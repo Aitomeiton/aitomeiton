@@ -10,11 +10,46 @@ export default async function handler(req, res) {
     const SLACK_WEBHOOK = process.env.SLACK_WEBHOOK;
     
     if (SLACK_WEBHOOK) {
+      // Formatear la conversación para Slack
+      const conversacion = leadData.conversacion || 'Sin conversación';
+      
       await fetch(SLACK_WEBHOOK, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          text: `🍅 *Nuevo lead en aitomeiton*\n\n*Nombre:* ${leadData.nombre || 'No indicado'}\n*Empresa:* ${leadData.empresa || 'No indicado'}\n*Contacto:* ${leadData.contacto || 'No indicado'}\n*Necesidad:* ${leadData.necesidad || 'No indicado'}\n*Calidad:* ${leadData.calidad || 'No indicado'}`
+          blocks: [
+            {
+              type: 'header',
+              text: {
+                type: 'plain_text',
+                text: '🍅 Nuevo lead en aitomeiton',
+                emoji: true
+              }
+            },
+            {
+              type: 'section',
+              fields: [
+                {
+                  type: 'mrkdwn',
+                  text: `*Contacto:*\n${leadData.contacto || 'No proporcionado'}`
+                },
+                {
+                  type: 'mrkdwn',
+                  text: `*Fecha:*\n${leadData.fecha || new Date().toLocaleString('es-ES')}`
+                }
+              ]
+            },
+            {
+              type: 'divider'
+            },
+            {
+              type: 'section',
+              text: {
+                type: 'mrkdwn',
+                text: `*Conversación:*\n\`\`\`${conversacion.substring(0, 2500)}\`\`\``
+              }
+            }
+          ]
         })
       });
     }
