@@ -290,10 +290,43 @@ FASE 3 - PROPONER (si hay dolor real):
 FASE 4 - CERRAR (solo leads buenos):
 - "Para prepararte una propuesta, necesito algunos datos"
 - Pide: nombre, empresa, email o teléfono
+- Cuando te den los datos, responde confirmando y añade al final de tu mensaje: [LEAD_CAPTURADO]{"nombre":"X","empresa":"Y","contacto":"Z","necesidad":"resumen breve"}
 
 Si pregunta precio: "Depende del volumen. Necesito entender tu caso primero"`;
 
     let messages = [];
+
+    async function captureLead(leadData) {
+      console.log('Lead capturado:', leadData);
+      try {
+        const response = await fetch('/api/lead', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(leadData)
+        });
+        if (response.ok) {
+          console.log('Lead enviado a Slack');
+        }
+      } catch (e) {
+        console.error('Error enviando lead:', e);
+      }
+    }
+
+    function checkForLead(text) {
+      if (text.includes('[LEAD_CAPTURADO]')) {
+        try {
+          const match = text.match(/\[LEAD_CAPTURADO\](\{.*?\})/);
+          if (match) {
+            const leadData = JSON.parse(match[1]);
+            captureLead(leadData);
+            return text.replace(/\[LEAD_CAPTURADO\]\{.*?\}/, '').trim();
+          }
+        } catch (e) {
+          console.error('Error parseando lead:', e);
+        }
+      }
+      return text;
+    }
 
     function startFromHero() {
       const heroInput = document.getElementById('hero-input');
@@ -362,7 +395,12 @@ Si pregunta precio: "Depende del volumen. Necesito entender tu caso primero"`;
 
         if (!response.ok) throw new Error('API error');
         const data = await response.json();
-        messages.push({ role: 'assistant', content: data.content[0].text });
+        let responseText = data.content[0].text;
+        
+        // Detectar y procesar lead
+        responseText = checkForLead(responseText);
+        
+        messages.push({ role: 'assistant', content: responseText });
       } catch (error) {
         console.error('Error:', error);
         messages.push({ role: 'assistant', content: 'Perdona, ha habido un problema. ¿Puedes repetirlo?' });
@@ -386,7 +424,6 @@ Si pregunta precio: "Depende del volumen. Necesito entender tu caso primero"`;
       sendToAI();
     }
 
-    // Enter key handlers
     document.getElementById('hero-input').addEventListener('keypress', function(e) {
       if (e.key === 'Enter') startFromHero();
     });
