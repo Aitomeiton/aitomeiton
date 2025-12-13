@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>aitomeiton | Automatización con IA</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,6 +24,20 @@
   <style>
     * { font-family: 'Inter', sans-serif; }
     
+    /* Fix para móvil cuando se abre el teclado */
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      position: fixed;
+      width: 100%;
+    }
+    
+    .app-container {
+      height: 100%;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
@@ -44,18 +58,12 @@
       50% { transform: scale(1.08); }
     }
 
-    @keyframes ping-slow {
-      0% { transform: scale(0.8); opacity: 0.4; }
-      100% { transform: scale(1.5); opacity: 0; }
-    }
-
     @keyframes glow-pulse {
       0%, 100% { filter: drop-shadow(0 0 8px rgba(70, 167, 88, 0.6)); }
       50% { filter: drop-shadow(0 0 20px rgba(229, 77, 46, 0.8)); }
     }
 
     .animate-breathe { animation: breathe 3s ease-in-out infinite; }
-    .animate-ping-slow { animation: ping-slow 2s ease-out infinite; }
     .animate-glow-pulse { animation: glow-pulse 2s ease-in-out infinite; }
     .animate-fadeIn { animation: fadeIn 0.6s ease-out; }
     .animate-messageIn { animation: messageIn 0.25s ease-out both; }
@@ -71,6 +79,7 @@
     .input-chat {
       background: rgba(70, 167, 88, 0.05);
       border: 1px solid rgba(70, 167, 88, 0.2);
+      font-size: 16px; /* Previene zoom en iOS */
     }
     .input-chat:focus {
       border-color: rgba(70, 167, 88, 0.5);
@@ -112,139 +121,90 @@
     .scrollbar-minimal::-webkit-scrollbar-thumb { background: rgba(70, 167, 88, 0.3); border-radius: 10px; }
 
     textarea::placeholder, input::placeholder { color: rgba(255,255,255,0.35); }
+    
+    /* Chat container fix para móvil */
+    #chat-section .card-glass {
+      display: flex;
+      flex-direction: column;
+      max-height: calc(100vh - 200px);
+    }
+    
+    @media (max-width: 768px) {
+      #chat-section .card-glass {
+        max-height: calc(100vh - 150px);
+        border-radius: 1rem;
+      }
+      #messages {
+        flex: 1;
+        min-height: 200px;
+        max-height: none;
+        height: auto;
+      }
+    }
   </style>
 </head>
-<body class="min-h-screen text-white" style="background-color: #0a0a0a;">
+<body class="text-white" style="background-color: #0a0a0a;">
   
-  <!-- Background -->
-  <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 0; background-color: #0a0a0a; overflow: hidden;">
-    <div style="position: absolute; top: -200px; right: -200px; width: 900px; height: 900px; background: radial-gradient(circle, rgba(70, 167, 88, 0.45) 0%, transparent 60%); border-radius: 50%; filter: blur(80px);"></div>
-    <div style="position: absolute; bottom: -200px; left: -200px; width: 800px; height: 800px; background: radial-gradient(circle, rgba(229, 77, 46, 0.4) 0%, transparent 60%); border-radius: 50%; filter: blur(80px);"></div>
-    <div style="position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, #46A758, #E54D2E, transparent);"></div>
-  </div>
-
-  <!-- Header -->
-  <header class="relative z-10 px-6 md:px-12 py-5 flex justify-between items-center max-w-6xl mx-auto">
-    <div class="flex items-center gap-2.5">
-      <svg viewBox="0 0 64 64" class="w-8 h-8">
-        <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#logoGrad)" stroke-width="10" stroke-linecap="round" stroke-dasharray="115 25"/>
-        <defs>
-          <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#46A758"/>
-            <stop offset="100%" stop-color="#E54D2E"/>
-          </linearGradient>
-        </defs>
-      </svg>
-      <span class="text-2xl tracking-tight font-bold" style="font-family: 'Nunito', sans-serif;">
-        ai<span class="gradient-text">tomeiton</span>
-      </span>
+  <div class="app-container">
+    <!-- Background -->
+    <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 0; background-color: #0a0a0a; overflow: hidden; pointer-events: none;">
+      <div style="position: absolute; top: -200px; right: -200px; width: 900px; height: 900px; background: radial-gradient(circle, rgba(70, 167, 88, 0.45) 0%, transparent 60%); border-radius: 50%; filter: blur(80px);"></div>
+      <div style="position: absolute; bottom: -200px; left: -200px; width: 800px; height: 800px; background: radial-gradient(circle, rgba(229, 77, 46, 0.4) 0%, transparent 60%); border-radius: 50%; filter: blur(80px);"></div>
+      <div style="position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, #46A758, #E54D2E, transparent);"></div>
     </div>
-    <nav class="hidden md:flex items-center gap-8 text-sm text-neutral-400">
-      <a href="servicios.html" class="hover:text-leaf-500 transition-colors">Servicios</a>
-      <a href="servicios.html#casos" class="hover:text-leaf-500 transition-colors">Casos</a>
-      <a href="servicios.html#faq" class="px-4 py-2 rounded-full border border-leaf-500/20 hover:border-leaf-500/50 hover:bg-leaf-500/5 transition-all">Contacto</a>
-    </nav>
-  </header>
 
-  <!-- Main -->
-  <main class="relative z-10 flex flex-col items-center justify-center min-h-[calc(100vh-80px)] px-6 py-8">
-    
-    <!-- Hero -->
-    <div id="hero" class="text-center max-w-2xl animate-fadeIn">
-      <!-- Meiton Avatar -->
-      <div class="relative w-32 h-32 mx-auto mb-10 flex items-center justify-center">
-        <svg viewBox="0 0 64 64" class="w-32 h-32 animate-breathe" style="overflow: visible;">
-          <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#heroGrad)" stroke-width="8" stroke-linecap="round" stroke-dasharray="115 25" class="animate-glow-pulse"/>
-          <path d="M24 42 Q32 50, 40 42" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
+    <!-- Header -->
+    <header class="relative z-10 px-4 md:px-12 py-4 flex justify-between items-center max-w-6xl mx-auto">
+      <div class="flex items-center gap-2">
+        <svg viewBox="0 0 64 64" class="w-7 h-7 md:w-8 md:h-8">
+          <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#logoGrad)" stroke-width="10" stroke-linecap="round" stroke-dasharray="115 25"/>
           <defs>
-            <linearGradient id="heroGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stop-color="#46A758"/>
               <stop offset="100%" stop-color="#E54D2E"/>
             </linearGradient>
           </defs>
         </svg>
+        <span class="text-xl md:text-2xl tracking-tight font-bold" style="font-family: 'Nunito', sans-serif;">
+          ai<span class="gradient-text">tomeiton</span>
+        </span>
       </div>
+      <nav class="hidden md:flex items-center gap-8 text-sm text-neutral-400">
+        <a href="servicios.html" class="hover:text-leaf-500 transition-colors">Servicios</a>
+        <a href="servicios.html#casos" class="hover:text-leaf-500 transition-colors">Casos</a>
+        <a href="servicios.html#faq" class="px-4 py-2 rounded-full border border-leaf-500/20 hover:border-leaf-500/50 hover:bg-leaf-500/5 transition-all">Contacto</a>
+      </nav>
+    </header>
 
-      <h1 class="text-4xl md:text-5xl font-semibold mb-5 leading-tight tracking-tight">
-        Venga, ¿qué te gustaría que<br>
-        <span class="gradient-text">se hiciera solo en tu empresa?</span>
-      </h1>
-
-      <!-- Input -->
-      <div class="w-full max-w-xl mt-8">
-        <div class="relative">
-          <input id="hero-input" type="text" placeholder="Ej: Responder emails, gestionar pedidos, atender clientes..." class="w-full input-chat rounded-2xl px-5 py-4 pr-14 text-base text-white transition-all">
-          <button onclick="startFromHero()" class="absolute right-2 top-1/2 -translate-y-1/2 p-2.5 rounded-xl btn-send transition-all duration-200 hover:scale-105">
-            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Chat -->
-    <div id="chat-section" class="w-full max-w-2xl hidden">
-      <div class="rounded-2xl card-glass backdrop-blur-xl overflow-hidden">
-        
-        <!-- Chat header -->
-        <div class="px-5 py-4 border-b border-leaf-500/10 flex items-center justify-between">
-          <div class="flex items-center gap-3">
-            <svg viewBox="0 0 64 64" class="w-10 h-10 animate-breathe">
-              <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#chatGrad)" stroke-width="8" stroke-linecap="round" stroke-dasharray="115 25"/>
-              <path d="M24 42 Q32 50, 40 42" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
-              <defs>
-                <linearGradient id="chatGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#46A758"/>
-                  <stop offset="100%" stop-color="#E54D2E"/>
-                </linearGradient>
-              </defs>
-            </svg>
-            <div>
-              <span class="text-sm font-medium">aitomeiton</span>
-              <div class="flex items-center gap-1.5">
-                <span class="w-1.5 h-1.5 rounded-full bg-leaf-500 animate-pulse"></span>
-                <span class="text-xs text-neutral-500">En línea</span>
-              </div>
-            </div>
-          </div>
-          <button onclick="goBack()" class="text-neutral-500 hover:text-white transition-colors p-2">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/>
-            </svg>
-          </button>
+    <!-- Main -->
+    <main class="relative z-10 flex flex-col items-center justify-center min-h-[calc(100vh-120px)] px-4 md:px-6 py-6">
+      
+      <!-- Hero -->
+      <div id="hero" class="text-center max-w-2xl animate-fadeIn">
+        <!-- Meiton Avatar -->
+        <div class="relative w-24 h-24 md:w-32 md:h-32 mx-auto mb-8 md:mb-10 flex items-center justify-center">
+          <svg viewBox="0 0 64 64" class="w-24 h-24 md:w-32 md:h-32 animate-breathe" style="overflow: visible;">
+            <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#heroGrad)" stroke-width="8" stroke-linecap="round" stroke-dasharray="115 25" class="animate-glow-pulse"/>
+            <path d="M24 42 Q32 50, 40 42" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
+            <defs>
+              <linearGradient id="heroGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#46A758"/>
+                <stop offset="100%" stop-color="#E54D2E"/>
+              </linearGradient>
+            </defs>
+          </svg>
         </div>
 
-        <!-- Messages -->
-        <div id="messages" class="h-80 md:h-96 overflow-y-auto p-5 space-y-4 scrollbar-minimal"></div>
-
-        <!-- Typing -->
-        <div id="typing" class="hidden px-5 pb-3">
-          <div class="flex items-start gap-3">
-            <svg viewBox="0 0 64 64" class="w-8 h-8">
-              <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#typingGrad)" stroke-width="8" stroke-linecap="round" stroke-dasharray="115 25"/>
-              <defs>
-                <linearGradient id="typingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stop-color="#46A758"/>
-                  <stop offset="100%" stop-color="#E54D2E"/>
-                </linearGradient>
-              </defs>
-            </svg>
-            <div class="message-bot px-4 py-3 rounded-2xl">
-              <div class="flex gap-1">
-                <span class="w-1.5 h-1.5 bg-neutral-500 rounded-full animate-bounce-dot"></span>
-                <span class="w-1.5 h-1.5 bg-neutral-500 rounded-full animate-bounce-dot" style="animation-delay: 0.15s;"></span>
-                <span class="w-1.5 h-1.5 bg-neutral-500 rounded-full animate-bounce-dot" style="animation-delay: 0.3s;"></span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <h1 class="text-3xl md:text-5xl font-semibold mb-4 md:mb-5 leading-tight tracking-tight px-2">
+          Venga, ¿qué te gustaría que<br>
+          <span class="gradient-text">se hiciera solo en tu empresa?</span>
+        </h1>
 
         <!-- Input -->
-        <div class="p-4 border-t border-leaf-500/10">
-          <div class="flex gap-3">
-            <input id="input" type="text" placeholder="Escribe tu mensaje..." class="flex-1 input-chat rounded-xl px-4 py-3 text-sm text-white transition-all">
-            <button id="sendBtn" onclick="sendMessage()" class="px-5 py-3 rounded-xl btn-send transition-all duration-200">
+        <div class="w-full max-w-xl mt-6 md:mt-8 px-2">
+          <div class="relative">
+            <input id="hero-input" type="text" placeholder="Ej: Responder emails, gestionar pedidos..." class="w-full input-chat rounded-2xl px-4 md:px-5 py-3 md:py-4 pr-14 text-base text-white transition-all">
+            <button onclick="startFromHero()" class="absolute right-2 top-1/2 -translate-y-1/2 p-2 md:p-2.5 rounded-xl btn-send transition-all duration-200 hover:scale-105">
               <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7"/>
               </svg>
@@ -252,13 +212,84 @@
           </div>
         </div>
       </div>
-    </div>
-  </main>
 
-  <!-- Footer -->
-  <footer class="relative z-10 py-6 px-6 text-center">
-    <a href="servicios.html" class="text-sm text-neutral-500 hover:text-leaf-500 transition-colors">Ver servicios y casos de éxito →</a>
-  </footer>
+      <!-- Chat -->
+      <div id="chat-section" class="w-full max-w-2xl hidden px-1">
+        <div class="rounded-2xl card-glass backdrop-blur-xl overflow-hidden">
+          
+          <!-- Chat header -->
+          <div class="px-4 py-3 border-b border-leaf-500/10 flex items-center justify-between flex-shrink-0">
+            <div class="flex items-center gap-3">
+              <svg viewBox="0 0 64 64" class="w-9 h-9 md:w-10 md:h-10 animate-breathe">
+                <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#chatGrad)" stroke-width="8" stroke-linecap="round" stroke-dasharray="115 25"/>
+                <path d="M24 42 Q32 50, 40 42" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
+                <defs>
+                  <linearGradient id="chatGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#46A758"/>
+                    <stop offset="100%" stop-color="#E54D2E"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+              <div>
+                <span class="text-sm font-medium">aitomeiton</span>
+                <div class="flex items-center gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-leaf-500 animate-pulse"></span>
+                  <span class="text-xs text-neutral-500">En línea</span>
+                </div>
+              </div>
+            </div>
+            <button onclick="goBack()" class="text-neutral-500 hover:text-white transition-colors p-2">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Messages -->
+          <div id="messages" class="h-64 md:h-80 overflow-y-auto p-4 space-y-4 scrollbar-minimal"></div>
+
+          <!-- Typing -->
+          <div id="typing" class="hidden px-4 pb-2">
+            <div class="flex items-start gap-3">
+              <svg viewBox="0 0 64 64" class="w-8 h-8 flex-shrink-0">
+                <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#typingGrad)" stroke-width="8" stroke-linecap="round" stroke-dasharray="115 25"/>
+                <defs>
+                  <linearGradient id="typingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#46A758"/>
+                    <stop offset="100%" stop-color="#E54D2E"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+              <div class="message-bot px-4 py-3 rounded-2xl">
+                <div class="flex gap-1">
+                  <span class="w-1.5 h-1.5 bg-neutral-500 rounded-full animate-bounce-dot"></span>
+                  <span class="w-1.5 h-1.5 bg-neutral-500 rounded-full animate-bounce-dot" style="animation-delay: 0.15s;"></span>
+                  <span class="w-1.5 h-1.5 bg-neutral-500 rounded-full animate-bounce-dot" style="animation-delay: 0.3s;"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Input -->
+          <div class="p-3 md:p-4 border-t border-leaf-500/10 flex-shrink-0">
+            <div class="flex gap-2 md:gap-3">
+              <input id="input" type="text" placeholder="Escribe tu mensaje..." class="flex-1 input-chat rounded-xl px-3 md:px-4 py-3 text-sm text-white transition-all">
+              <button id="sendBtn" onclick="sendMessage()" class="px-4 md:px-5 py-3 rounded-xl btn-send transition-all duration-200">
+                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-10 py-4 px-4 text-center">
+      <a href="servicios.html" class="text-sm text-neutral-500 hover:text-leaf-500 transition-colors">Ver servicios y casos de éxito →</a>
+    </footer>
+  </div>
 
   <script>
     const SYSTEM_PROMPT = `Eres Meiton, el asesor virtual de aitomeiton. Ayudas a empresas a automatizar tareas repetitivas con inteligencia artificial.
@@ -290,14 +321,43 @@ FASE 3 - PROPONER (si hay dolor real):
 FASE 4 - CERRAR (solo leads buenos):
 - "Para prepararte una propuesta, necesito algunos datos"
 - Pide: nombre, empresa, email o teléfono
-- Cuando te den los datos, responde confirmando y añade al final de tu mensaje: [LEAD_CAPTURADO]{"nombre":"X","empresa":"Y","contacto":"Z","necesidad":"resumen breve"}
+- Cuando te den los datos, confirma que los has recibido
 
 Si pregunta precio: "Depende del volumen. Necesito entender tu caso primero"`;
 
     let messages = [];
+    let leadSent = false;
 
-    async function captureLead(leadData) {
-      console.log('Lead capturado:', leadData);
+    // Detectar si el mensaje contiene datos de contacto
+    function detectContactInfo(text) {
+      const emailRegex = /[\w.-]+@[\w.-]+\.\w+/;
+      const phoneRegex = /[\d\s\-\+\(\)]{9,}/;
+      
+      return emailRegex.test(text) || phoneRegex.test(text);
+    }
+
+    // Enviar lead a Slack con toda la conversación
+    async function sendLead() {
+      if (leadSent) return;
+      
+      const conversation = messages.map(m => 
+        `${m.role === 'user' ? '👤 Usuario' : '🤖 Meiton'}: ${m.content}`
+      ).join('\n\n');
+      
+      // Extraer info del usuario de los mensajes
+      const userMessages = messages.filter(m => m.role === 'user').map(m => m.content).join(' ');
+      
+      // Buscar email y teléfono
+      const emailMatch = userMessages.match(/[\w.-]+@[\w.-]+\.\w+/);
+      const phoneMatch = userMessages.match(/[\d\s\-\+\(\)]{9,}/);
+      
+      const leadData = {
+        contacto: emailMatch ? emailMatch[0] : (phoneMatch ? phoneMatch[0] : 'No proporcionado'),
+        conversacion: conversation,
+        fecha: new Date().toLocaleString('es-ES'),
+        url: window.location.href
+      };
+
       try {
         const response = await fetch('/api/lead', {
           method: 'POST',
@@ -305,27 +365,12 @@ Si pregunta precio: "Depende del volumen. Necesito entender tu caso primero"`;
           body: JSON.stringify(leadData)
         });
         if (response.ok) {
-          console.log('Lead enviado a Slack');
+          console.log('Lead enviado correctamente');
+          leadSent = true;
         }
       } catch (e) {
         console.error('Error enviando lead:', e);
       }
-    }
-
-    function checkForLead(text) {
-      if (text.includes('[LEAD_CAPTURADO]')) {
-        try {
-          const match = text.match(/\[LEAD_CAPTURADO\](\{.*?\})/);
-          if (match) {
-            const leadData = JSON.parse(match[1]);
-            captureLead(leadData);
-            return text.replace(/\[LEAD_CAPTURADO\]\{.*?\}/, '').trim();
-          }
-        } catch (e) {
-          console.error('Error parseando lead:', e);
-        }
-      }
-      return text;
     }
 
     function startFromHero() {
@@ -346,15 +391,16 @@ Si pregunta precio: "Depende del volumen. Necesito entender tu caso primero"`;
       document.getElementById('chat-section').classList.add('hidden');
       document.getElementById('hero').classList.remove('hidden');
       messages = [];
+      leadSent = false;
       document.getElementById('messages').innerHTML = '';
     }
 
     function renderMessages() {
       const container = document.getElementById('messages');
       container.innerHTML = messages.map((msg, i) => `
-        <div class="flex ${msg.role === 'user' ? 'justify-end' : 'items-start gap-3'} animate-messageIn">
+        <div class="flex ${msg.role === 'user' ? 'justify-end' : 'items-start gap-2 md:gap-3'} animate-messageIn">
           ${msg.role === 'assistant' ? `
-            <svg viewBox="0 0 64 64" class="w-8 h-8 flex-shrink-0">
+            <svg viewBox="0 0 64 64" class="w-7 h-7 md:w-8 md:h-8 flex-shrink-0">
               <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#msgGrad${i})" stroke-width="8" stroke-linecap="round" stroke-dasharray="115 25"/>
               <path d="M24 42 Q32 50, 40 42" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
               <defs>
@@ -365,7 +411,7 @@ Si pregunta precio: "Depende del volumen. Necesito entender tu caso primero"`;
               </defs>
             </svg>
           ` : ''}
-          <div class="max-w-[80%] px-4 py-3 rounded-2xl ${msg.role === 'user' ? 'message-user text-white' : 'message-bot text-neutral-200'}">
+          <div class="max-w-[85%] md:max-w-[80%] px-3 md:px-4 py-2 md:py-3 rounded-2xl ${msg.role === 'user' ? 'message-user text-white' : 'message-bot text-neutral-200'}">
             <p class="text-sm leading-relaxed">${msg.content}</p>
           </div>
         </div>
@@ -377,6 +423,10 @@ Si pregunta precio: "Depende del volumen. Necesito entender tu caso primero"`;
       document.getElementById('typing').classList.remove('hidden');
       document.getElementById('input').disabled = true;
       document.getElementById('sendBtn').disabled = true;
+      
+      // Scroll al typing indicator
+      const msgContainer = document.getElementById('messages');
+      msgContainer.scrollTop = msgContainer.scrollHeight;
 
       try {
         const response = await fetch('/api/chat', {
@@ -397,10 +447,14 @@ Si pregunta precio: "Depende del volumen. Necesito entender tu caso primero"`;
         const data = await response.json();
         let responseText = data.content[0].text;
         
-        // Detectar y procesar lead
-        responseText = checkForLead(responseText);
-        
         messages.push({ role: 'assistant', content: responseText });
+        
+        // Detectar si el usuario dio datos de contacto
+        const lastUserMsg = messages.filter(m => m.role === 'user').pop();
+        if (lastUserMsg && detectContactInfo(lastUserMsg.content)) {
+          sendLead();
+        }
+        
       } catch (error) {
         console.error('Error:', error);
         messages.push({ role: 'assistant', content: 'Perdona, ha habido un problema. ¿Puedes repetirlo?' });
@@ -430,6 +484,9 @@ Si pregunta precio: "Depende del volumen. Necesito entender tu caso primero"`;
     document.getElementById('input').addEventListener('keypress', function(e) {
       if (e.key === 'Enter') sendMessage();
     });
+    
+    // Fix para iOS - prevenir zoom al hacer focus en input
+    document.addEventListener('touchstart', function() {}, {passive: true});
   </script>
 </body>
 </html>
