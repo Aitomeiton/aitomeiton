@@ -39,46 +39,9 @@
       50% { transform: translateY(-4px); }
     }
 
-    @keyframes pulse-glow {
-      0%, 100% { opacity: 0.5; }
-      50% { opacity: 1; }
-    }
-
-    @keyframes gradient-shift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
     @keyframes breathe {
       0%, 100% { transform: scale(1); }
       50% { transform: scale(1.08); }
-    }
-
-    @keyframes spin-slow {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    @keyframes bounce-avatar {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-    }
-
-    @keyframes blink {
-      0%, 90%, 100% { transform: scaleY(1); }
-      95% { transform: scaleY(0.1); }
-    }
-
-    @keyframes blink-eyes {
-      0%, 85%, 100% { transform: scaleY(1); }
-      90% { transform: scaleY(0.1); }
-    }
-
-    @keyframes look-around {
-      0%, 40%, 100% { transform: translateX(0); }
-      20% { transform: translateX(1.5px); }
-      60% { transform: translateX(-1.5px); }
     }
 
     @keyframes ping-slow {
@@ -92,19 +55,11 @@
     }
 
     .animate-breathe { animation: breathe 3s ease-in-out infinite; }
-    .animate-spin-slow { animation: spin-slow 8s linear infinite; }
-    .animate-bounce-avatar { animation: bounce-avatar 1s ease-in-out infinite; }
-    .animate-blink { animation: blink 4s ease-in-out infinite; transform-origin: center; }
-    .animate-blink-eyes { animation: blink-eyes 5s ease-in-out infinite; transform-origin: center; }
-    .animate-look-around { animation: look-around 6s ease-in-out infinite; }
     .animate-ping-slow { animation: ping-slow 2s ease-out infinite; }
     .animate-glow-pulse { animation: glow-pulse 2s ease-in-out infinite; }
-
     .animate-fadeIn { animation: fadeIn 0.6s ease-out; }
     .animate-messageIn { animation: messageIn 0.25s ease-out both; }
     .animate-bounce-dot { animation: bounce-dot 0.5s infinite; }
-    .animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
-    .animate-gradient { animation: gradient-shift 8s ease infinite; background-size: 200% 200%; }
 
     .gradient-text {
       background: linear-gradient(135deg, #46A758 0%, #E54D2E 100%);
@@ -146,11 +101,6 @@
       transform: none;
     }
 
-    .glow-line {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, #46A758, #E54D2E, transparent);
-    }
-
     .card-glass {
       background: rgba(10, 10, 10, 0.8);
       border: 1px solid rgba(70, 167, 88, 0.15);
@@ -166,13 +116,10 @@
 </head>
 <body class="min-h-screen text-white" style="background-color: #0a0a0a;">
   
-  <!-- Background con degradados verde y rojo -->
+  <!-- Background -->
   <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 0; background-color: #0a0a0a; overflow: hidden;">
-    <!-- Orbe verde arriba derecha -->
     <div style="position: absolute; top: -200px; right: -200px; width: 900px; height: 900px; background: radial-gradient(circle, rgba(70, 167, 88, 0.45) 0%, transparent 60%); border-radius: 50%; filter: blur(80px);"></div>
-    <!-- Orbe rojo abajo izquierda -->
     <div style="position: absolute; bottom: -200px; left: -200px; width: 800px; height: 800px; background: radial-gradient(circle, rgba(229, 77, 46, 0.4) 0%, transparent 60%); border-radius: 50%; filter: blur(80px);"></div>
-    <!-- Línea verde/roja arriba -->
     <div style="position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, #46A758, #E54D2E, transparent);"></div>
   </div>
 
@@ -180,12 +127,7 @@
   <header class="relative z-10 px-6 md:px-12 py-5 flex justify-between items-center max-w-6xl mx-auto">
     <div class="flex items-center gap-2.5">
       <svg viewBox="0 0 64 64" class="w-8 h-8">
-        <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" 
-              fill="none" 
-              stroke="url(#logoGrad)" 
-              stroke-width="10" 
-              stroke-linecap="round"
-              stroke-dasharray="115 25"/>
+        <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#logoGrad)" stroke-width="10" stroke-linecap="round" stroke-dasharray="115 25"/>
         <defs>
           <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stop-color="#46A758"/>
@@ -198,9 +140,9 @@
       </span>
     </div>
     <nav class="hidden md:flex items-center gap-8 text-sm text-neutral-400">
-      <a href="#" class="hover:text-leaf-500 transition-colors">Soluciones</a>
-      <a href="#" class="hover:text-leaf-500 transition-colors">Casos</a>
-      <a href="#" class="px-4 py-2 rounded-full border border-leaf-500/20 hover:border-leaf-500/50 hover:bg-leaf-500/5 transition-all">Contacto</a>
+      <a href="servicios.html" class="hover:text-leaf-500 transition-colors">Servicios</a>
+      <a href="servicios.html#casos" class="hover:text-leaf-500 transition-colors">Casos</a>
+      <a href="servicios.html#faq" class="px-4 py-2 rounded-full border border-leaf-500/20 hover:border-leaf-500/50 hover:bg-leaf-500/5 transition-all">Contacto</a>
     </nav>
   </header>
 
@@ -209,27 +151,18 @@
     
     <!-- Hero -->
     <div id="hero" class="text-center max-w-2xl animate-fadeIn">
-
-      <!-- Meiton Avatar Grande -->
+      <!-- Meiton Avatar -->
       <div class="relative w-32 h-32 mx-auto mb-10 flex items-center justify-center">
         <svg viewBox="0 0 64 64" class="w-32 h-32 animate-breathe" style="overflow: visible;">
-          <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" 
-                fill="none" 
-                stroke="url(#heroMeitonGrad)" 
-                stroke-width="8" 
-                stroke-linecap="round"
-                stroke-dasharray="115 25"
-                class="animate-glow-pulse"/>
-          <!-- Sonrisa -->
+          <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#heroGrad)" stroke-width="8" stroke-linecap="round" stroke-dasharray="115 25" class="animate-glow-pulse"/>
           <path d="M24 42 Q32 50, 40 42" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
           <defs>
-            <linearGradient id="heroMeitonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <linearGradient id="heroGrad" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stop-color="#46A758"/>
               <stop offset="100%" stop-color="#E54D2E"/>
             </linearGradient>
           </defs>
         </svg>
-        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 100px; height: 100px; border-radius: 50%; background: radial-gradient(circle, rgba(70, 167, 88, 0.3) 0%, transparent 70%); animation: ping-slow 2s ease-out infinite;"></div>
       </div>
 
       <h1 class="text-4xl md:text-5xl font-semibold mb-5 leading-tight tracking-tight">
@@ -237,20 +170,11 @@
         <span class="gradient-text">se hiciera solo en tu empresa?</span>
       </h1>
 
-      <!-- Input directo estilo Claude -->
+      <!-- Input -->
       <div class="w-full max-w-xl mt-8">
         <div class="relative">
-          <input 
-            id="hero-input" 
-            type="text" 
-            placeholder="Ej: Responder emails, gestionar pedidos, atender clientes..."
-            class="w-full input-chat rounded-2xl px-5 py-4 pr-14 text-base text-white transition-all"
-            onkeypress="handleHeroKeyPress(event)"
-          >
-          <button 
-            onclick="startFromHero()"
-            class="absolute right-2 top-1/2 -translate-y-1/2 p-2.5 rounded-xl btn-send transition-all duration-200 hover:scale-105"
-          >
+          <input id="hero-input" type="text" placeholder="Ej: Responder emails, gestionar pedidos, atender clientes..." class="w-full input-chat rounded-2xl px-5 py-4 pr-14 text-base text-white transition-all">
+          <button onclick="startFromHero()" class="absolute right-2 top-1/2 -translate-y-1/2 p-2.5 rounded-xl btn-send transition-all duration-200 hover:scale-105">
             <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7"/>
             </svg>
@@ -266,25 +190,16 @@
         <!-- Chat header -->
         <div class="px-5 py-4 border-b border-leaf-500/10 flex items-center justify-between">
           <div class="flex items-center gap-3">
-            <div class="relative w-10 h-10 flex items-center justify-center">
-              <svg viewBox="0 0 64 64" class="w-10 h-10 animate-breathe">
-                <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" 
-                      fill="none" 
-                      stroke="url(#chatMeitonGrad)" 
-                      stroke-width="8" 
-                      stroke-linecap="round"
-                      stroke-dasharray="115 25"
-                      class="animate-glow-pulse"/>
-                <!-- Sonrisa -->
-                <path d="M24 42 Q32 50, 40 42" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
-                <defs>
-                  <linearGradient id="chatMeitonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#46A758"/>
-                    <stop offset="100%" stop-color="#E54D2E"/>
-                  </linearGradient>
-                </defs>
-              </svg>
-            </div>
+            <svg viewBox="0 0 64 64" class="w-10 h-10 animate-breathe">
+              <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#chatGrad)" stroke-width="8" stroke-linecap="round" stroke-dasharray="115 25"/>
+              <path d="M24 42 Q32 50, 40 42" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
+              <defs>
+                <linearGradient id="chatGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#46A758"/>
+                  <stop offset="100%" stop-color="#E54D2E"/>
+                </linearGradient>
+              </defs>
+            </svg>
             <div>
               <span class="text-sm font-medium">aitomeiton</span>
               <div class="flex items-center gap-1.5">
@@ -303,26 +218,18 @@
         <!-- Messages -->
         <div id="messages" class="h-80 md:h-96 overflow-y-auto p-5 space-y-4 scrollbar-minimal"></div>
 
-        <!-- Typing indicator -->
+        <!-- Typing -->
         <div id="typing" class="hidden px-5 pb-3">
           <div class="flex items-start gap-3">
-            <div class="relative w-8 h-8 flex items-center justify-center flex-shrink-0">
-              <svg viewBox="0 0 64 64" class="w-8 h-8 animate-breathe">
-                <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" 
-                      fill="none" 
-                      stroke="url(#typingMeitonGrad)" 
-                      stroke-width="8" 
-                      stroke-linecap="round"
-                      stroke-dasharray="115 25"/>
-                <path d="M24 42 Q32 50, 40 42" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
-                <defs>
-                  <linearGradient id="typingMeitonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#46A758"/>
-                    <stop offset="100%" stop-color="#E54D2E"/>
-                  </linearGradient>
-                </defs>
-              </svg>
-            </div>
+            <svg viewBox="0 0 64 64" class="w-8 h-8">
+              <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#typingGrad)" stroke-width="8" stroke-linecap="round" stroke-dasharray="115 25"/>
+              <defs>
+                <linearGradient id="typingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#46A758"/>
+                  <stop offset="100%" stop-color="#E54D2E"/>
+                </linearGradient>
+              </defs>
+            </svg>
             <div class="message-bot px-4 py-3 rounded-2xl">
               <div class="flex gap-1">
                 <span class="w-1.5 h-1.5 bg-neutral-500 rounded-full animate-bounce-dot"></span>
@@ -336,18 +243,8 @@
         <!-- Input -->
         <div class="p-4 border-t border-leaf-500/10">
           <div class="flex gap-3">
-            <input 
-              id="input" 
-              type="text" 
-              placeholder="Escribe tu mensaje..."
-              class="flex-1 input-chat rounded-xl px-4 py-3 text-sm text-white transition-all"
-              onkeypress="handleKeyPress(event)"
-            >
-            <button 
-              id="sendBtn"
-              onclick="sendMessage()"
-              class="px-5 py-3 rounded-xl btn-send transition-all duration-200"
-            >
+            <input id="input" type="text" placeholder="Escribe tu mensaje..." class="flex-1 input-chat rounded-xl px-4 py-3 text-sm text-white transition-all">
+            <button id="sendBtn" onclick="sendMessage()" class="px-5 py-3 rounded-xl btn-send transition-all duration-200">
               <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7"/>
               </svg>
@@ -358,10 +255,9 @@
     </div>
   </main>
 
-
-  <!-- Footer mínimo -->
+  <!-- Footer -->
   <footer class="relative z-10 py-6 px-6 text-center">
-    <a href="/servicios.html" class="text-sm text-neutral-500 hover:text-leaf-500 transition-colors">Ver servicios y casos de éxito →</a>
+    <a href="servicios.html" class="text-sm text-neutral-500 hover:text-leaf-500 transition-colors">Ver servicios y casos de éxito →</a>
   </footer>
 
   <script>
@@ -372,163 +268,45 @@ PERSONALIDAD:
 - Respuestas cortas (2-3 frases máximo)
 - Tuteas siempre
 - NUNCA uses tecnicismos ni nombres de tecnologías
-- Validas el dolor del cliente: "Sí, eso es un coñazo", "Claro, eso quita mucho tiempo"
 
 TU PROCESO:
 
-FASE 1 - ESCUCHAR Y ENTENDER:
+FASE 1 - ESCUCHAR:
 - Deja que explique qué quiere automatizar
-- Pregunta para entender el contexto:
-  * "¿Cuántas veces al día/semana pasa esto?"
-  * "¿Cuántas personas tenéis dedicadas a esto?"
-  * "¿Cuánto tiempo os lleva cada vez?"
-- Detecta el dolor real
+- Pregunta: "¿Cuántas veces al día pasa esto?", "¿Cuántas personas tenéis?"
 
-FASE 2 - CUALIFICAR (muy importante):
-Haz preguntas sutiles para saber si es un lead de calidad:
-- Volumen: "¿Más o menos cuántos emails/pedidos/clientes al día?"
-- Tamaño: "¿Cuántas personas sois en el equipo?"
-- Decisión: "¿Esto lo decides tú o hay que hablarlo con alguien más?"
-- Urgencia: "¿Habéis probado otras soluciones antes?"
+FASE 2 - CUALIFICAR:
+- Volumen: "¿Cuántos emails/pedidos/clientes al día?"
+- Tamaño: "¿Cuántas personas sois?"
+- Decisión: "¿Esto lo decides tú?"
 
-SEÑALES DE LEAD BUENO (pide datos):
-- Volumen alto (+20 tareas/día o +100/semana)
-- Equipo de +3 personas
-- Dolor urgente ("nos mata", "perdemos clientes", "no damos abasto")
-- Es decisor o tiene acceso directo
+LEAD BUENO (pide datos): +20 tareas/día, +3 personas, dolor urgente
+LEAD FRÍO (no pidas datos): curiosidad, autónomo sin volumen, no sabe qué quiere
 
-SEÑALES DE LEAD FRÍO (NO pidas datos):
-- "Solo pregunto por curiosidad"
-- Autónomo sin volumen claro
-- No sabe qué quiere automatizar
-- Pregunta precio sin explicar problema
-→ Con leads fríos: sé amable, resuelve dudas, invita a volver cuando tenga una necesidad más clara
-
-FASE 3 - PROPONER (solo si hay dolor real):
-- Explica la solución desde la EXPERIENCIA: "Imagina que te levantas y ya está hecho"
-- Beneficios: ahorro tiempo, menos errores, 24/7, tranquilidad
-- NO hables de tecnología, APIs, integraciones
+FASE 3 - PROPONER (si hay dolor real):
+- "Imagina que te levantas y ya está hecho"
+- Beneficios: ahorro tiempo, menos errores, 24/7
 
 FASE 4 - CERRAR (solo leads buenos):
 - "Para prepararte una propuesta, necesito algunos datos"
 - Pide: nombre, empresa, email o teléfono
-- "Te contactamos en menos de 24h con una propuesta personalizada"
 
-Cuando el usuario te dé sus datos de contacto (nombre + empresa + email/teléfono), responde confirmando que los has recibido y que le contactaréis pronto. Incluye en tu respuesta la palabra clave [LEAD_CAPTURADO] seguida de los datos en formato JSON así:
-[LEAD_CAPTURADO]{"nombre":"X","empresa":"Y","contacto":"Z","necesidad":"resumen de lo que quiere automatizar","calidad":"alta/media"}
-
-IMPORTANTE:
-- Si pregunta precio: "Depende del volumen. Por eso necesito entender bien tu caso primero"
-- No prometas nada concreto sin saber más
-- Si no entiendes qué quiere, pregunta antes de proponer
-- Sé honesto: si algo no se puede automatizar, dilo`;
+Si pregunta precio: "Depende del volumen. Necesito entender tu caso primero"`;
 
     let messages = [];
-    let isTyping = false;
-
-    // Webhook para captura de leads
-    async function captureLead(leadData) {
-      console.log('Lead capturado:', leadData);
-      
-      // Guardar en localStorage como backup
-      const leads = JSON.parse(localStorage.getItem('aitomeiton_leads') || '[]');
-      leads.push({...leadData, timestamp: new Date().toISOString()});
-      localStorage.setItem('aitomeiton_leads', JSON.stringify(leads));
-      
-      // Enviar al webhook
-      try {
-        await fetch(LEAD_WEBHOOK_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(leadData)
-        });
-        console.log('Lead enviado al servidor');
-      } catch (e) {
-        console.error('Error enviando lead:', e);
-      }
-    }
-
-    function checkForLead(response) {
-      if (response.includes('[LEAD_CAPTURADO]')) {
-        try {
-          const jsonMatch = response.match(/\[LEAD_CAPTURADO\](\{.*?\})/);
-          if (jsonMatch) {
-            const leadData = JSON.parse(jsonMatch[1]);
-            captureLead(leadData);
-            // Limpiar el marcador de la respuesta visible
-            return response.replace(/\[LEAD_CAPTURADO\]\{.*?\}/, '').trim();
-          }
-        } catch (e) {
-          console.error('Error parseando lead:', e);
-        }
-      }
-      return response;
-    }
-
-    function handleCtaKeyPress(e) {
-      if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        startFromCta();
-      }
-    }
-
-    function startFromCta() {
-      const ctaInput = document.getElementById('cta-input');
-      const text = ctaInput.value.trim();
-      
-      if (!text) return;
-      
-      // Scroll to top and open chat
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      
-      setTimeout(() => {
-        document.getElementById('hero').classList.add('hidden');
-        document.getElementById('chat-section').classList.remove('hidden');
-        document.getElementById('chat-section').classList.add('animate-fadeIn');
-        
-        messages.push({ role: 'user', content: text });
-        renderMessages();
-        sendToAI();
-      }, 500);
-    }
-
-    function handleHeroKeyPress(e) {
-      if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        startFromHero();
-      }
-    }
 
     function startFromHero() {
       const heroInput = document.getElementById('hero-input');
       const text = heroInput.value.trim();
-      
       if (!text) return;
       
       document.getElementById('hero').classList.add('hidden');
       document.getElementById('chat-section').classList.remove('hidden');
       document.getElementById('chat-section').classList.add('animate-fadeIn');
       
-      // Añadir el mensaje del usuario directamente
       messages.push({ role: 'user', content: text });
       renderMessages();
-      
-      // Enviar a la IA
       sendToAI();
-    }
-
-    function startChat() {
-      document.getElementById('hero').classList.add('hidden');
-      document.getElementById('chat-section').classList.remove('hidden');
-      document.getElementById('chat-section').classList.add('animate-fadeIn');
-      
-      const welcomeMessage = {
-        role: "assistant",
-        content: "¡Hola! 👋 Cuéntame, ¿qué tarea o proceso te gustaría automatizar en tu negocio?"
-      };
-      messages.push(welcomeMessage);
-      renderMessages();
-      document.getElementById('input').focus();
     }
 
     function goBack() {
@@ -541,27 +319,20 @@ IMPORTANTE:
     function renderMessages() {
       const container = document.getElementById('messages');
       container.innerHTML = messages.map((msg, i) => `
-        <div class="flex ${msg.role === 'user' ? 'justify-end' : 'items-start gap-3'} animate-messageIn" style="animation-delay: ${i * 0.03}s;">
+        <div class="flex ${msg.role === 'user' ? 'justify-end' : 'items-start gap-3'} animate-messageIn">
           ${msg.role === 'assistant' ? `
-            <div class="relative w-8 h-8 flex items-center justify-center flex-shrink-0">
-              <svg viewBox="0 0 64 64" class="w-8 h-8">
-                <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" 
-                      fill="none" 
-                      stroke="url(#msgMeitonGrad${i})" 
-                      stroke-width="8" 
-                      stroke-linecap="round"
-                      stroke-dasharray="115 25"/>
-                <path d="M24 42 Q32 50, 40 42" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
-                <defs>
-                  <linearGradient id="msgMeitonGrad${i}" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#46A758"/>
-                    <stop offset="100%" stop-color="#E54D2E"/>
-                  </linearGradient>
-                </defs>
-              </svg>
-            </div>
+            <svg viewBox="0 0 64 64" class="w-8 h-8 flex-shrink-0">
+              <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#msgGrad${i})" stroke-width="8" stroke-linecap="round" stroke-dasharray="115 25"/>
+              <path d="M24 42 Q32 50, 40 42" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
+              <defs>
+                <linearGradient id="msgGrad${i}" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#46A758"/>
+                  <stop offset="100%" stop-color="#E54D2E"/>
+                </linearGradient>
+              </defs>
+            </svg>
           ` : ''}
-          <div class="max-w-[80%] px-4 py-3 rounded-2xl ${msg.role === 'user' ? 'message-user text-white' : 'message-bot text-neutral-200'}" style="border-radius: ${msg.role === 'user' ? '20px 20px 4px 20px' : '20px 20px 20px 4px'};">
+          <div class="max-w-[80%] px-4 py-3 rounded-2xl ${msg.role === 'user' ? 'message-user text-white' : 'message-bot text-neutral-200'}">
             <p class="text-sm leading-relaxed">${msg.content}</p>
           </div>
         </div>
@@ -569,28 +340,13 @@ IMPORTANTE:
       container.scrollTop = container.scrollHeight;
     }
 
-    function handleKeyPress(e) {
-      if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        sendMessage();
-      }
-    }
-
-    // URL del proxy - usa el endpoint local en producción
-    const API_URL = '/api/chat';
-    
-    // URL del webhook de leads
-    const LEAD_WEBHOOK_URL = '/api/lead';
-
     async function sendToAI() {
-      isTyping = true;
       document.getElementById('typing').classList.remove('hidden');
       document.getElementById('input').disabled = true;
       document.getElementById('sendBtn').disabled = true;
-      document.getElementById('messages').scrollTop = document.getElementById('messages').scrollHeight;
 
       try {
-        const response = await fetch(API_URL, {
+        const response = await fetch('/api/chat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -605,19 +361,12 @@ IMPORTANTE:
         });
 
         if (!response.ok) throw new Error('API error');
-
         const data = await response.json();
-        let responseText = data.content[0].text;
-        
-        // Detectar y procesar lead capturado
-        responseText = checkForLead(responseText);
-        
-        messages.push({ role: 'assistant', content: responseText });
+        messages.push({ role: 'assistant', content: data.content[0].text });
       } catch (error) {
         console.error('Error:', error);
         messages.push({ role: 'assistant', content: 'Perdona, ha habido un problema. ¿Puedes repetirlo?' });
       } finally {
-        isTyping = false;
         document.getElementById('typing').classList.add('hidden');
         document.getElementById('input').disabled = false;
         document.getElementById('sendBtn').disabled = false;
@@ -626,6 +375,24 @@ IMPORTANTE:
       }
     }
 
-    async function sendMessage() {
+    function sendMessage() {
       const input = document.getElementById('input');
-      const te
+      const text = input.value.trim();
+      if (!text) return;
+      
+      input.value = '';
+      messages.push({ role: 'user', content: text });
+      renderMessages();
+      sendToAI();
+    }
+
+    // Enter key handlers
+    document.getElementById('hero-input').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') startFromHero();
+    });
+    document.getElementById('input').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') sendMessage();
+    });
+  </script>
+</body>
+</html>
