@@ -509,6 +509,29 @@ REGLAS IMPORTANTES:
       document.getElementById('messages').innerHTML = '';
     }
 
+    function formatMessage(text) {
+      // Convertir markdown básico a HTML
+      let formatted = text
+        // Escapar HTML primero
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        // Negritas **texto**
+        .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+        // Listas con guiones
+        .replace(/^- (.+)$/gm, '<li>$1</li>')
+        // Saltos de línea
+        .replace(/\n\n/g, '</p><p class="mt-2">')
+        .replace(/\n/g, '<br>');
+      
+      // Envolver listas en <ul>
+      if (formatted.includes('<li>')) {
+        formatted = formatted.replace(/(<li>.*?<\/li>)+/g, '<ul class="list-disc list-inside mt-1 space-y-1">$&</ul>');
+      }
+      
+      return formatted;
+    }
+
     function renderMessages() {
       const container = document.getElementById('messages');
       container.innerHTML = messages.map((msg, i) => `
@@ -526,7 +549,7 @@ REGLAS IMPORTANTES:
             </svg>
           ` : ''}
           <div class="max-w-[85%] md:max-w-[80%] px-3 md:px-4 py-2 md:py-3 rounded-2xl ${msg.role === 'user' ? 'message-user text-white' : 'message-bot text-neutral-200'}">
-            <p class="text-sm leading-relaxed">${msg.content}</p>
+            <div class="text-sm leading-relaxed">${formatMessage(msg.content)}</div>
           </div>
         </div>
       `).join('');
