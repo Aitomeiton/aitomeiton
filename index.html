@@ -350,12 +350,35 @@ EJEMPLOS DE SOLUCIONES según el caso:
 🔄 SEGUIMIENTO COMERCIAL:
 "Creamos flujos automáticos de seguimiento: cuando un cliente muestra interés, el sistema le envía información relevante, recordatorios y te avisa cuando está listo para cerrar. Tu equipo se dedica a vender, no a perseguir."
 
-═══════════════════════════════════════
-FASE 5: CERRAR (pedir datos para propuesta)
-═══════════════════════════════════════
-Solo después de haber dado valor (ahorro + solución), pide los datos:
+🏨 AGENCIAS DE VIAJES / TURISMO:
+"Montamos un asistente que atiende consultas 24/7, busca ofertas en tiempo real, genera presupuestos personalizados y gestiona reservas completas. Tu equipo solo interviene en ventas complejas y atención premium."
 
-"¿Te parece que preparemos una propuesta formal con todo esto? Necesitaría tu nombre, empresa y un email o teléfono para enviártela."
+═══════════════════════════════════════
+FASE 5: CERRAR (pedir datos para reunión técnica)
+═══════════════════════════════════════
+IMPORTANTE: El siguiente paso SIEMPRE es una reunión técnica con nuestro equipo de integraciones. Debes dejarlo muy claro.
+
+Cuando llegue el momento de cerrar, di algo como:
+
+"El siguiente paso sería agendar una reunión técnica con nuestro equipo de integraciones. En esa llamada analizamos vuestro flujo actual, resolvemos dudas técnicas y definimos el plan de implementación a medida.
+
+Para coordinar la reunión necesito:
+- Tu nombre
+- Nombre de la empresa
+- Email
+- Teléfono
+
+¿Me los facilitas?"
+
+REGLA CRÍTICA SOBRE LOS DATOS:
+- Necesitas los 4 datos: nombre, empresa, email Y teléfono
+- Si el cliente solo te da uno o dos, pídele amablemente los que faltan
+- Ejemplo: "Perfecto, ya tengo el teléfono. ¿Me dices también tu nombre, empresa y email para completar el registro?"
+- NO des por cerrado hasta tener los 4 datos
+- Si se resiste, explica: "Los necesito todos para que el equipo técnico pueda preparar la reunión con contexto"
+
+Cuando tengas los 4 datos, confirma:
+"Perfecto [nombre], de [empresa]. Nuestro equipo de integraciones te contactará en [email/teléfono] en las próximas 24-48 horas para agendar la reunión técnica. ¡Gracias por confiar en nosotros!"
 
 ═══════════════════════════════════════
 REGLAS IMPORTANTES:
@@ -366,7 +389,9 @@ REGLAS IMPORTANTES:
 - Respuestas de 3-5 frases máximo, claras y directas
 - El cliente no tiene que pensar ni calcular nada, tú se lo das hecho
 - Sé cercano pero profesional, nada de colegueo excesivo
-- Si pregunta precio: "Depende del volumen, pero para darte una cifra exacta necesito entender un poco mejor tu caso"`;
+- Si pregunta precio: "Depende del volumen y complejidad. En la reunión técnica os damos un presupuesto cerrado sin compromiso."
+- SIEMPRE enfatiza que el siguiente paso es la REUNIÓN TÉCNICA con el equipo de integraciones
+- SIEMPRE pide los 4 datos: nombre, empresa, email, teléfono`;
 
     let messages = [];
     let leadSent = false;
@@ -378,35 +403,44 @@ REGLAS IMPORTANTES:
         empresa: '',
         email: '',
         telefono: '',
-        necesidad: firstMessage
+        necesidad: firstMessage || 'No especificada'
       };
       
+      // Email
       const emailMatch = allText.match(/[\w.-]+@[\w.-]+\.\w+/i);
       if (emailMatch) data.email = emailMatch[0];
       
+      // Teléfono (varios formatos)
       const phoneMatch = allText.match(/(?:\+34\s?)?(?:6\d{8}|7\d{8}|9\d{8}|\d{3}[\s.-]?\d{3}[\s.-]?\d{3}|\d{3}[\s.-]?\d{2}[\s.-]?\d{2}[\s.-]?\d{2})/);
       if (phoneMatch) data.telefono = phoneMatch[0].replace(/[\s.-]/g, '');
       
+      // Nombre - buscar patrones comunes
       const nombrePatterns = [
-        /(?:me llamo|soy|mi nombre es)\s+([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+)?)/i,
-        /(?:^|\s)([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+)\s+(?:de|desde|en)\s+(?:la empresa|la compañía)/i
+        /(?:me llamo|soy|mi nombre es|nombre:?)\s+([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+)*)/i,
+        /([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+)?)\s*,?\s*(?:de la empresa|de|en)\s+/i
       ];
       for (const pattern of nombrePatterns) {
         const match = allText.match(pattern);
-        if (match) {
-          data.nombre = match[1];
+        if (match && match[1].length > 2) {
+          data.nombre = match[1].trim();
           break;
         }
       }
       
+      // Empresa - buscar patrones comunes
       const empresaPatterns = [
-        /(?:empresa|compañía|trabajo en|trabajamos en|de la empresa|somos|en)\s+([A-ZÁÉÍÓÚÑ][\w\s&.-]+?)(?:\s*[,.]|\s+y\s|\s+somos|\s+tenemos|$)/i
+        /(?:empresa|compañía|trabajo en|trabajamos en|de la empresa|somos de|en|empresa:?)\s+([A-ZÁÉÍÓÚÑ][\w\s&.-]+?)(?:\s*[,.]|\s+y\s|\s+somos|\s+tenemos|\s+mi\s|$)/i,
+        /(?:de|desde|en)\s+([A-ZÁÉÍÓÚÑ][\w\s&.-]{2,25}?)(?:\s*[,.]|\s+y\s|$)/i
       ];
       for (const pattern of empresaPatterns) {
         const match = allText.match(pattern);
         if (match && match[1].length > 2 && match[1].length < 40) {
-          data.empresa = match[1].trim();
-          break;
+          // Evitar que capture palabras comunes
+          const skipWords = ['el', 'la', 'los', 'las', 'un', 'una', 'que', 'para', 'por', 'con'];
+          if (!skipWords.includes(match[1].toLowerCase().trim())) {
+            data.empresa = match[1].trim();
+            break;
+          }
         }
       }
       
@@ -425,7 +459,13 @@ REGLAS IMPORTANTES:
       const userMessages = messages.filter(m => m.role === 'user').map(m => m.content).join(' ');
       const leadData = extractLeadData(userMessages);
       
+      // Solo enviar si hay al menos email o teléfono
       if (!leadData.email && !leadData.telefono) return;
+      
+      // Asegurar que la necesidad nunca esté vacía
+      if (!leadData.necesidad || leadData.necesidad === 'No especificada') {
+        leadData.necesidad = firstMessage || messages[0]?.content || 'Consulta general de automatización';
+      }
       
       leadData.fecha = new Date().toLocaleString('es-ES');
 
@@ -522,6 +562,7 @@ REGLAS IMPORTANTES:
         
         messages.push({ role: 'assistant', content: responseText });
         
+        // Verificar si hay datos de contacto después de cada mensaje
         const allUserText = messages.filter(m => m.role === 'user').map(m => m.content).join(' ');
         if (hasContactInfo(allUserText)) {
           sendLead();
