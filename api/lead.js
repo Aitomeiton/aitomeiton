@@ -4,15 +4,20 @@ export default async function handler(req, res) {
   }
 
   try {
-    const leadData = req.body;
-    console.log('Nuevo lead:', leadData);
+    const lead = req.body;
+    console.log('Nuevo lead:', lead);
 
     const SLACK_WEBHOOK = process.env.SLACK_WEBHOOK;
     
     if (SLACK_WEBHOOK) {
-      // Formatear la conversación para Slack
-      const conversacion = leadData.conversacion || 'Sin conversación';
-      
+      // Formatear datos - nunca mostrar vacíos
+      const nombre = lead.nombre && lead.nombre.trim() ? lead.nombre : '⚠️ No proporcionado';
+      const empresa = lead.empresa && lead.empresa.trim() ? lead.empresa : '⚠️ No proporcionado';
+      const email = lead.email && lead.email.trim() ? lead.email : '⚠️ No proporcionado';
+      const telefono = lead.telefono && lead.telefono.trim() ? lead.telefono : '⚠️ No proporcionado';
+      const necesidad = lead.necesidad && lead.necesidad.trim() ? lead.necesidad : '⚠️ No especificada';
+      const fecha = lead.fecha || new Date().toLocaleString('es-ES');
+
       await fetch(SLACK_WEBHOOK, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -27,15 +32,31 @@ export default async function handler(req, res) {
               }
             },
             {
+              type: 'divider'
+            },
+            {
               type: 'section',
               fields: [
                 {
                   type: 'mrkdwn',
-                  text: `*Contacto:*\n${leadData.contacto || 'No proporcionado'}`
+                  text: `*👤 Nombre:*\n${nombre}`
                 },
                 {
                   type: 'mrkdwn',
-                  text: `*Fecha:*\n${leadData.fecha || new Date().toLocaleString('es-ES')}`
+                  text: `*🏢 Empresa:*\n${empresa}`
+                }
+              ]
+            },
+            {
+              type: 'section',
+              fields: [
+                {
+                  type: 'mrkdwn',
+                  text: `*📧 Email:*\n${email}`
+                },
+                {
+                  type: 'mrkdwn',
+                  text: `*📱 Teléfono:*\n${telefono}`
                 }
               ]
             },
@@ -46,8 +67,17 @@ export default async function handler(req, res) {
               type: 'section',
               text: {
                 type: 'mrkdwn',
-                text: `*Conversación:*\n\`\`\`${conversacion.substring(0, 2500)}\`\`\``
+                text: `*💡 Necesidad:*\n${necesidad}`
               }
+            },
+            {
+              type: 'context',
+              elements: [
+                {
+                  type: 'mrkdwn',
+                  text: `📅 ${fecha}`
+                }
+              ]
             }
           ]
         })
