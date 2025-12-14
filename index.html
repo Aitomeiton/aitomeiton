@@ -24,7 +24,6 @@
   <style>
     * { font-family: 'Inter', sans-serif; }
     
-    /* Fix para móvil cuando se abre el teclado */
     html, body {
       height: 100%;
       overflow: hidden;
@@ -79,7 +78,7 @@
     .input-chat {
       background: rgba(70, 167, 88, 0.05);
       border: 1px solid rgba(70, 167, 88, 0.2);
-      font-size: 16px; /* Previene zoom en iOS */
+      font-size: 16px;
     }
     .input-chat:focus {
       border-color: rgba(70, 167, 88, 0.5);
@@ -122,7 +121,6 @@
 
     textarea::placeholder, input::placeholder { color: rgba(255,255,255,0.35); }
     
-    /* Chat container fix para móvil */
     #chat-section .card-glass {
       display: flex;
       flex-direction: column;
@@ -181,7 +179,6 @@
       
       <!-- Hero -->
       <div id="hero" class="text-center max-w-2xl animate-fadeIn">
-        <!-- Meiton Avatar -->
         <div class="relative w-24 h-24 md:w-32 md:h-32 mx-auto mb-8 md:mb-10 flex items-center justify-center">
           <svg viewBox="0 0 64 64" class="w-24 h-24 md:w-32 md:h-32 animate-breathe" style="overflow: visible;">
             <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#heroGrad)" stroke-width="8" stroke-linecap="round" stroke-dasharray="115 25" class="animate-glow-pulse"/>
@@ -200,7 +197,6 @@
           <span class="gradient-text">se hiciera solo en tu empresa?</span>
         </h1>
 
-        <!-- Input -->
         <div class="w-full max-w-xl mt-6 md:mt-8 px-2">
           <div class="relative">
             <input id="hero-input" type="text" placeholder="Ej: Responder emails, gestionar pedidos..." class="w-full input-chat rounded-2xl px-4 md:px-5 py-3 md:py-4 pr-14 text-base text-white transition-all">
@@ -217,7 +213,6 @@
       <div id="chat-section" class="w-full max-w-2xl hidden px-1">
         <div class="rounded-2xl card-glass backdrop-blur-xl overflow-hidden">
           
-          <!-- Chat header -->
           <div class="px-4 py-3 border-b border-leaf-500/10 flex items-center justify-between flex-shrink-0">
             <div class="flex items-center gap-3">
               <svg viewBox="0 0 64 64" class="w-9 h-9 md:w-10 md:h-10 animate-breathe">
@@ -245,10 +240,8 @@
             </button>
           </div>
 
-          <!-- Messages -->
           <div id="messages" class="h-64 md:h-80 overflow-y-auto p-4 space-y-4 scrollbar-minimal"></div>
 
-          <!-- Typing -->
           <div id="typing" class="hidden px-4 pb-2">
             <div class="flex items-start gap-3">
               <svg viewBox="0 0 64 64" class="w-8 h-8 flex-shrink-0">
@@ -270,7 +263,6 @@
             </div>
           </div>
 
-          <!-- Input -->
           <div class="p-3 md:p-4 border-t border-leaf-500/10 flex-shrink-0">
             <div class="flex gap-2 md:gap-3">
               <input id="input" type="text" placeholder="Escribe tu mensaje..." class="flex-1 input-chat rounded-xl px-3 md:px-4 py-3 text-sm text-white transition-all">
@@ -285,78 +277,157 @@
       </div>
     </main>
 
-    <!-- Footer -->
     <footer class="relative z-10 py-4 px-4 text-center">
       <a href="servicios.html" class="text-sm text-neutral-500 hover:text-leaf-500 transition-colors">Ver servicios y casos de éxito →</a>
     </footer>
   </div>
 
   <script>
-    const SYSTEM_PROMPT = `Eres Meiton, el asesor virtual de aitomeiton. Ayudas a empresas a automatizar tareas repetitivas con inteligencia artificial.
+    const SYSTEM_PROMPT = `Eres Meiton, consultor de automatización de aitomeiton. Tu trabajo es escuchar al cliente, entender su situación y darle una solución clara con el ahorro que conseguiría.
 
-PERSONALIDAD:
-- Cercano, directo, sin rodeos
-- Respuestas cortas (2-3 frases máximo)
-- Tuteas siempre
-- NUNCA uses tecnicismos ni nombres de tecnologías
+CÓMO ERES:
+- Cercano y profesional (nunca brusco ni demasiado informal)
+- Transmites confianza y seguridad
+- Escuchas más de lo que preguntas
+- Das respuestas claras y directas, sin rodeos
+- El cliente no tiene que pensar, tú le das todo mascado
 
-TU PROCESO:
+TU PROCESO (sigue este orden):
 
-FASE 1 - ESCUCHAR:
-- Deja que explique qué quiere automatizar
-- Pregunta: "¿Cuántas veces al día pasa esto?", "¿Cuántas personas tenéis?"
+═══════════════════════════════════════
+FASE 1: ESCUCHAR (1-2 mensajes)
+═══════════════════════════════════════
+Cuando el cliente te cuenta qué quiere automatizar:
+- Muestra que entiendes: "Entiendo perfectamente, es algo muy común"
+- Valida su problema: "Sí, eso consume mucho tiempo"
+- Deja que se explaye, no interrumpas con muchas preguntas
 
-FASE 2 - CUALIFICAR:
-- Volumen: "¿Cuántos emails/pedidos/clientes al día?"
-- Tamaño: "¿Cuántas personas sois?"
-- Decisión: "¿Esto lo decides tú?"
+═══════════════════════════════════════
+FASE 2: ENTENDER (máximo 2-3 preguntas PRÁCTICAS)
+═══════════════════════════════════════
+Solo pregunta lo necesario para calcular el ahorro:
+- "¿Cuántas veces al día/semana pasa esto aproximadamente?"
+- "¿Cuántas personas dedicáis a esta tarea?"
+- "¿Lo hacéis manual o usáis alguna herramienta?"
 
-LEAD BUENO (pide datos): +20 tareas/día, +3 personas, dolor urgente
-LEAD FRÍO (no pidas datos): curiosidad, autónomo sin volumen, no sabe qué quiere
+IMPORTANTE: Haz UNA pregunta por mensaje, no varias a la vez.
 
-FASE 3 - PROPONER (si hay dolor real):
-- "Imagina que te levantas y ya está hecho"
-- Beneficios: ahorro tiempo, menos errores, 24/7
+═══════════════════════════════════════
+FASE 3: CALCULAR Y MOSTRAR EL AHORRO
+═══════════════════════════════════════
+Con los datos que te ha dado, calcula el coste actual y el ahorro:
 
-FASE 4 - CERRAR (solo leads buenos):
-- "Para prepararte una propuesta, necesito algunos datos"
-- Pide: nombre, empresa, email o teléfono
-- Cuando te den los datos, confirma que los has recibido
+Fórmula mental:
+- Horas semanales x 52 = horas anuales
+- Horas anuales x 12€/hora = coste anual aproximado
+- Automatización ahorra 70-80% del tiempo
 
-Si pregunta precio: "Depende del volumen. Necesito entender tu caso primero"`;
+Ejemplo de cómo decirlo:
+"Con lo que me cuentas, estáis dedicando unas 15 horas semanales a esto. Son casi 800 horas al año, que en coste de personal suponen unos 9.500€. Con la automatización, podríais reducir eso a menos de 2.000€ anuales. Estamos hablando de un ahorro de más de 7.000€ al año."
+
+═══════════════════════════════════════
+FASE 4: PROPONER LA SOLUCIÓN (clara y concreta)
+═══════════════════════════════════════
+Explica QUÉ harías, de forma simple y sin tecnicismos.
+
+EJEMPLOS DE SOLUCIONES según el caso:
+
+📧 EMAILS / ATENCIÓN AL CLIENTE:
+"Lo que haríamos es crear un asistente que lea los emails entrantes, los clasifique automáticamente y responda los más habituales. Los casos complejos os los pasa a vosotros con un resumen. Funciona 24/7 y responde en segundos."
+
+📊 PROSPECCIÓN / EMAIL MARKETING:
+"Tenemos herramientas que acceden a bases de datos de empresas reales, segmentadas por sector, tamaño y cargo. La extracción es legal, mediante IA. Luego creamos secuencias de emails personalizados que no caen en spam y cumplen la RGPD. Es como tener un comercial que contacta 500 empresas al día sin descanso."
+
+📋 PEDIDOS / FACTURAS:
+"Automatizamos la entrada de pedidos desde cualquier canal: email, web, WhatsApp. El sistema extrae los datos, valida que estén correctos, genera la factura y actualiza tu sistema. Sin intervención manual."
+
+📅 CITAS / RESERVAS:
+"Implementamos un sistema que gestiona las citas automáticamente. El cliente elige día y hora disponible, recibe confirmación, recordatorios, y puede modificar o cancelar. Vosotros solo veis el calendario actualizado."
+
+📈 INFORMES / ANÁLISIS:
+"Conectamos tus fuentes de datos y generamos informes automáticos: diarios, semanales o cuando los necesites. Con los datos que te interesan, sin tener que prepararlos a mano."
+
+🔄 SEGUIMIENTO COMERCIAL:
+"Creamos flujos automáticos de seguimiento: cuando un cliente muestra interés, el sistema le envía información relevante, recordatorios y te avisa cuando está listo para cerrar. Tu equipo se dedica a vender, no a perseguir."
+
+═══════════════════════════════════════
+FASE 5: CERRAR (pedir datos para propuesta)
+═══════════════════════════════════════
+Solo después de haber dado valor (ahorro + solución), pide los datos:
+
+"¿Te parece que preparemos una propuesta formal con todo esto? Necesitaría tu nombre, empresa y un email o teléfono para enviártela."
+
+═══════════════════════════════════════
+REGLAS IMPORTANTES:
+═══════════════════════════════════════
+- NUNCA menciones nombres de herramientas, APIs o tecnologías
+- NUNCA hagas más de una pregunta por mensaje
+- SIEMPRE calcula el ahorro en euros cuando tengas datos
+- Respuestas de 3-5 frases máximo, claras y directas
+- El cliente no tiene que pensar ni calcular nada, tú se lo das hecho
+- Sé cercano pero profesional, nada de colegueo excesivo
+- Si pregunta precio: "Depende del volumen, pero para darte una cifra exacta necesito entender un poco mejor tu caso"`;
 
     let messages = [];
     let leadSent = false;
+    let firstMessage = '';
 
-    // Detectar si el mensaje contiene datos de contacto
-    function detectContactInfo(text) {
-      const emailRegex = /[\w.-]+@[\w.-]+\.\w+/;
-      const phoneRegex = /[\d\s\-\+\(\)]{9,}/;
+    function extractLeadData(allText) {
+      const data = {
+        nombre: '',
+        empresa: '',
+        email: '',
+        telefono: '',
+        necesidad: firstMessage
+      };
       
-      return emailRegex.test(text) || phoneRegex.test(text);
+      const emailMatch = allText.match(/[\w.-]+@[\w.-]+\.\w+/i);
+      if (emailMatch) data.email = emailMatch[0];
+      
+      const phoneMatch = allText.match(/(?:\+34\s?)?(?:6\d{8}|7\d{8}|9\d{8}|\d{3}[\s.-]?\d{3}[\s.-]?\d{3}|\d{3}[\s.-]?\d{2}[\s.-]?\d{2}[\s.-]?\d{2})/);
+      if (phoneMatch) data.telefono = phoneMatch[0].replace(/[\s.-]/g, '');
+      
+      const nombrePatterns = [
+        /(?:me llamo|soy|mi nombre es)\s+([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+)?)/i,
+        /(?:^|\s)([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+)\s+(?:de|desde|en)\s+(?:la empresa|la compañía)/i
+      ];
+      for (const pattern of nombrePatterns) {
+        const match = allText.match(pattern);
+        if (match) {
+          data.nombre = match[1];
+          break;
+        }
+      }
+      
+      const empresaPatterns = [
+        /(?:empresa|compañía|trabajo en|trabajamos en|de la empresa|somos|en)\s+([A-ZÁÉÍÓÚÑ][\w\s&.-]+?)(?:\s*[,.]|\s+y\s|\s+somos|\s+tenemos|$)/i
+      ];
+      for (const pattern of empresaPatterns) {
+        const match = allText.match(pattern);
+        if (match && match[1].length > 2 && match[1].length < 40) {
+          data.empresa = match[1].trim();
+          break;
+        }
+      }
+      
+      return data;
     }
 
-    // Enviar lead a Slack con toda la conversación
+    function hasContactInfo(text) {
+      const hasEmail = /[\w.-]+@[\w.-]+\.\w+/i.test(text);
+      const hasPhone = /(?:\+34\s?)?(?:6\d{8}|7\d{8}|9\d{8}|\d{3}[\s.-]?\d{3}[\s.-]?\d{3})/i.test(text);
+      return hasEmail || hasPhone;
+    }
+
     async function sendLead() {
       if (leadSent) return;
       
-      const conversation = messages.map(m => 
-        `${m.role === 'user' ? '👤 Usuario' : '🤖 Meiton'}: ${m.content}`
-      ).join('\n\n');
-      
-      // Extraer info del usuario de los mensajes
       const userMessages = messages.filter(m => m.role === 'user').map(m => m.content).join(' ');
+      const leadData = extractLeadData(userMessages);
       
-      // Buscar email y teléfono
-      const emailMatch = userMessages.match(/[\w.-]+@[\w.-]+\.\w+/);
-      const phoneMatch = userMessages.match(/[\d\s\-\+\(\)]{9,}/);
+      if (!leadData.email && !leadData.telefono) return;
       
-      const leadData = {
-        contacto: emailMatch ? emailMatch[0] : (phoneMatch ? phoneMatch[0] : 'No proporcionado'),
-        conversacion: conversation,
-        fecha: new Date().toLocaleString('es-ES'),
-        url: window.location.href
-      };
+      leadData.fecha = new Date().toLocaleString('es-ES');
 
       try {
         const response = await fetch('/api/lead', {
@@ -365,7 +436,7 @@ Si pregunta precio: "Depende del volumen. Necesito entender tu caso primero"`;
           body: JSON.stringify(leadData)
         });
         if (response.ok) {
-          console.log('Lead enviado correctamente');
+          console.log('Lead enviado');
           leadSent = true;
         }
       } catch (e) {
@@ -377,6 +448,8 @@ Si pregunta precio: "Depende del volumen. Necesito entender tu caso primero"`;
       const heroInput = document.getElementById('hero-input');
       const text = heroInput.value.trim();
       if (!text) return;
+      
+      firstMessage = text;
       
       document.getElementById('hero').classList.add('hidden');
       document.getElementById('chat-section').classList.remove('hidden');
@@ -392,6 +465,7 @@ Si pregunta precio: "Depende del volumen. Necesito entender tu caso primero"`;
       document.getElementById('hero').classList.remove('hidden');
       messages = [];
       leadSent = false;
+      firstMessage = '';
       document.getElementById('messages').innerHTML = '';
     }
 
@@ -424,7 +498,6 @@ Si pregunta precio: "Depende del volumen. Necesito entender tu caso primero"`;
       document.getElementById('input').disabled = true;
       document.getElementById('sendBtn').disabled = true;
       
-      // Scroll al typing indicator
       const msgContainer = document.getElementById('messages');
       msgContainer.scrollTop = msgContainer.scrollHeight;
 
@@ -434,7 +507,7 @@ Si pregunta precio: "Depende del volumen. Necesito entender tu caso primero"`;
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             model: 'claude-sonnet-4-20250514',
-            max_tokens: 400,
+            max_tokens: 600,
             system: SYSTEM_PROMPT,
             messages: messages.map(msg => ({
               role: msg.role === 'assistant' ? 'assistant' : 'user',
@@ -449,15 +522,14 @@ Si pregunta precio: "Depende del volumen. Necesito entender tu caso primero"`;
         
         messages.push({ role: 'assistant', content: responseText });
         
-        // Detectar si el usuario dio datos de contacto
-        const lastUserMsg = messages.filter(m => m.role === 'user').pop();
-        if (lastUserMsg && detectContactInfo(lastUserMsg.content)) {
+        const allUserText = messages.filter(m => m.role === 'user').map(m => m.content).join(' ');
+        if (hasContactInfo(allUserText)) {
           sendLead();
         }
         
       } catch (error) {
         console.error('Error:', error);
-        messages.push({ role: 'assistant', content: 'Perdona, ha habido un problema. ¿Puedes repetirlo?' });
+        messages.push({ role: 'assistant', content: 'Perdona, ha habido un problema técnico. ¿Puedes repetir lo último?' });
       } finally {
         document.getElementById('typing').classList.add('hidden');
         document.getElementById('input').disabled = false;
@@ -485,7 +557,6 @@ Si pregunta precio: "Depende del volumen. Necesito entender tu caso primero"`;
       if (e.key === 'Enter') sendMessage();
     });
     
-    // Fix para iOS - prevenir zoom al hacer focus en input
     document.addEventListener('touchstart', function() {}, {passive: true});
   </script>
 </body>
