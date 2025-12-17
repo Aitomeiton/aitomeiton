@@ -62,6 +62,21 @@
       50% { filter: drop-shadow(0 0 20px rgba(229, 77, 46, 0.8)); }
     }
 
+    /* Meiton Avatar Animado */
+    .meiton-body {
+      transform-origin: center;
+      animation: breathe 3s ease-in-out infinite, glow-pulse 2s ease-in-out infinite;
+    }
+    
+    .meiton-mouth {
+      animation: smile 6s ease-in-out infinite;
+    }
+    
+    @keyframes smile {
+      0%, 100% { d: path("M24 42 Q32 48, 40 42"); }
+      50% { d: path("M24 42 Q32 51, 40 42"); }
+    }
+
     .animate-breathe { animation: breathe 3s ease-in-out infinite; }
     .animate-glow-pulse { animation: glow-pulse 2s ease-in-out infinite; }
     .animate-fadeIn { animation: fadeIn 0.6s ease-out; }
@@ -180,15 +195,21 @@
       <!-- Hero -->
       <div id="hero" class="text-center max-w-2xl animate-fadeIn">
         <div class="relative w-24 h-24 md:w-32 md:h-32 mx-auto mb-8 md:mb-10 flex items-center justify-center">
-          <svg viewBox="0 0 64 64" class="w-24 h-24 md:w-32 md:h-32 animate-breathe" style="overflow: visible;">
-            <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#heroGrad)" stroke-width="8" stroke-linecap="round" stroke-dasharray="115 25" class="animate-glow-pulse"/>
-            <path d="M24 42 Q32 50, 40 42" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
+          <svg viewBox="0 0 64 64" class="w-24 h-24 md:w-32 md:h-32 meiton-avatar" style="overflow: visible;">
             <defs>
               <linearGradient id="heroGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stop-color="#46A758"/>
                 <stop offset="100%" stop-color="#E54D2E"/>
               </linearGradient>
             </defs>
+            <g class="meiton-body">
+              <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#heroGrad)" stroke-width="8" stroke-linecap="round" stroke-dasharray="115 25"/>
+              <!-- Ojos -->
+              <ellipse class="meiton-eye" cx="24" cy="30" rx="2.5" ry="3.5" fill="white"/>
+              <ellipse class="meiton-eye" cx="40" cy="30" rx="2.5" ry="3.5" fill="white"/>
+              <!-- Sonrisa -->
+              <path class="meiton-mouth" d="M24 42 Q32 48, 40 42" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+            </g>
           </svg>
         </div>
 
@@ -691,6 +712,38 @@ REGLAS IMPORTANTES:
     });
     
     document.addEventListener('touchstart', function() {}, {passive: true});
+
+    // Parpadeo de Meiton
+    function meitonBlink() {
+      const eyes = document.querySelectorAll('.meiton-eye');
+      if (eyes.length === 0) return;
+      
+      let ry = 3.5;
+      const closeSpeed = 0.7;
+      const openSpeed = 0.5;
+      
+      const closeInterval = setInterval(() => {
+        ry -= closeSpeed;
+        if (ry <= 0.3) {
+          ry = 0.3;
+          clearInterval(closeInterval);
+          
+          const openInterval = setInterval(() => {
+            ry += openSpeed;
+            if (ry >= 3.5) {
+              ry = 3.5;
+              clearInterval(openInterval);
+            }
+            eyes.forEach(eye => eye.setAttribute('ry', ry));
+          }, 20);
+        }
+        eyes.forEach(eye => eye.setAttribute('ry', ry));
+      }, 20);
+      
+      setTimeout(meitonBlink, 2500 + Math.random() * 3500);
+    }
+    
+    setTimeout(meitonBlink, 1500);
   </script>
 </body>
 </html>
