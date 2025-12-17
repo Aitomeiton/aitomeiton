@@ -237,14 +237,16 @@
           <div class="px-4 py-3 border-b border-leaf-500/10 flex items-center justify-between flex-shrink-0">
             <div class="flex items-center gap-3">
               <svg viewBox="0 0 64 64" class="w-9 h-9 md:w-10 md:h-10 animate-breathe">
-                <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#chatGrad)" stroke-width="8" stroke-linecap="round" stroke-dasharray="115 25"/>
-                <path d="M24 42 Q32 50, 40 42" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
                 <defs>
                   <linearGradient id="chatGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                     <stop offset="0%" stop-color="#46A758"/>
                     <stop offset="100%" stop-color="#E54D2E"/>
                   </linearGradient>
                 </defs>
+                <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#chatGrad)" stroke-width="8" stroke-linecap="round" stroke-dasharray="115 25"/>
+                <ellipse cx="24" cy="30" rx="2" ry="3" fill="white"/>
+                <ellipse cx="40" cy="30" rx="2" ry="3" fill="white"/>
+                <path d="M24 42 Q32 48, 40 42" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/>
               </svg>
               <div>
                 <span class="text-sm font-medium">aitomeiton</span>
@@ -266,13 +268,17 @@
           <div id="typing" class="hidden px-4 pb-2">
             <div class="flex items-start gap-3">
               <svg viewBox="0 0 64 64" class="w-8 h-8 flex-shrink-0">
-                <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#typingGrad)" stroke-width="8" stroke-linecap="round" stroke-dasharray="115 25"/>
                 <defs>
                   <linearGradient id="typingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                     <stop offset="0%" stop-color="#46A758"/>
                     <stop offset="100%" stop-color="#E54D2E"/>
                   </linearGradient>
                 </defs>
+                <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#typingGrad)" stroke-width="8" stroke-linecap="round" stroke-dasharray="115 25"/>
+                <ellipse cx="24" cy="30" rx="2" ry="3" fill="white"/>
+                <ellipse cx="40" cy="30" rx="2" ry="3" fill="white"/>
+                <path d="M24 42 Q32 48, 40 42" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/>
+              </svg>
               </svg>
               <div class="message-bot px-4 py-3 rounded-2xl">
                 <div class="flex gap-1">
@@ -573,14 +579,16 @@ REGLAS IMPORTANTES:
         <div class="flex ${msg.role === 'user' ? 'justify-end' : 'items-start gap-2 md:gap-3'} animate-messageIn">
           ${msg.role === 'assistant' ? `
             <svg viewBox="0 0 64 64" class="w-7 h-7 md:w-8 md:h-8 flex-shrink-0">
-              <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#msgGrad${i})" stroke-width="8" stroke-linecap="round" stroke-dasharray="115 25"/>
-              <path d="M24 42 Q32 50, 40 42" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
               <defs>
                 <linearGradient id="msgGrad${i}" x1="0%" y1="0%" x2="100%" y2="100%">
                   <stop offset="0%" stop-color="#46A758"/>
                   <stop offset="100%" stop-color="#E54D2E"/>
                 </linearGradient>
               </defs>
+              <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#msgGrad${i})" stroke-width="8" stroke-linecap="round" stroke-dasharray="115 25"/>
+              <ellipse cx="24" cy="30" rx="2" ry="3" fill="white"/>
+              <ellipse cx="40" cy="30" rx="2" ry="3" fill="white"/>
+              <path d="M24 42 Q32 48, 40 42" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/>
             </svg>
           ` : ''}
           <div class="max-w-[85%] md:max-w-[80%] px-3 md:px-4 py-2 md:py-3 rounded-2xl ${msg.role === 'user' ? 'message-user text-white' : 'message-bot text-neutral-200'}">
@@ -619,14 +627,16 @@ REGLAS IMPORTANTES:
         <div class="flex ${msg.role === 'user' ? 'justify-end' : 'items-start gap-2 md:gap-3'} animate-messageIn" data-msg-index="${i}">
           ${msg.role === 'assistant' ? `
             <svg viewBox="0 0 64 64" class="w-7 h-7 md:w-8 md:h-8 flex-shrink-0">
-              <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#msgGrad${i})" stroke-width="8" stroke-linecap="round" stroke-dasharray="115 25"/>
-              <path d="M24 42 Q32 50, 40 42" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
               <defs>
                 <linearGradient id="msgGrad${i}" x1="0%" y1="0%" x2="100%" y2="100%">
                   <stop offset="0%" stop-color="#46A758"/>
                   <stop offset="100%" stop-color="#E54D2E"/>
                 </linearGradient>
               </defs>
+              <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#msgGrad${i})" stroke-width="8" stroke-linecap="round" stroke-dasharray="115 25"/>
+              <ellipse cx="24" cy="30" rx="2" ry="3" fill="white"/>
+              <ellipse cx="40" cy="30" rx="2" ry="3" fill="white"/>
+              <path d="M24 42 Q32 48, 40 42" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/>
             </svg>
           ` : ''}
           <div class="max-w-[85%] md:max-w-[80%] px-3 md:px-4 py-2 md:py-3 rounded-2xl ${msg.role === 'user' ? 'message-user text-white' : 'message-bot text-neutral-200'}">
