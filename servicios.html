@@ -69,36 +69,22 @@
       transform: scale(1.05);
       box-shadow: 0 6px 30px rgba(70, 167, 88, 0.4);
     }
-
-    @keyframes pulse-glow {
-      0%, 100% { opacity: 0.5; }
-      50% { opacity: 1; }
-    }
-    .animate-pulse-glow { animation: pulse-glow 3s ease-in-out infinite; }
   </style>
 </head>
-<body class="min-h-screen text-white" style="background-color: #0a0a0a;">
+<body class="min-h-screen bg-[#0a0a0a] text-white">
   
-  <!-- Background con degradados verde y rojo -->
-  <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 0; background-color: #0a0a0a; overflow: hidden;">
-    <!-- Orbe verde arriba derecha -->
+  <!-- Background -->
+  <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 0; background-color: #0a0a0a; overflow: hidden; pointer-events: none;">
     <div style="position: absolute; top: -200px; right: -200px; width: 900px; height: 900px; background: radial-gradient(circle, rgba(70, 167, 88, 0.45) 0%, transparent 60%); border-radius: 50%; filter: blur(80px);"></div>
-    <!-- Orbe rojo abajo izquierda -->
     <div style="position: absolute; bottom: -200px; left: -200px; width: 800px; height: 800px; background: radial-gradient(circle, rgba(229, 77, 46, 0.4) 0%, transparent 60%); border-radius: 50%; filter: blur(80px);"></div>
-    <!-- Línea verde/roja arriba -->
     <div style="position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, #46A758, #E54D2E, transparent);"></div>
   </div>
 
   <!-- Header -->
-  <header class="relative z-10 px-6 md:px-12 py-5 flex justify-between items-center max-w-6xl mx-auto">
-    <a href="aitomeiton.html" class="flex items-center gap-2.5">
-      <svg viewBox="0 0 64 64" class="w-8 h-8">
-        <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" 
-              fill="none" 
-              stroke="url(#logoGrad)" 
-              stroke-width="10" 
-              stroke-linecap="round"
-              stroke-dasharray="115 25"/>
+  <header class="relative z-10 px-4 md:px-12 py-4 flex justify-between items-center max-w-6xl mx-auto">
+    <a href="/" class="flex items-center gap-2">
+      <svg viewBox="0 0 64 64" class="w-7 h-7 md:w-8 md:h-8">
+        <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#logoGrad)" stroke-width="10" stroke-linecap="round" stroke-dasharray="115 25"/>
         <defs>
           <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stop-color="#46A758"/>
@@ -106,15 +92,14 @@
           </linearGradient>
         </defs>
       </svg>
-      <span class="text-2xl tracking-tight font-bold" style="font-family: 'Nunito', sans-serif;">
+      <span class="text-xl md:text-2xl tracking-tight font-bold" style="font-family: 'Nunito', sans-serif;">
         ai<span class="gradient-text">tomeiton</span>
       </span>
     </a>
     <nav class="hidden md:flex items-center gap-8 text-sm text-neutral-400">
-      <a href="#casos" class="hover:text-leaf-500 transition-colors">Casos de uso</a>
-      <a href="#testimonios" class="hover:text-leaf-500 transition-colors">Testimonios</a>
-      <a href="#faq" class="hover:text-leaf-500 transition-colors">FAQ</a>
-      <a href="aitomeiton.html" class="px-4 py-2 rounded-full border border-leaf-500/20 hover:border-leaf-500/50 hover:bg-leaf-500/5 transition-all">Empezar</a>
+      <a href="servicios.html" class="hover:text-leaf-500 transition-colors">Servicios</a>
+      <a href="servicios.html#casos" class="hover:text-leaf-500 transition-colors">Casos</a>
+      <a href="contacto.html" class="px-4 py-2 rounded-full border border-leaf-500/20 hover:border-leaf-500/50 hover:bg-leaf-500/5 transition-all">Contacto</a>
     </nav>
   </header>
 
@@ -130,7 +115,7 @@
       <h2 class="text-3xl md:text-4xl font-semibold text-center mb-4">¿Qué puedes automatizar?</h2>
       <p class="text-neutral-400 text-center mb-16 max-w-xl mx-auto">Todo lo que haces una y otra vez, puede hacerse solo.</p>
       
-      <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-6">
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
         <!-- Caso 1 -->
         <div class="p-6 rounded-2xl border border-leaf-500/10 bg-neutral-900/30 hover:border-leaf-500/30 transition-all group">
           <div class="w-12 h-12 rounded-xl bg-leaf-500/10 flex items-center justify-center mb-4 group-hover:bg-leaf-500/20 transition-all">
@@ -174,137 +159,6 @@
           <h3 class="font-medium mb-2">Citas y reservas</h3>
           <p class="text-sm text-neutral-400">Agenda que se gestiona sola con recordatorios incluidos.</p>
         </div>
-
-        <!-- Caso 5 - NUEVO -->
-        <div class="p-6 rounded-2xl border border-leaf-500/10 bg-neutral-900/30 hover:border-leaf-500/30 transition-all group">
-          <div class="w-12 h-12 rounded-xl bg-leaf-500/10 flex items-center justify-center mb-4 group-hover:bg-leaf-500/20 transition-all">
-            <svg class="w-6 h-6 text-leaf-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
-          </div>
-          <h3 class="font-medium mb-2">Análisis de solicitantes</h3>
-          <p class="text-sm text-neutral-400">Filtra y cualifica clientes automáticamente según tus criterios de aprobación.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Sección: Casos por sector -->
-  <section class="relative z-10 py-24 px-6 border-t border-leaf-500/10">
-    <div class="max-w-6xl mx-auto">
-      <h2 class="text-3xl md:text-4xl font-semibold text-center mb-4">Casos reales en tu sector</h2>
-      <p class="text-neutral-400 text-center mb-16 max-w-2xl mx-auto">Así ayudamos a negocios como el tuyo cada día.</p>
-      
-      <!-- Intermediarios Financieros / Hipotecas -->
-      <div class="mb-16">
-        <div class="flex items-center gap-3 mb-8">
-          <div class="w-12 h-12 rounded-xl bg-leaf-500/10 flex items-center justify-center">
-            <svg class="w-6 h-6 text-leaf-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold">Intermediarios financieros e hipotecarios</h3>
-        </div>
-        <div class="grid md:grid-cols-3 gap-6">
-          <div class="p-6 rounded-2xl border border-leaf-500/10 bg-neutral-900/30">
-            <h4 class="font-medium mb-2 text-leaf-500">Pre-análisis de solicitantes</h4>
-            <p class="text-sm text-neutral-400">El cliente rellena un formulario. La IA analiza sus datos, calcula ratios de endeudamiento, y te dice si es viable ANTES de que pierdas tiempo.</p>
-          </div>
-          <div class="p-6 rounded-2xl border border-leaf-500/10 bg-neutral-900/30">
-            <h4 class="font-medium mb-2 text-leaf-500">Recopilación de documentos</h4>
-            <p class="text-sm text-neutral-400">Bot que pide al cliente nóminas, IRPF, vida laboral por WhatsApp. Valida que estén completos y los organiza en carpetas automáticamente.</p>
-          </div>
-          <div class="p-6 rounded-2xl border border-leaf-500/10 bg-neutral-900/30">
-            <h4 class="font-medium mb-2 text-leaf-500">Comparador de condiciones</h4>
-            <p class="text-sm text-neutral-400">Introduces las ofertas de los bancos y genera automáticamente un informe comparativo para el cliente con tu recomendación.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Corredurías de Seguros -->
-      <div class="mb-16">
-        <div class="flex items-center gap-3 mb-8">
-          <div class="w-12 h-12 rounded-xl bg-tomato-500/10 flex items-center justify-center">
-            <svg class="w-6 h-6 text-tomato-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold">Corredurías de seguros</h3>
-        </div>
-        <div class="grid md:grid-cols-3 gap-6">
-          <div class="p-6 rounded-2xl border border-leaf-500/10 bg-neutral-900/30">
-            <h4 class="font-medium mb-2 text-tomato-500">Cotizador automático 24/7</h4>
-            <p class="text-sm text-neutral-400">El cliente pregunta por WhatsApp, la IA recoge los datos y genera presupuestos de múltiples aseguradoras en minutos. Tú solo cierras.</p>
-          </div>
-          <div class="p-6 rounded-2xl border border-leaf-500/10 bg-neutral-900/30">
-            <h4 class="font-medium mb-2 text-tomato-500">Gestión de siniestros</h4>
-            <p class="text-sm text-neutral-400">Cliente reporta un siniestro → la IA recoge fotos, datos, y genera el parte. Lo clasifica por urgencia y avisa al gestor adecuado.</p>
-          </div>
-          <div class="p-6 rounded-2xl border border-leaf-500/10 bg-neutral-900/30">
-            <h4 class="font-medium mb-2 text-tomato-500">Renovaciones proactivas</h4>
-            <p class="text-sm text-neutral-400">30 días antes del vencimiento, contacta al cliente automáticamente, ofrece mejoras y gestiona la renovación sin que tú hagas nada.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Autoescuelas -->
-      <div class="mb-16">
-        <div class="flex items-center gap-3 mb-8">
-          <div class="w-12 h-12 rounded-xl bg-leaf-500/10 flex items-center justify-center">
-            <svg class="w-6 h-6 text-leaf-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold">Autoescuelas</h3>
-        </div>
-        <div class="grid md:grid-cols-3 gap-6">
-          <div class="p-6 rounded-2xl border border-leaf-500/10 bg-neutral-900/30">
-            <h4 class="font-medium mb-2 text-leaf-500">Gestión de citas inteligente</h4>
-            <p class="text-sm text-neutral-400">Alumnos reservan prácticas por WhatsApp. La IA cuadra disponibilidad de profesores, vehículos y horarios. Envía recordatorios automáticos.</p>
-          </div>
-          <div class="p-6 rounded-2xl border border-leaf-500/10 bg-neutral-900/30">
-            <h4 class="font-medium mb-2 text-leaf-500">Seguimiento de alumnos</h4>
-            <p class="text-sm text-neutral-400">Detecta alumnos que llevan tiempo sin reservar, les contacta automáticamente y ofrece horarios disponibles para reactivarlos.</p>
-          </div>
-          <div class="p-6 rounded-2xl border border-leaf-500/10 bg-neutral-900/30">
-            <h4 class="font-medium mb-2 text-leaf-500">Gestión de exámenes DGT</h4>
-            <p class="text-sm text-neutral-400">Controla fechas de examen, avisa a los alumnos, gestiona la documentación necesaria y hace seguimiento post-examen.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Inmobiliarias -->
-      <div class="mb-16">
-        <div class="flex items-center gap-3 mb-8">
-          <div class="w-12 h-12 rounded-xl bg-tomato-500/10 flex items-center justify-center">
-            <svg class="w-6 h-6 text-tomato-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
-            </svg>
-          </div>
-          <h3 class="text-xl font-semibold">Inmobiliarias</h3>
-        </div>
-        <div class="grid md:grid-cols-3 gap-6">
-          <div class="p-6 rounded-2xl border border-leaf-500/10 bg-neutral-900/30">
-            <h4 class="font-medium mb-2 text-tomato-500">Cualificación de leads 24/7</h4>
-            <p class="text-sm text-neutral-400">Llega un contacto de Idealista a las 11 de la noche → la IA responde, pregunta presupuesto, zona, urgencia y te lo pasa cualificado por la mañana.</p>
-          </div>
-          <div class="p-6 rounded-2xl border border-leaf-500/10 bg-neutral-900/30">
-            <h4 class="font-medium mb-2 text-tomato-500">Matching automático</h4>
-            <p class="text-sm text-neutral-400">Nuevo piso en cartera → automáticamente cruza con tu base de datos de compradores y avisa a los que encajan. Sin buscar manualmente.</p>
-          </div>
-          <div class="p-6 rounded-2xl border border-leaf-500/10 bg-neutral-900/30">
-            <h4 class="font-medium mb-2 text-tomato-500">Seguimiento de propietarios</h4>
-            <p class="text-sm text-neutral-400">Contacta periódicamente a propietarios con pisos en venta, informa del estado, recoge feedback y detecta si bajan precio.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Más sectores -->
-      <div class="mt-12 text-center">
-        <p class="text-neutral-400 mb-6">También trabajamos con clínicas, asesorías, ecommerce, logística y más.</p>
-        <a href="index.html" class="inline-block px-6 py-3 rounded-xl border border-leaf-500/30 hover:bg-leaf-500/10 transition-all text-leaf-500">
-          Cuéntanos tu caso →
-        </a>
       </div>
     </div>
   </section>
@@ -523,19 +377,19 @@
   <!-- Sección: CTA Final -->
   <section class="relative z-10 py-24 px-6">
     <div class="max-w-2xl mx-auto text-center">
-      <!-- Meiton -->
+      <!-- Gordon -->
       <div class="relative w-24 h-24 mx-auto mb-8 flex items-center justify-center">
         <svg viewBox="0 0 64 64" class="w-24 h-24 animate-breathe">
           <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" 
                 fill="none" 
-                stroke="url(#ctaMeitonGrad)" 
+                stroke="url(#ctaGordonGrad)" 
                 stroke-width="8" 
                 stroke-linecap="round"
                 stroke-dasharray="115 25"
                 class="animate-glow-pulse"/>
           <path d="M24 42 Q32 50, 40 42" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
           <defs>
-            <linearGradient id="ctaMeitonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <linearGradient id="ctaGordonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stop-color="#46A758"/>
               <stop offset="100%" stop-color="#E54D2E"/>
             </linearGradient>
@@ -548,26 +402,9 @@
       <h2 class="text-3xl md:text-4xl font-semibold mb-4">¿Listo para automatizar?</h2>
       <p class="text-neutral-400 mb-8">Cuéntanos tu caso y te decimos cómo podemos ayudarte.</p>
       
-      <!-- Input CTA -->
-      <div class="max-w-xl mx-auto">
-        <div class="relative">
-          <input 
-            id="cta-input" 
-            type="text" 
-            placeholder="¿Qué quieres automatizar?"
-            class="w-full input-chat rounded-2xl px-5 py-4 pr-14 text-base text-white transition-all"
-            onkeypress="if(event.key === 'Enter') { window.location.href = 'index.html?q=' + encodeURIComponent(this.value); }"
-          >
-          <button 
-            onclick="window.location.href = 'index.html?q=' + encodeURIComponent(document.getElementById('cta-input').value);"
-            class="absolute right-2 top-1/2 -translate-y-1/2 p-2.5 rounded-xl btn-send transition-all duration-200 hover:scale-105"
-          >
-            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
-          </button>
-        </div>
-      </div>
+      <a href="/" class="inline-block px-8 py-4 rounded-2xl btn-send text-white font-medium transition-all">
+        Empezar ahora →
+      </a>
     </div>
   </section>
 
@@ -576,14 +413,9 @@
     <div class="max-w-5xl mx-auto">
       <div class="flex flex-col md:flex-row justify-between items-center gap-6">
         <!-- Logo -->
-        <a href="aitomeiton.html" class="flex items-center gap-2.5">
-          <svg viewBox="0 0 64 64" class="w-8 h-8">
-            <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" 
-                  fill="none" 
-                  stroke="url(#footerLogoGrad)" 
-                  stroke-width="10" 
-                  stroke-linecap="round"
-                  stroke-dasharray="115 25"/>
+        <a href="/" class="flex items-center gap-2">
+          <svg viewBox="0 0 64 64" class="w-7 h-7 md:w-8 md:h-8">
+            <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#footerLogoGrad)" stroke-width="10" stroke-linecap="round" stroke-dasharray="115 25"/>
             <defs>
               <linearGradient id="footerLogoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stop-color="#46A758"/>
@@ -598,7 +430,7 @@
 
         <!-- Links -->
         <div class="flex gap-8 text-sm text-neutral-400">
-          <a href="/cdn-cgi/l/email-protection#ec8483808dac8d859883818d8598839fc28f8381" class="hover:text-white transition-colors"><span class="__cf_email__" data-cfemail="0f6760636e4f6e667b60626e667b607c216c6062">[email&#160;protected]</span></a>
+          <a href="/cdn-cgi/l/email-protection#50383f3c31103139243f3d3139243f237e333f3d" class="hover:text-white transition-colors"><span class="__cf_email__" data-cfemail="80e8efece1c0e1e9f4efede1e9f4eff3aee3efed">[email&#160;protected]</span></a>
           <a href="#" class="hover:text-white transition-colors">LinkedIn</a>
           <a href="#" class="hover:text-white transition-colors">Twitter</a>
         </div>
