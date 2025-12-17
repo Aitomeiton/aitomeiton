@@ -153,7 +153,7 @@
 
     <!-- Header -->
     <header class="relative z-10 px-4 md:px-12 py-4 flex justify-between items-center max-w-6xl mx-auto">
-      <div class="flex items-center gap-2">
+      <a href="/" class="flex items-center gap-2">
         <svg viewBox="0 0 64 64" class="w-7 h-7 md:w-8 md:h-8">
           <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#logoGrad)" stroke-width="10" stroke-linecap="round" stroke-dasharray="115 25"/>
           <defs>
@@ -166,11 +166,11 @@
         <span class="text-xl md:text-2xl tracking-tight font-bold" style="font-family: 'Nunito', sans-serif;">
           ai<span class="gradient-text">tomeiton</span>
         </span>
-      </div>
+      </a>
       <nav class="hidden md:flex items-center gap-8 text-sm text-neutral-400">
         <a href="servicios.html" class="hover:text-leaf-500 transition-colors">Servicios</a>
         <a href="servicios.html#casos" class="hover:text-leaf-500 transition-colors">Casos</a>
-        <a href="servicios.html#faq" class="px-4 py-2 rounded-full border border-leaf-500/20 hover:border-leaf-500/50 hover:bg-leaf-500/5 transition-all">Contacto</a>
+        <a href="contacto.html" class="px-4 py-2 rounded-full border border-leaf-500/20 hover:border-leaf-500/50 hover:bg-leaf-500/5 transition-all">Contacto</a>
       </nav>
     </header>
 
@@ -410,9 +410,24 @@ REGLAS IMPORTANTES:
       const emailMatch = allText.match(/[\w.-]+@[\w.-]+\.\w+/i);
       if (emailMatch) data.email = emailMatch[0];
       
-      // Teléfono (varios formatos)
-      const phoneMatch = allText.match(/(?:\+34\s?)?(?:6\d{8}|7\d{8}|9\d{8}|\d{3}[\s.-]?\d{3}[\s.-]?\d{3}|\d{3}[\s.-]?\d{2}[\s.-]?\d{2}[\s.-]?\d{2})/);
-      if (phoneMatch) data.telefono = phoneMatch[0].replace(/[\s.-]/g, '');
+      // Teléfono - formato más flexible
+      const phonePatterns = [
+        /\b(\+34\s?\d{9})\b/,                    // +34 con 9 dígitos
+        /\b(\d{9})\b/,                            // 9 dígitos seguidos
+        /\b(\d{3}[\s.-]\d{3}[\s.-]\d{3})\b/,     // 666 666 666 o 666-666-666
+        /\b(\d{3}[\s.-]\d{2}[\s.-]\d{2}[\s.-]\d{2})\b/, // 666 66 66 66
+        /\b(6\d{8})\b/,                           // Empieza por 6
+        /\b(7\d{8})\b/,                           // Empieza por 7
+        /\b(9\d{8})\b/                            // Empieza por 9
+      ];
+      
+      for (const pattern of phonePatterns) {
+        const match = allText.match(pattern);
+        if (match) {
+          data.telefono = match[1].replace(/[\s.-]/g, '');
+          break;
+        }
+      }
       
       // Nombre - buscar patrones comunes
       const nombrePatterns = [
@@ -449,7 +464,8 @@ REGLAS IMPORTANTES:
 
     function hasContactInfo(text) {
       const hasEmail = /[\w.-]+@[\w.-]+\.\w+/i.test(text);
-      const hasPhone = /(?:\+34\s?)?(?:6\d{8}|7\d{8}|9\d{8}|\d{3}[\s.-]?\d{3}[\s.-]?\d{3})/i.test(text);
+      // Teléfono: 9 dígitos seguidos o con separadores
+      const hasPhone = /\b\d{9}\b|\b\d{3}[\s.-]\d{3}[\s.-]\d{3}\b/i.test(text);
       return hasEmail || hasPhone;
     }
 
@@ -462,10 +478,8 @@ REGLAS IMPORTANTES:
       // Solo enviar si hay al menos email o teléfono
       if (!leadData.email && !leadData.telefono) return;
       
-      // Asegurar que la necesidad nunca esté vacía
-      if (!leadData.necesidad || leadData.necesidad === 'No especificada') {
-        leadData.necesidad = firstMessage || messages[0]?.content || 'Consulta general de automatización';
-      }
+      // Asegurar que la necesidad SIEMPRE tenga valor
+      leadData.necesidad = firstMessage || messages[0]?.content || 'Consulta general de automatización';
       
       leadData.fecha = new Date().toLocaleString('es-ES');
 
@@ -556,6 +570,52 @@ REGLAS IMPORTANTES:
       container.scrollTop = container.scrollHeight;
     }
 
+    async function typeMessage(text, messageIndex) {
+      const container = document.getElementById('messages');
+      const messageDiv = container.querySelector(`[data-msg-index="${messageIndex}"] .msg-content`);
+      if (!messageDiv) return;
+      
+      let currentText = '';
+      const speed = 15; // milisegundos por carácter
+      
+      for (let i = 0; i < text.length; i++) {
+        currentText += text[i];
+        messageDiv.innerHTML = formatMessage(currentText);
+        container.scrollTop = container.scrollHeight;
+        
+        // Pausa más larga en puntos y saltos de línea
+        if (text[i] === '.' || text[i] === '\n') {
+          await new Promise(r => setTimeout(r, speed * 3));
+        } else {
+          await new Promise(r => setTimeout(r, speed));
+        }
+      }
+    }
+
+    function renderMessagesWithTyping(newMessageIndex = -1) {
+      const container = document.getElementById('messages');
+      container.innerHTML = messages.map((msg, i) => `
+        <div class="flex ${msg.role === 'user' ? 'justify-end' : 'items-start gap-2 md:gap-3'} animate-messageIn" data-msg-index="${i}">
+          ${msg.role === 'assistant' ? `
+            <svg viewBox="0 0 64 64" class="w-7 h-7 md:w-8 md:h-8 flex-shrink-0">
+              <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#msgGrad${i})" stroke-width="8" stroke-linecap="round" stroke-dasharray="115 25"/>
+              <path d="M24 42 Q32 50, 40 42" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
+              <defs>
+                <linearGradient id="msgGrad${i}" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#46A758"/>
+                  <stop offset="100%" stop-color="#E54D2E"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          ` : ''}
+          <div class="max-w-[85%] md:max-w-[80%] px-3 md:px-4 py-2 md:py-3 rounded-2xl ${msg.role === 'user' ? 'message-user text-white' : 'message-bot text-neutral-200'}">
+            <div class="text-sm leading-relaxed msg-content">${i === newMessageIndex ? '' : formatMessage(msg.content)}</div>
+          </div>
+        </div>
+      `).join('');
+      container.scrollTop = container.scrollHeight;
+    }
+
     async function sendToAI() {
       document.getElementById('typing').classList.remove('hidden');
       document.getElementById('input').disabled = true;
@@ -585,6 +645,14 @@ REGLAS IMPORTANTES:
         
         messages.push({ role: 'assistant', content: responseText });
         
+        // Ocultar typing y mostrar mensaje vacío
+        document.getElementById('typing').classList.add('hidden');
+        const newMsgIndex = messages.length - 1;
+        renderMessagesWithTyping(newMsgIndex);
+        
+        // Efecto typewriter
+        await typeMessage(responseText, newMsgIndex);
+        
         // Verificar si hay datos de contacto después de cada mensaje
         const allUserText = messages.filter(m => m.role === 'user').map(m => m.content).join(' ');
         if (hasContactInfo(allUserText)) {
@@ -594,6 +662,7 @@ REGLAS IMPORTANTES:
       } catch (error) {
         console.error('Error:', error);
         messages.push({ role: 'assistant', content: 'Perdona, ha habido un problema técnico. ¿Puedes repetir lo último?' });
+        renderMessages();
       } finally {
         document.getElementById('typing').classList.add('hidden');
         document.getElementById('input').disabled = false;
