@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contacto | aitomeiton</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Nunito:wght@600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { 'inter': ['Inter', 'sans-serif'] },
+          colors: {
+            tomato: { 500: '#E54D2E', 600: '#CD4527' },
+            leaf: { 500: '#46A758' }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { font-family: 'Inter', sans-serif; }
+    
+    .gradient-text {
+      background: linear-gradient(135deg, #46A758 0%, #E54D2E 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .input-field {
+      background: rgba(70, 167, 88, 0.05);
+      border: 1px solid rgba(70, 167, 88, 0.2);
+      font-size: 16px;
+    }
+    .input-field:focus {
+      border-color: rgba(70, 167, 88, 0.5);
+      background: rgba(70, 167, 88, 0.08);
+      box-shadow: 0 0 20px rgba(70, 167, 88, 0.1);
+      outline: none;
+    }
+
+    .btn-submit {
+      background: linear-gradient(135deg, #46A758 0%, #E54D2E 100%);
+      box-shadow: 0 4px 20px rgba(70, 167, 88, 0.3);
+    }
+    .btn-submit:hover {
+      transform: scale(1.02);
+      box-shadow: 0 6px 30px rgba(70, 167, 88, 0.4);
+    }
+    .btn-submit:disabled {
+      opacity: 0.5;
+      transform: none;
+      cursor: not-allowed;
+    }
+
+    .card-glass {
+      background: rgba(10, 10, 10, 0.8);
+      border: 1px solid rgba(70, 167, 88, 0.15);
+      box-shadow: 0 0 40px rgba(70, 167, 88, 0.05);
+    }
+
+    textarea::placeholder, input::placeholder { color: rgba(255,255,255,0.35); }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-fadeIn { animation: fadeIn 0.6s ease-out; }
+
+    @keyframes checkmark {
+      0% { transform: scale(0); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+    .animate-checkmark { animation: checkmark 0.5s ease-out; }
+  </style>
+</head>
+<body class="min-h-screen text-white" style="background-color: #0a0a0a;">
+  
+  <!-- Background -->
+  <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 0; background-color: #0a0a0a; overflow: hidden; pointer-events: none;">
+    <div style="position: absolute; top: -200px; right: -200px; width: 900px; height: 900px; background: radial-gradient(circle, rgba(70, 167, 88, 0.45) 0%, transparent 60%); border-radius: 50%; filter: blur(80px);"></div>
+    <div style="position: absolute; bottom: -200px; left: -200px; width: 800px; height: 800px; background: radial-gradient(circle, rgba(229, 77, 46, 0.4) 0%, transparent 60%); border-radius: 50%; filter: blur(80px);"></div>
+    <div style="position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, #46A758, #E54D2E, transparent);"></div>
+  </div>
+
+  <!-- Header -->
+  <header class="relative z-10 px-4 md:px-12 py-4 flex justify-between items-center max-w-6xl mx-auto">
+    <a href="/" class="flex items-center gap-2">
+      <svg viewBox="0 0 64 64" class="w-7 h-7 md:w-8 md:h-8">
+        <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#logoGrad)" stroke-width="10" stroke-linecap="round" stroke-dasharray="115 25"/>
+        <defs>
+          <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#46A758"/>
+            <stop offset="100%" stop-color="#E54D2E"/>
+          </linearGradient>
+        </defs>
+      </svg>
+      <span class="text-xl md:text-2xl tracking-tight font-bold" style="font-family: 'Nunito', sans-serif;">
+        ai<span class="gradient-text">tomeiton</span>
+      </span>
+    </a>
+    <nav class="hidden md:flex items-center gap-8 text-sm text-neutral-400">
+      <a href="servicios.html" class="hover:text-leaf-500 transition-colors">Servicios</a>
+      <a href="servicios.html#casos" class="hover:text-leaf-500 transition-colors">Casos</a>
+      <a href="contacto.html" class="px-4 py-2 rounded-full border border-leaf-500/20 hover:border-leaf-500/50 hover:bg-leaf-500/5 transition-all text-leaf-500">Contacto</a>
+    </nav>
+  </header>
+
+  <!-- Main -->
+  <main class="relative z-10 flex flex-col items-center justify-center min-h-[calc(100vh-120px)] px-4 md:px-6 py-8">
+    
+    <div class="w-full max-w-lg animate-fadeIn">
+      
+      <!-- Título -->
+      <div class="text-center mb-8">
+        <h1 class="text-3xl md:text-4xl font-semibold mb-3">
+          <span class="gradient-text">Hablemos</span>
+        </h1>
+        <p class="text-neutral-400">Cuéntanos qué necesitas y te contactamos en menos de 24h</p>
+      </div>
+
+      <!-- Formulario -->
+      <div id="form-container" class="card-glass rounded-2xl p-6 md:p-8">
+        <form id="contact-form" class="space-y-5">
+          
+          <!-- Nombre -->
+          <div>
+            <label for="nombre" class="block text-sm text-neutral-300 mb-2">Nombre *</label>
+            <input 
+              type="text" 
+              id="nombre" 
+              name="nombre" 
+              required
+              class="w-full input-field rounded-xl px-4 py-3 text-white transition-all"
+              placeholder="Tu nombre"
+            >
+          </div>
+
+          <!-- Email -->
+          <div>
+            <label for="email" class="block text-sm text-neutral-300 mb-2">Email *</label>
+            <input 
+              type="email" 
+              id="email" 
+              name="email" 
+              required
+              class="w-full input-field rounded-xl px-4 py-3 text-white transition-all"
+              placeholder="tu@email.com"
+            >
+          </div>
+
+          <!-- Teléfono -->
+          <div>
+            <label for="telefono" class="block text-sm text-neutral-300 mb-2">Teléfono</label>
+            <input 
+              type="tel" 
+              id="telefono" 
+              name="telefono"
+              class="w-full input-field rounded-xl px-4 py-3 text-white transition-all"
+              placeholder="600 000 000"
+            >
+          </div>
+
+          <!-- Mensaje -->
+          <div>
+            <label for="mensaje" class="block text-sm text-neutral-300 mb-2">¿Qué te gustaría automatizar? *</label>
+            <textarea 
+              id="mensaje" 
+              name="mensaje" 
+              required
+              rows="4"
+              class="w-full input-field rounded-xl px-4 py-3 text-white transition-all resize-none"
+              placeholder="Cuéntanos brevemente qué proceso o tarea te gustaría automatizar..."
+            ></textarea>
+          </div>
+
+          <!-- Botón -->
+          <button 
+            type="submit" 
+            id="submit-btn"
+            class="w-full btn-submit text-white font-medium py-4 rounded-xl transition-all duration-200"
+          >
+            Enviar mensaje
+          </button>
+
+        </form>
+      </div>
+
+      <!-- Mensaje de éxito -->
+      <div id="success-message" class="hidden card-glass rounded-2xl p-8 text-center">
+        <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-leaf-500/20 flex items-center justify-center animate-checkmark">
+          <svg class="w-8 h-8 text-leaf-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+          </svg>
+        </div>
+        <h2 class="text-xl font-semibold mb-2">¡Mensaje enviado!</h2>
+        <p class="text-neutral-400 mb-6">Te contactaremos en menos de 24 horas.</p>
+        <a href="/" class="inline-block text-leaf-500 hover:underline">Volver a la home</a>
+      </div>
+
+      <!-- Info adicional -->
+      <div class="mt-8 text-center text-sm text-neutral-500">
+        <p>¿Prefieres hablar directamente con Meiton?</p>
+        <a href="/" class="text-leaf-500 hover:underline">Ir al chat →</a>
+      </div>
+
+    </div>
+  </main>
+
+  <script>
+    const form = document.getElementById('contact-form');
+    const submitBtn = document.getElementById('submit-btn');
+    const formContainer = document.getElementById('form-container');
+    const successMessage = document.getElementById('success-message');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      // Deshabilitar botón
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Enviando...';
+
+      const formData = {
+        nombre: document.getElementById('nombre').value.trim(),
+        email: document.getElementById('email').value.trim(),
+        telefono: document.getElementById('telefono').value.trim() || 'No proporcionado',
+        mensaje: document.getElementById('mensaje').value.trim(),
+        origen: 'Formulario de contacto',
+        fecha: new Date().toLocaleString('es-ES')
+      };
+
+      try {
+        const response = await fetch('/api/contacto', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(formData)
+        });
+
+        if (response.ok) {
+          // Mostrar mensaje de éxito
+          formContainer.classList.add('hidden');
+          successMessage.classList.remove('hidden');
+        } else {
+          throw new Error('Error al enviar');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Ha habido un error al enviar el mensaje. Por favor, inténtalo de nuevo.');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Enviar mensaje';
+      }
+    });
+  </script>
+</body>
+</html>
