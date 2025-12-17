@@ -43,6 +43,21 @@
     .animate-glow-pulse { animation: glow-pulse 2s ease-in-out infinite; }
     .animate-ping-slow { animation: ping-slow 2s ease-out infinite; }
 
+    /* Meiton Avatar Animado */
+    .meiton-body {
+      transform-origin: center;
+      animation: breathe 3s ease-in-out infinite, glow-pulse 2s ease-in-out infinite;
+    }
+    
+    .meiton-mouth {
+      animation: smile 6s ease-in-out infinite;
+    }
+    
+    @keyframes smile {
+      0%, 100% { d: path("M24 42 Q32 48, 40 42"); }
+      50% { d: path("M24 42 Q32 51, 40 42"); }
+    }
+
     .gradient-text {
       background: linear-gradient(135deg, #46A758 0%, #E54D2E 100%);
       -webkit-background-clip: text;
@@ -377,26 +392,24 @@
   <!-- Sección: CTA Final -->
   <section class="relative z-10 py-24 px-6">
     <div class="max-w-2xl mx-auto text-center">
-      <!-- Gordon -->
+      <!-- Meiton -->
       <div class="relative w-24 h-24 mx-auto mb-8 flex items-center justify-center">
-        <svg viewBox="0 0 64 64" class="w-24 h-24 animate-breathe">
-          <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" 
-                fill="none" 
-                stroke="url(#ctaGordonGrad)" 
-                stroke-width="8" 
-                stroke-linecap="round"
-                stroke-dasharray="115 25"
-                class="animate-glow-pulse"/>
-          <path d="M24 42 Q32 50, 40 42" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" opacity="0.9"/>
+        <svg viewBox="0 0 64 64" class="w-24 h-24 meiton-avatar" style="overflow: visible;">
           <defs>
-            <linearGradient id="ctaGordonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <linearGradient id="ctaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" stop-color="#46A758"/>
               <stop offset="100%" stop-color="#E54D2E"/>
             </linearGradient>
           </defs>
+          <g class="meiton-body">
+            <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#ctaGrad)" stroke-width="8" stroke-linecap="round" stroke-dasharray="115 25"/>
+            <!-- Ojos -->
+            <ellipse class="meiton-eye" cx="24" cy="30" rx="2.5" ry="3.5" fill="white"/>
+            <ellipse class="meiton-eye" cx="40" cy="30" rx="2.5" ry="3.5" fill="white"/>
+            <!-- Sonrisa -->
+            <path class="meiton-mouth" d="M24 42 Q32 48, 40 42" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+          </g>
         </svg>
-        <div class="absolute inset-0 rounded-full animate-ping-slow opacity-20"
-             style="background: radial-gradient(circle, #46A758 0%, transparent 70%);"></div>
       </div>
 
       <h2 class="text-3xl md:text-4xl font-semibold mb-4">¿Listo para automatizar?</h2>
@@ -430,10 +443,50 @@
 
         <!-- Links -->
         <div class="flex gap-8 text-sm text-neutral-400">
-          <a href="/cdn-cgi/l/email-protection#50383f3c31103139243f3d3139243f237e333f3d" class="hover:text-white transition-colors"><span class="__cf_email__" data-cfemail="80e8efece1c0e1e9f4efede1e9f4eff3aee3efed">[email&#160;protected]</span></a>
+          <a href="contacto.html" class="hover:text-white transition-colors">Contacto</a>
           <a href="#" class="hover:text-white transition-colors">LinkedIn</a>
           <a href="#" class="hover:text-white transition-colors">Twitter</a>
         </div>
       </div>
       
-      <div class="mt-8 pt-8 border-t border-neutral-800 text-center text-sm text-neutr
+      <div class="mt-8 pt-8 border-t border-neutral-800 text-center text-sm text-neutral-500">
+        © 2024 aitomeiton. Todos los derechos reservados.
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Parpadeo de Meiton
+    function meitonBlink() {
+      const eyes = document.querySelectorAll('.meiton-eye');
+      if (eyes.length === 0) return;
+      
+      let ry = 3.5;
+      const closeSpeed = 0.7;
+      const openSpeed = 0.5;
+      
+      const closeInterval = setInterval(() => {
+        ry -= closeSpeed;
+        if (ry <= 0.3) {
+          ry = 0.3;
+          clearInterval(closeInterval);
+          
+          const openInterval = setInterval(() => {
+            ry += openSpeed;
+            if (ry >= 3.5) {
+              ry = 3.5;
+              clearInterval(openInterval);
+            }
+            eyes.forEach(eye => eye.setAttribute('ry', ry));
+          }, 20);
+        }
+        eyes.forEach(eye => eye.setAttribute('ry', ry));
+      }, 20);
+      
+      setTimeout(meitonBlink, 2500 + Math.random() * 3500);
+    }
+    
+    setTimeout(meitonBlink, 1500);
+  </script>
+</body>
+</html>
