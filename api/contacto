@@ -1,0 +1,84 @@
+export default async function handler(req, res) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  try {
+    const data = req.body;
+    console.log('Nuevo contacto:', data);
+
+    const SLACK_WEBHOOK = process.env.SLACK_WEBHOOK;
+    
+    if (SLACK_WEBHOOK) {
+      await fetch(SLACK_WEBHOOK, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          blocks: [
+            {
+              type: 'header',
+              text: {
+                type: 'plain_text',
+                text: '📬 Nuevo mensaje de contacto',
+                emoji: true
+              }
+            },
+            {
+              type: 'divider'
+            },
+            {
+              type: 'section',
+              fields: [
+                {
+                  type: 'mrkdwn',
+                  text: `*👤 Nombre:*\n${data.nombre || 'No proporcionado'}`
+                },
+                {
+                  type: 'mrkdwn',
+                  text: `*📧 Email:*\n${data.email || 'No proporcionado'}`
+                }
+              ]
+            },
+            {
+              type: 'section',
+              fields: [
+                {
+                  type: 'mrkdwn',
+                  text: `*📱 Teléfono:*\n${data.telefono || 'No proporcionado'}`
+                },
+                {
+                  type: 'mrkdwn',
+                  text: `*📍 Origen:*\n${data.origen || 'Web'}`
+                }
+              ]
+            },
+            {
+              type: 'divider'
+            },
+            {
+              type: 'section',
+              text: {
+                type: 'mrkdwn',
+                text: `*💬 Mensaje:*\n${data.mensaje || 'Sin mensaje'}`
+              }
+            },
+            {
+              type: 'context',
+              elements: [
+                {
+                  type: 'mrkdwn',
+                  text: `📅 ${data.fecha || new Date().toLocaleString('es-ES')}`
+                }
+              ]
+            }
+          ]
+        })
+      });
+    }
+
+    return res.status(200).json({ success: true });
+  } catch (error) {
+    console.error('Error:', error);
+    return res.status(500).json({ error: 'Error enviando mensaje' });
+  }
+}
