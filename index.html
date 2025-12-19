@@ -215,6 +215,15 @@
         display: none !important;
       }
       
+      /* Ocultar botón de enviar en el chat (se usa Enter del teclado) */
+      body.chat-open #sendBtn {
+        display: none;
+      }
+      
+      body.chat-open #chatForm input {
+        border-radius: 1rem;
+      }
+      
       #chat-section {
         position: fixed;
         top: 0;
@@ -441,7 +450,7 @@
           </div>
 
           <div class="chat-input-container p-3 md:p-4 border-t border-leaf-500/10 flex-shrink-0 bg-neutral-900/95">
-            <form id="chatForm" onsubmit="handleSubmit(event)" class="flex gap-2 md:gap-3">
+            <form id="chatForm" class="flex gap-2 md:gap-3">
               <input id="input" type="text" inputmode="text" enterkeyhint="send" autocomplete="off" autocorrect="on" placeholder="Escribe tu mensaje..." class="flex-1 input-chat rounded-xl px-3 md:px-4 py-3 text-base text-white transition-all">
               <button type="submit" id="sendBtn" class="px-4 md:px-5 py-3 rounded-xl btn-send transition-all duration-200">
                 <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -807,7 +816,7 @@ REGLAS CRÍTICAS
 
     async function sendToAI() {
       document.getElementById('typing').classList.remove('hidden');
-      document.getElementById('input').disabled = true;
+      // Solo deshabilitar el botón, no el input (para mantener el teclado en móvil)
       document.getElementById('sendBtn').disabled = true;
       
       const msgContainer = document.getElementById('messages');
@@ -854,18 +863,28 @@ REGLAS CRÍTICAS
         renderMessages();
       } finally {
         document.getElementById('typing').classList.add('hidden');
-        document.getElementById('input').disabled = false;
         document.getElementById('sendBtn').disabled = false;
         renderMessages();
-        document.getElementById('input').focus();
+        // Mantener el foco en el input para que el teclado no se cierre
+        const inputEl = document.getElementById('input');
+        requestAnimationFrame(() => {
+          inputEl.focus();
+          setTimeout(() => inputEl.focus(), 50);
+        });
       }
     }
 
     document.getElementById('hero-input').addEventListener('keypress', function(e) {
       if (e.key === 'Enter') startFromHero();
     });
-    document.getElementById('input').addEventListener('keypress', function(e) {
-      if (e.key === 'Enter') sendMessage();
+    
+    // Usar form submit en vez de keypress para mantener el teclado
+    document.getElementById('chatForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const inputEl = document.getElementById('input');
+      sendMessage();
+      // Mantener foco inmediatamente
+      requestAnimationFrame(() => inputEl.focus());
     });
     
     document.addEventListener('touchstart', function() {}, {passive: true});
