@@ -209,6 +209,12 @@
         display: flex;
       }
       
+      /* Ocultar header y footer cuando el chat está abierto */
+      body.chat-open header,
+      body.chat-open footer {
+        display: none !important;
+      }
+      
       #chat-section {
         position: fixed;
         top: 0;
@@ -246,6 +252,20 @@
         max-height: none;
         overflow-y: auto;
         -webkit-overflow-scrolling: touch;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+      }
+      
+      #messages > div {
+        margin-top: auto;
+      }
+      
+      #messages .messages-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        min-height: 100%;
       }
       
       /* Input fijo abajo como WhatsApp */
@@ -709,7 +729,7 @@ REGLAS CRÍTICAS
 
     function renderMessages() {
       const container = document.getElementById('messages');
-      container.innerHTML = messages.map((msg, i) => `
+      const messagesHTML = messages.map((msg, i) => `
         <div class="flex ${msg.role === 'user' ? 'justify-end' : 'items-start gap-2 md:gap-3'} animate-messageIn">
           ${msg.role === 'assistant' ? `
             <svg viewBox="0 0 64 64" class="w-7 h-7 md:w-8 md:h-8 flex-shrink-0">
@@ -730,6 +750,8 @@ REGLAS CRÍTICAS
           </div>
         </div>
       `).join('');
+      
+      container.innerHTML = `<div class="messages-wrapper space-y-4">${messagesHTML}</div>`;
       container.scrollTop = container.scrollHeight;
     }
 
@@ -757,7 +779,7 @@ REGLAS CRÍTICAS
 
     function renderMessagesWithTyping(newMessageIndex = -1) {
       const container = document.getElementById('messages');
-      container.innerHTML = messages.map((msg, i) => `
+      const messagesHTML = messages.map((msg, i) => `
         <div class="flex ${msg.role === 'user' ? 'justify-end' : 'items-start gap-2 md:gap-3'} animate-messageIn" data-msg-index="${i}">
           ${msg.role === 'assistant' ? `
             <svg viewBox="0 0 64 64" class="w-7 h-7 md:w-8 md:h-8 flex-shrink-0">
@@ -778,6 +800,8 @@ REGLAS CRÍTICAS
           </div>
         </div>
       `).join('');
+      
+      container.innerHTML = `<div class="messages-wrapper space-y-4">${messagesHTML}</div>`;
       container.scrollTop = container.scrollHeight;
     }
 
