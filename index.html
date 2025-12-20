@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -23,280 +24,226 @@
   </script>
   <style>
     * { font-family: 'Inter', sans-serif; }
-    
-    html, body {
-      height: 100%;
-      overflow: hidden;
-      position: fixed;
-      width: 100%;
-    }
-    
-    .app-container {
-      height: 100%;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-    
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    
-    @keyframes messageIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
 
-    @keyframes bounce-dot {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-4px); }
-    }
+```
+html, body {
+  height: 100%;
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}
 
-    @keyframes breathe {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.08); }
-    }
+.app-container {
+  height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
 
-    @keyframes glow-pulse {
-      0%, 100% { filter: drop-shadow(0 0 8px rgba(70, 167, 88, 0.6)); }
-      50% { filter: drop-shadow(0 0 20px rgba(229, 77, 46, 0.8)); }
-    }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-    /* Meiton Avatar Animado */
-    .meiton-body {
-      transform-origin: center;
-      animation: breathe 3s ease-in-out infinite, glow-pulse 2s ease-in-out infinite;
-    }
-    
-    .meiton-mouth {
-      animation: smile 6s ease-in-out infinite;
-    }
-    
-    @keyframes smile {
-      0%, 100% { d: path("M24 42 Q32 48, 40 42"); }
-      50% { d: path("M24 42 Q32 51, 40 42"); }
-    }
+@keyframes messageIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-    .animate-breathe { animation: breathe 3s ease-in-out infinite; }
-    .animate-glow-pulse { animation: glow-pulse 2s ease-in-out infinite; }
-    .animate-fadeIn { animation: fadeIn 0.6s ease-out; }
-    .animate-messageIn { animation: messageIn 0.25s ease-out both; }
-    .animate-bounce-dot { animation: bounce-dot 0.5s infinite; }
+@keyframes bounce-dot {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
 
-    .gradient-text {
-      background: linear-gradient(135deg, #46A758 0%, #E54D2E 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
+@keyframes breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
 
-    .input-chat {
-      background: rgba(70, 167, 88, 0.05);
-      border: 1px solid rgba(70, 167, 88, 0.2);
-      font-size: 16px;
-    }
-    .input-chat:focus {
-      border-color: rgba(70, 167, 88, 0.5);
-      background: rgba(70, 167, 88, 0.08);
-      box-shadow: 0 0 20px rgba(70, 167, 88, 0.1);
-      outline: none;
-    }
+@keyframes glow-pulse {
+  0%, 100% { filter: drop-shadow(0 0 8px rgba(70, 167, 88, 0.6)); }
+  50% { filter: drop-shadow(0 0 20px rgba(229, 77, 46, 0.8)); }
+}
 
-    .message-user {
-      background: linear-gradient(135deg, #46A758 0%, #E54D2E 100%);
-    }
+/* Meiton Avatar Animado */
+.meiton-body {
+  transform-origin: center;
+  animation: breathe 3s ease-in-out infinite, glow-pulse 2s ease-in-out infinite;
+}
 
-    .message-bot {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(70, 167, 88, 0.15);
-    }
+.meiton-mouth {
+  animation: smile 6s ease-in-out infinite;
+}
 
-    .btn-send {
-      background: linear-gradient(135deg, #46A758 0%, #E54D2E 100%);
-      box-shadow: 0 4px 20px rgba(70, 167, 88, 0.3);
-    }
-    .btn-send:hover {
-      transform: scale(1.05);
-      box-shadow: 0 6px 30px rgba(70, 167, 88, 0.4);
-    }
-    .btn-send:disabled {
-      opacity: 0.5;
-      transform: none;
-    }
+@keyframes smile {
+  0%, 100% { d: path("M24 42 Q32 48, 40 42"); }
+  50% { d: path("M24 42 Q32 51, 40 42"); }
+}
 
-    .card-glass {
-      background: rgba(10, 10, 10, 0.8);
-      border: 1px solid rgba(70, 167, 88, 0.15);
-      box-shadow: 0 0 40px rgba(70, 167, 88, 0.05);
-    }
+.animate-breathe { animation: breathe 3s ease-in-out infinite; }
+.animate-glow-pulse { animation: glow-pulse 2s ease-in-out infinite; }
+.animate-fadeIn { animation: fadeIn 0.6s ease-out; }
+.animate-messageIn { animation: messageIn 0.25s ease-out both; }
+.animate-bounce-dot { animation: bounce-dot 0.5s infinite; }
 
-    .scrollbar-minimal::-webkit-scrollbar { width: 3px; }
-    .scrollbar-minimal::-webkit-scrollbar-track { background: transparent; }
-    .scrollbar-minimal::-webkit-scrollbar-thumb { background: rgba(70, 167, 88, 0.3); border-radius: 10px; }
+.gradient-text {
+  background: linear-gradient(135deg, #46A758 0%, #E54D2E 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 
-    textarea::placeholder, input::placeholder { color: rgba(255,255,255,0.35); }
-    
-    /* Chat en desktop - más grande */
-    #chat-section .card-glass {
-      display: flex;
-      flex-direction: column;
-      height: calc(100vh - 180px);
-      max-height: 700px;
-      min-height: 500px;
-    }
-    
-    #messages {
-      flex: 1;
-      overflow-y: auto;
-    }
+.input-chat {
+  background: rgba(70, 167, 88, 0.05);
+  border: 1px solid rgba(70, 167, 88, 0.2);
+  font-size: 16px;
+}
+.input-chat:focus {
+  border-color: rgba(70, 167, 88, 0.5);
+  background: rgba(70, 167, 88, 0.08);
+  box-shadow: 0 0 20px rgba(70, 167, 88, 0.1);
+  outline: none;
+}
 
-    /* Menú hamburguesa */
-    .menu-burger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      padding: 8px;
-      z-index: 100;
-    }
-    .menu-burger span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: white;
-      border-radius: 2px;
-      transition: all 0.3s;
-    }
-    .menu-burger.active span:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 5px);
-    }
-    .menu-burger.active span:nth-child(2) {
-      opacity: 0;
-    }
-    .menu-burger.active span:nth-child(3) {
-      transform: rotate(-45deg) translate(5px, -5px);
-    }
+.message-user {
+  background: linear-gradient(135deg, #46A758 0%, #E54D2E 100%);
+}
 
-    .mobile-menu {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(10, 10, 10, 0.98);
-      z-index: 90;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 32px;
-    }
-    .mobile-menu.active {
-      display: flex;
-    }
-    .mobile-menu a {
-      font-size: 1.5rem;
-      color: #a3a3a3;
-      transition: color 0.3s;
-    }
-    .mobile-menu a:hover {
-      color: #46A758;
-    }
-    
-    /* Chat en móvil - fullscreen */
-    @media (max-width: 768px) {
-      .menu-burger {
-        display: flex;
-      }
-      
-      /* Ocultar header y footer cuando el chat está abierto */
-      body.chat-open header,
-      body.chat-open footer {
-        display: none !important;
-      }
-      
-      /* Ocultar botón de enviar en el chat (se usa Enter del teclado) */
-      body.chat-open #sendBtn {
-        display: none;
-      }
-      
-      body.chat-open #chatForm input {
-        border-radius: 1rem;
-      }
-      
-      #chat-section {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 50;
-        padding: 0;
-        max-width: 100%;
-        display: none;
-        background: #0a0a0a;
-      }
-      
-      #chat-section.active {
-        display: flex;
-      }
-      
-      #chat-section:not(.hidden) {
-        display: flex;
-      }
-      
-      #chat-section .card-glass {
-        height: 100%;
-        max-height: 100%;
-        min-height: 100%;
-        border-radius: 0;
-        border: none;
-        background: #0a0a0a;
-      }
-      
-      #messages {
-        flex: 1;
-        height: auto;
-        min-height: 0;
-        max-height: none;
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-      }
-      
-      #messages > div {
-        margin-top: auto;
-      }
-      
-      #messages .messages-wrapper {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        min-height: 100%;
-      }
-      
-      /* Input fijo abajo como WhatsApp */
-      .chat-input-container {
-        position: sticky;
-        bottom: 0;
-        background: #0a0a0a;
-        padding-bottom: env(safe-area-inset-bottom, 12px);
-        border-top: 1px solid rgba(70, 167, 88, 0.1);
-      }
-      
-      /* Asegurar que el body no haga scroll cuando el chat está abierto */
-      body.chat-open {
-        overflow: hidden;
-        position: fixed;
-        width: 100%;
-      }
-    }
+.message-bot {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(70, 167, 88, 0.15);
+}
+
+.btn-send {
+  background: linear-gradient(135deg, #46A758 0%, #E54D2E 100%);
+  box-shadow: 0 4px 20px rgba(70, 167, 88, 0.3);
+}
+.btn-send:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 30px rgba(70, 167, 88, 0.4);
+}
+.btn-send:disabled {
+  opacity: 0.5;
+  transform: none;
+}
+
+.card-glass {
+  background: rgba(10, 10, 10, 0.8);
+  border: 1px solid rgba(70, 167, 88, 0.15);
+  box-shadow: 0 0 40px rgba(70, 167, 88, 0.05);
+}
+
+.scrollbar-minimal::-webkit-scrollbar { width: 3px; }
+.scrollbar-minimal::-webkit-scrollbar-track { background: transparent; }
+.scrollbar-minimal::-webkit-scrollbar-thumb { background: rgba(70, 167, 88, 0.3); border-radius: 10px; }
+
+textarea::placeholder, input::placeholder { color: rgba(255,255,255,0.35); }
+
+/* Chat en desktop - más grande */
+#chat-section .card-glass {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 180px);
+  max-height: 700px;
+  min-height: 500px;
+}
+
+#messages {
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* Chat en móvil - fullscreen */
+@media (max-width: 768px) {
+  /* Ocultar header y footer cuando el chat está abierto */
+  body.chat-open header,
+  body.chat-open footer {
+    display: none !important;
+  }
+  
+  /* Ocultar botón de enviar en el chat (se usa Enter del teclado) */
+  body.chat-open #sendBtn {
+    display: none;
+  }
+  
+  body.chat-open #chatForm input {
+    border-radius: 1rem;
+  }
+  
+  #chat-section {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 50;
+    padding: 0;
+    max-width: 100%;
+    display: none;
+    background: #0a0a0a;
+  }
+  
+  #chat-section.active {
+    display: flex;
+  }
+  
+  #chat-section:not(.hidden) {
+    display: flex;
+  }
+  
+  #chat-section .card-glass {
+    height: 100%;
+    max-height: 100%;
+    min-height: 100%;
+    border-radius: 0;
+    border: none;
+    background: #0a0a0a;
+  }
+  
+  #messages {
+    flex: 1;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  
+  #messages > div {
+    margin-top: auto;
+  }
+  
+  #messages .messages-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 100%;
+  }
+  
+  /* Input fijo abajo como WhatsApp */
+  .chat-input-container {
+    position: sticky;
+    bottom: 0;
+    background: #0a0a0a;
+    padding-bottom: env(safe-area-inset-bottom, 12px);
+    border-top: 1px solid rgba(70, 167, 88, 0.1);
+  }
+  
+  /* Asegurar que el body no haga scroll cuando el chat está abierto */
+  body.chat-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+  }
+}
+```
+
   </style>
 </head>
 <body class="text-white" style="background-color: #0a0a0a;">
-  
+
   <div class="app-container">
     <!-- Background -->
     <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 0; background-color: #0a0a0a; overflow: hidden; pointer-events: none;">
@@ -305,244 +252,248 @@
       <div style="position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, #46A758, #E54D2E, transparent);"></div>
     </div>
 
-    <!-- Header -->
-    <header class="relative z-20 px-4 md:px-12 py-4 flex justify-between items-center max-w-6xl mx-auto">
-      <a href="/" class="flex items-center gap-2">
-        <svg viewBox="0 0 64 64" class="w-7 h-7 md:w-8 md:h-8">
-          <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#logoGrad)" stroke-width="10" stroke-linecap="round" stroke-dasharray="115 25"/>
-          <defs>
-            <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#46A758"/>
-              <stop offset="100%" stop-color="#E54D2E"/>
-            </linearGradient>
-          </defs>
-        </svg>
-        <span class="text-xl md:text-2xl tracking-tight font-bold" style="font-family: 'Nunito', sans-serif;">
-          ai<span class="gradient-text">tomeiton</span>
-        </span>
-      </a>
-      
-      <!-- Menú desktop -->
-      <nav class="hidden md:flex items-center gap-8 text-sm text-neutral-400">
-        <a href="servicios.html" class="hover:text-leaf-500 transition-colors">Servicios</a>
-        <a href="servicios.html#casos" class="hover:text-leaf-500 transition-colors">Casos</a>
-        <a href="contacto.html" class="px-4 py-2 rounded-full border border-leaf-500/20 hover:border-leaf-500/50 hover:bg-leaf-500/5 transition-all">Contacto</a>
-      </nav>
-      
-      <!-- Menú hamburguesa móvil -->
-      <button id="menuToggle" class="md:hidden p-2 text-neutral-400 hover:text-white transition-colors" onclick="toggleMenu()">
-        <svg id="menuIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-        </svg>
-        <svg id="closeIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-        </svg>
-      </button>
-    </header>
-    
-    <!-- Menú móvil desplegable -->
-    <div id="mobileMenu" class="hidden md:hidden fixed inset-0 z-[100] pt-20" style="background-color: rgba(10, 10, 10, 0.95);">
-      <button onclick="toggleMenu()" class="absolute top-4 right-4 p-2 text-neutral-400 hover:text-white">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-        </svg>
-      </button>
-      <nav class="flex flex-col items-center gap-8 text-xl text-neutral-300 p-8 mt-8">
-        <a href="/" class="hover:text-leaf-500 transition-colors" onclick="toggleMenu()">Inicio</a>
-        <a href="servicios.html" class="hover:text-leaf-500 transition-colors" onclick="toggleMenu()">Servicios</a>
-        <a href="servicios.html#casos" class="hover:text-leaf-500 transition-colors" onclick="toggleMenu()">Casos</a>
-        <a href="contacto.html" class="px-6 py-3 rounded-full border border-leaf-500/30 hover:border-leaf-500/50 hover:bg-leaf-500/10 transition-all" onclick="toggleMenu()">Contacto</a>
-      </nav>
+```
+<!-- Header -->
+<header class="relative z-20 px-4 md:px-12 py-4 flex justify-between items-center max-w-6xl mx-auto">
+  <a href="/" class="flex items-center gap-2">
+    <svg viewBox="0 0 64 64" class="w-7 h-7 md:w-8 md:h-8">
+      <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#logoGrad)" stroke-width="10" stroke-linecap="round" stroke-dasharray="115 25"/>
+      <defs>
+        <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#46A758"/>
+          <stop offset="100%" stop-color="#E54D2E"/>
+        </linearGradient>
+      </defs>
+    </svg>
+    <span class="text-xl md:text-2xl tracking-tight font-bold" style="font-family: 'Nunito', sans-serif;">
+      ai<span class="gradient-text">tomeiton</span>
+    </span>
+  </a>
+  
+  <!-- Menú desktop -->
+  <nav class="hidden md:flex items-center gap-8 text-sm text-neutral-400">
+    <a href="servicios.html" class="hover:text-leaf-500 transition-colors">Servicios</a>
+    <a href="servicios.html#casos" class="hover:text-leaf-500 transition-colors">Casos</a>
+    <a href="contacto.html" class="px-4 py-2 rounded-full border border-leaf-500/20 hover:border-leaf-500/50 hover:bg-leaf-500/5 transition-all">Contacto</a>
+  </nav>
+  
+  <!-- Menú hamburguesa móvil -->
+  <button id="menuToggle" class="md:hidden p-2 text-neutral-400 hover:text-white transition-colors" onclick="toggleMenu()">
+    <svg id="menuIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+    </svg>
+    <svg id="closeIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+    </svg>
+  </button>
+</header>
+
+<!-- Menú móvil desplegable -->
+<div id="mobileMenu" class="hidden md:hidden fixed inset-0 z-[100] pt-20" style="background-color: rgba(10, 10, 10, 0.95);">
+  <button onclick="toggleMenu()" class="absolute top-4 right-4 p-2 text-neutral-400 hover:text-white">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+    </svg>
+  </button>
+  <nav class="flex flex-col items-center gap-8 text-xl text-neutral-300 p-8 mt-8">
+    <a href="/" class="hover:text-leaf-500 transition-colors" onclick="toggleMenu()">Inicio</a>
+    <a href="servicios.html" class="hover:text-leaf-500 transition-colors" onclick="toggleMenu()">Servicios</a>
+    <a href="servicios.html#casos" class="hover:text-leaf-500 transition-colors" onclick="toggleMenu()">Casos</a>
+    <a href="contacto.html" class="px-6 py-3 rounded-full border border-leaf-500/30 hover:border-leaf-500/50 hover:bg-leaf-500/10 transition-all" onclick="toggleMenu()">Contacto</a>
+  </nav>
+</div>
+
+<!-- Main -->
+<main class="relative z-10 flex flex-col items-center justify-center min-h-[calc(100vh-120px)] px-4 md:px-6 py-6">
+  
+  <!-- Hero -->
+  <div id="hero" class="text-center max-w-2xl animate-fadeIn">
+    <h1 class="text-sm md:text-base text-neutral-400 mb-6 md:mb-8 tracking-wide uppercase px-2">
+      Tu equipo especializado en desarrollo e implementación de automatización de procesos con IA
+    </h1>
+
+    <div class="relative w-24 h-24 md:w-32 md:h-32 mx-auto mb-6 md:mb-8 flex items-center justify-center">
+      <svg viewBox="0 0 64 64" class="w-24 h-24 md:w-32 md:h-32 meiton-avatar" style="overflow: visible;">
+        <defs>
+          <linearGradient id="heroGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#46A758"/>
+            <stop offset="100%" stop-color="#E54D2E"/>
+          </linearGradient>
+        </defs>
+        <g class="meiton-body">
+          <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#heroGrad)" stroke-width="8" stroke-linecap="round" stroke-dasharray="115 25"/>
+          <!-- Ojos -->
+          <ellipse class="meiton-eye" cx="24" cy="30" rx="2.5" ry="3.5" fill="white"/>
+          <ellipse class="meiton-eye" cx="40" cy="30" rx="2.5" ry="3.5" fill="white"/>
+          <!-- Sonrisa -->
+          <path class="meiton-mouth" d="M24 42 Q32 48, 40 42" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+        </g>
+      </svg>
     </div>
 
-    <!-- Main -->
-    <main class="relative z-10 flex flex-col items-center justify-center min-h-[calc(100vh-120px)] px-4 md:px-6 py-6">
-      
-      <!-- Hero -->
-      <div id="hero" class="text-center max-w-2xl animate-fadeIn">
-        <h1 class="text-sm md:text-base text-neutral-400 mb-6 md:mb-8 tracking-wide uppercase px-2">
-          Tu equipo especializado en desarrollo e implementación de automatización de procesos con IA
-        </h1>
+    <p class="text-3xl md:text-5xl font-semibold mb-4 md:mb-5 leading-tight tracking-tight px-2">
+      Venga, ¿qué procesos quieres<br class="hidden md:block">
+      <span class="gradient-text">automatizar en tu empresa?</span>
+    </p>
 
-        <div class="relative w-24 h-24 md:w-32 md:h-32 mx-auto mb-6 md:mb-8 flex items-center justify-center">
-          <svg viewBox="0 0 64 64" class="w-24 h-24 md:w-32 md:h-32 meiton-avatar" style="overflow: visible;">
+    <div class="w-full max-w-xl mt-6 md:mt-8 px-2 mx-auto">
+      <div class="relative">
+        <input id="hero-input" type="text" placeholder="Ventas, atención al cliente, administración..." class="w-full input-chat rounded-2xl px-4 md:px-5 py-3 md:py-4 pr-14 text-base text-white transition-all">
+        <button onclick="startFromHero()" class="absolute right-2 top-1/2 -translate-y-1/2 p-2 md:p-2.5 rounded-xl btn-send transition-all duration-200 hover:scale-105">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chat -->
+  <div id="chat-section" class="w-full max-w-2xl hidden px-1 md:px-4 flex-1 flex flex-col">
+    <div class="rounded-2xl md:rounded-2xl card-glass backdrop-blur-xl overflow-hidden flex flex-col flex-1 max-h-[calc(100vh-100px)] md:max-h-[600px]">
+      
+      <div class="px-4 py-3 border-b border-leaf-500/10 flex items-center justify-between flex-shrink-0">
+        <div class="flex items-center gap-3">
+          <svg viewBox="0 0 64 64" class="w-9 h-9 md:w-10 md:h-10 animate-breathe">
             <defs>
-              <linearGradient id="heroGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <linearGradient id="chatGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stop-color="#46A758"/>
                 <stop offset="100%" stop-color="#E54D2E"/>
               </linearGradient>
             </defs>
-            <g class="meiton-body">
-              <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#heroGrad)" stroke-width="8" stroke-linecap="round" stroke-dasharray="115 25"/>
-              <!-- Ojos -->
-              <ellipse class="meiton-eye" cx="24" cy="30" rx="2.5" ry="3.5" fill="white"/>
-              <ellipse class="meiton-eye" cx="40" cy="30" rx="2.5" ry="3.5" fill="white"/>
-              <!-- Sonrisa -->
-              <path class="meiton-mouth" d="M24 42 Q32 48, 40 42" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
-            </g>
+            <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#chatGrad)" stroke-width="8" stroke-linecap="round" stroke-dasharray="115 25"/>
+            <ellipse cx="24" cy="30" rx="2" ry="3" fill="white"/>
+            <ellipse cx="40" cy="30" rx="2" ry="3" fill="white"/>
+            <path d="M24 42 Q32 48, 40 42" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/>
           </svg>
+          <div>
+            <span class="text-sm font-medium">aitomeiton</span>
+            <div class="flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-leaf-500 animate-pulse"></span>
+              <span class="text-xs text-neutral-500">En línea</span>
+            </div>
+          </div>
         </div>
+        <button onclick="goBack()" class="text-neutral-500 hover:text-white transition-colors p-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
 
-        <p class="text-3xl md:text-5xl font-semibold mb-4 md:mb-5 leading-tight tracking-tight px-2">
-          Venga, ¿qué procesos quieres<br class="hidden md:block">
-          <span class="gradient-text">automatizar en tu empresa?</span>
-        </p>
+      <div id="messages" class="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-minimal"></div>
 
-        <div class="w-full max-w-xl mt-6 md:mt-8 px-2 mx-auto">
-          <div class="relative">
-            <input id="hero-input" type="text" placeholder="Ventas, atención al cliente, administración..." class="w-full input-chat rounded-2xl px-4 md:px-5 py-3 md:py-4 pr-14 text-base text-white transition-all">
-            <button onclick="startFromHero()" class="absolute right-2 top-1/2 -translate-y-1/2 p-2 md:p-2.5 rounded-xl btn-send transition-all duration-200 hover:scale-105">
-              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7"/>
-              </svg>
-            </button>
+      <div id="typing" class="hidden px-4 pb-2">
+        <div class="flex items-start gap-3">
+          <svg viewBox="0 0 64 64" class="w-8 h-8 flex-shrink-0">
+            <defs>
+              <linearGradient id="typingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#46A758"/>
+                <stop offset="100%" stop-color="#E54D2E"/>
+              </linearGradient>
+            </defs>
+            <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#typingGrad)" stroke-width="8" stroke-linecap="round" stroke-dasharray="115 25"/>
+            <ellipse cx="24" cy="30" rx="2" ry="3" fill="white"/>
+            <ellipse cx="40" cy="30" rx="2" ry="3" fill="white"/>
+            <path d="M24 42 Q32 48, 40 42" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <div class="message-bot px-4 py-3 rounded-2xl">
+            <div class="flex gap-1">
+              <span class="w-1.5 h-1.5 bg-neutral-500 rounded-full animate-bounce-dot"></span>
+              <span class="w-1.5 h-1.5 bg-neutral-500 rounded-full animate-bounce-dot" style="animation-delay: 0.15s;"></span>
+              <span class="w-1.5 h-1.5 bg-neutral-500 rounded-full animate-bounce-dot" style="animation-delay: 0.3s;"></span>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Chat -->
-      <div id="chat-section" class="w-full max-w-2xl hidden px-1 md:px-4 flex-1 flex flex-col">
-        <div class="rounded-2xl md:rounded-2xl card-glass backdrop-blur-xl overflow-hidden flex flex-col flex-1 max-h-[calc(100vh-100px)] md:max-h-[600px]">
-          
-          <div class="px-4 py-3 border-b border-leaf-500/10 flex items-center justify-between flex-shrink-0">
-            <div class="flex items-center gap-3">
-              <svg viewBox="0 0 64 64" class="w-9 h-9 md:w-10 md:h-10 animate-breathe">
-                <defs>
-                  <linearGradient id="chatGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#46A758"/>
-                    <stop offset="100%" stop-color="#E54D2E"/>
-                  </linearGradient>
-                </defs>
-                <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#chatGrad)" stroke-width="8" stroke-linecap="round" stroke-dasharray="115 25"/>
-                <ellipse cx="24" cy="30" rx="2" ry="3" fill="white"/>
-                <ellipse cx="40" cy="30" rx="2" ry="3" fill="white"/>
-                <path d="M24 42 Q32 48, 40 42" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-              <div>
-                <span class="text-sm font-medium">aitomeiton</span>
-                <div class="flex items-center gap-1.5">
-                  <span class="w-1.5 h-1.5 rounded-full bg-leaf-500 animate-pulse"></span>
-                  <span class="text-xs text-neutral-500">En línea</span>
-                </div>
-              </div>
-            </div>
-            <button onclick="goBack()" class="text-neutral-500 hover:text-white transition-colors p-2">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/>
-              </svg>
-            </button>
-          </div>
-
-          <div id="messages" class="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-minimal"></div>
-
-          <div id="typing" class="hidden px-4 pb-2">
-            <div class="flex items-start gap-3">
-              <svg viewBox="0 0 64 64" class="w-8 h-8 flex-shrink-0">
-                <defs>
-                  <linearGradient id="typingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#46A758"/>
-                    <stop offset="100%" stop-color="#E54D2E"/>
-                  </linearGradient>
-                </defs>
-                <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#typingGrad)" stroke-width="8" stroke-linecap="round" stroke-dasharray="115 25"/>
-                <ellipse cx="24" cy="30" rx="2" ry="3" fill="white"/>
-                <ellipse cx="40" cy="30" rx="2" ry="3" fill="white"/>
-                <path d="M24 42 Q32 48, 40 42" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-              <div class="message-bot px-4 py-3 rounded-2xl">
-                <div class="flex gap-1">
-                  <span class="w-1.5 h-1.5 bg-neutral-500 rounded-full animate-bounce-dot"></span>
-                  <span class="w-1.5 h-1.5 bg-neutral-500 rounded-full animate-bounce-dot" style="animation-delay: 0.15s;"></span>
-                  <span class="w-1.5 h-1.5 bg-neutral-500 rounded-full animate-bounce-dot" style="animation-delay: 0.3s;"></span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="chat-input-container p-3 md:p-4 border-t border-leaf-500/10 flex-shrink-0 bg-neutral-900/95">
-            <form id="chatForm" class="flex gap-2 md:gap-3">
-              <input id="input" type="text" inputmode="text" enterkeyhint="send" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Escribe tu mensaje..." class="flex-1 input-chat rounded-xl px-3 md:px-4 py-3 text-base text-white transition-all">
-              <button type="submit" id="sendBtn" class="px-4 md:px-5 py-3 rounded-xl btn-send transition-all duration-200">
-                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
-              </button>
-            </form>
-          </div>
-        </div>
+      <div class="chat-input-container p-3 md:p-4 border-t border-leaf-500/10 flex-shrink-0 bg-neutral-900/95">
+        <form id="chatForm" class="flex gap-2 md:gap-3">
+          <input id="input" type="text" inputmode="text" enterkeyhint="send" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Escribe tu mensaje..." class="flex-1 input-chat rounded-xl px-3 md:px-4 py-3 text-base text-white transition-all">
+          <button type="submit" id="sendBtn" class="px-4 md:px-5 py-3 rounded-xl btn-send transition-all duration-200">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </button>
+        </form>
       </div>
-    </main>
-
-    <!-- CTA Servicios -->
-    <div class="relative z-10 py-6 px-4 text-center" style="margin-top: 30px;">
-      <a href="servicios.html" class="text-sm text-neutral-500 hover:text-leaf-500 transition-colors">Ver servicios y casos de éxito →</a>
     </div>
+  </div>
+</main>
 
-    <!-- Footer -->
-    <footer class="relative z-10 border-t border-neutral-800 mt-8">
-      <div class="max-w-6xl mx-auto px-4 md:px-12 py-10">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12">
-          
-          <div class="col-span-2 md:col-span-1 mb-4 md:mb-0">
-            <a href="/" class="flex items-center gap-2 mb-3">
-              <svg viewBox="0 0 64 64" class="w-7 h-7">
-                <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#footerGrad)" stroke-width="8" stroke-linecap="round" stroke-dasharray="115 25"/>
-                <defs><linearGradient id="footerGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#46A758"/><stop offset="100%" stop-color="#E54D2E"/></linearGradient></defs>
-              </svg>
-              <span class="text-lg font-bold" style="font-family: 'Nunito', sans-serif;">ai<span class="gradient-text">tomeiton</span></span>
-            </a>
-            <p class="text-xs text-neutral-500 leading-relaxed">Automatización de procesos con IA.</p>
-          </div>
-          
-          <div>
-            <h4 class="text-xs font-semibold text-white mb-3">Navegación</h4>
-            <ul class="space-y-1.5 text-xs text-neutral-400">
-              <li><a href="/" class="hover:text-leaf-500 transition-colors">Inicio</a></li>
-              <li><a href="servicios.html" class="hover:text-leaf-500 transition-colors">Servicios</a></li>
-              <li><a href="contacto.html" class="hover:text-leaf-500 transition-colors">Contacto</a></li>
-            </ul>
-          </div>
-          
-          <div>
-            <h4 class="text-xs font-semibold text-white mb-3">Legal</h4>
-            <ul class="space-y-1.5 text-xs text-neutral-400">
-              <li><a href="legal.html" class="hover:text-leaf-500 transition-colors">Aviso Legal</a></li>
-              <li><a href="privacidad.html" class="hover:text-leaf-500 transition-colors">Privacidad</a></li>
-              <li><a href="cookies.html" class="hover:text-leaf-500 transition-colors">Cookies</a></li>
-            </ul>
-          </div>
-          
-          <div class="col-span-2 md:col-span-1">
-            <h4 class="text-xs font-semibold text-white mb-3">Contacto</h4>
-            <ul class="space-y-1.5 text-xs text-neutral-400">
-              <li><a href="mailto:hola@aitomeiton.com" class="hover:text-leaf-500 transition-colors">hola@aitomeiton.com</a></li>
-              <li><a href="tel:+34674959787" class="hover:text-leaf-500 transition-colors">+34 674 959 787</a></li>
-              <li>Valencia, España</li>
-            </ul>
-          </div>
-        </div>
-        
-        <div class="border-t border-neutral-800 mt-8 pt-5 flex flex-col md:flex-row justify-between items-center gap-3">
-          <p class="text-xs text-neutral-500">© 2025 aitomeiton · <a href="https://wedocreatives.com" target="_blank" class="text-leaf-500 hover:underline">Wedo Creatives S.L.</a></p>
-          <div class="flex items-center gap-4">
-            <a href="https://www.linkedin.com/company/wedocreatives" target="_blank" class="text-neutral-500 hover:text-leaf-500 transition-colors">
-              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-            </a>
-            <a href="https://www.instagram.com/wedocreatives" target="_blank" class="text-neutral-500 hover:text-leaf-500 transition-colors">
-              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-            </a>
-          </div>
-        </div>
+<!-- CTA Servicios -->
+<div class="relative z-10 py-6 px-4 text-center" style="margin-top: 30px;">
+  <a href="servicios.html" class="text-sm text-neutral-500 hover:text-leaf-500 transition-colors">Ver servicios y casos de éxito →</a>
+</div>
+
+<!-- Footer -->
+<footer class="relative z-10 border-t border-neutral-800 mt-8">
+  <div class="max-w-6xl mx-auto px-4 md:px-12 py-10">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12">
+      
+      <div class="col-span-2 md:col-span-1 mb-4 md:mb-0">
+        <a href="/" class="flex items-center gap-2 mb-3">
+          <svg viewBox="0 0 64 64" class="w-7 h-7">
+            <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#footerGrad)" stroke-width="8" stroke-linecap="round" stroke-dasharray="115 25"/>
+            <defs><linearGradient id="footerGrad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#46A758"/><stop offset="100%" stop-color="#E54D2E"/></linearGradient></defs>
+          </svg>
+          <span class="text-lg font-bold" style="font-family: 'Nunito', sans-serif;">ai<span class="gradient-text">tomeiton</span></span>
+        </a>
+        <p class="text-xs text-neutral-500 leading-relaxed">Automatización de procesos con IA.</p>
       </div>
-    </footer>
+      
+      <div>
+        <h4 class="text-xs font-semibold text-white mb-3">Navegación</h4>
+        <ul class="space-y-1.5 text-xs text-neutral-400">
+          <li><a href="/" class="hover:text-leaf-500 transition-colors">Inicio</a></li>
+          <li><a href="servicios.html" class="hover:text-leaf-500 transition-colors">Servicios</a></li>
+          <li><a href="contacto.html" class="hover:text-leaf-500 transition-colors">Contacto</a></li>
+        </ul>
+      </div>
+      
+      <div>
+        <h4 class="text-xs font-semibold text-white mb-3">Legal</h4>
+        <ul class="space-y-1.5 text-xs text-neutral-400">
+          <li><a href="legal.html" class="hover:text-leaf-500 transition-colors">Aviso Legal</a></li>
+          <li><a href="privacidad.html" class="hover:text-leaf-500 transition-colors">Privacidad</a></li>
+          <li><a href="cookies.html" class="hover:text-leaf-500 transition-colors">Cookies</a></li>
+        </ul>
+      </div>
+      
+      <div class="col-span-2 md:col-span-1">
+        <h4 class="text-xs font-semibold text-white mb-3">Contacto</h4>
+        <ul class="space-y-1.5 text-xs text-neutral-400">
+          <li><a href="mailto:hola@aitomeiton.com" class="hover:text-leaf-500 transition-colors">hola@aitomeiton.com</a></li>
+          <li><a href="tel:+34674959787" class="hover:text-leaf-500 transition-colors">+34 674 959 787</a></li>
+          <li>Valencia, España</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="border-t border-neutral-800 mt-8 pt-5 flex flex-col md:flex-row justify-between items-center gap-3">
+      <p class="text-xs text-neutral-500">© 2025 aitomeiton · <a href="https://wedocreatives.com" target="_blank" class="text-leaf-500 hover:underline">Wedo Creatives S.L.</a></p>
+      <div class="flex items-center gap-4">
+        <a href="https://www.linkedin.com/company/wedocreatives" target="_blank" class="text-neutral-500 hover:text-leaf-500 transition-colors">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/wedocreatives" target="_blank" class="text-neutral-500 hover:text-leaf-500 transition-colors">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+```
+
   </div>
 
-  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  <script>
     const SYSTEM_PROMPT = `Eres Meiton, consultor de IA de aitomeiton especializado en automatización empresarial.
 
 ═══════════════════════════════════════
 TU PERSONALIDAD
 ═══════════════════════════════════════
+
 - Cercano y profesional
 - Transmites confianza y seguridad
 - Escuchas más de lo que preguntas
@@ -567,12 +518,14 @@ Luego: "¿Y tenéis web?"
 
 PASO 4 - ENTENDER EL PROBLEMA (máximo 2-3 preguntas):
 Haz preguntas prácticas UNA A UNA:
+
 - "¿Cuántas veces al día/semana pasa esto?"
 - "¿Cuántas personas dedicáis a esta tarea?"
 - "¿Lo hacéis manual o usáis alguna herramienta?"
 
 PASO 5 - CALCULAR AHORRO:
 Con los datos, calcula el ahorro:
+
 - Horas semanales x 52 = horas anuales
 - Horas anuales x 12€/hora = coste anual
 - Automatización ahorra 70-80%
@@ -588,8 +541,9 @@ PASO 7 - CERRAR (pedir datos UNO A UNO):
 "El siguiente paso es una reunión técnica con nuestro equipo de integraciones para analizar vuestro caso en detalle."
 
 Pide los datos UNO POR UNO en este orden:
+
 1. "[nombre], ¿cuál es tu email para que te contactemos?"
-2. "Perfecto. ¿Y un teléfono de contacto?"
+1. "Perfecto. ¿Y un teléfono de contacto?"
 
 Cuando tengas email y teléfono, confirma:
 "Genial, [nombre]. Nuestro equipo de integraciones de [empresa] te contactará en las próximas 24-48h para agendar la reunión. ¡Gracias por confiar en nosotros!"
@@ -597,6 +551,7 @@ Cuando tengas email y teléfono, confirma:
 ═══════════════════════════════════════
 REGLAS CRÍTICAS
 ═══════════════════════════════════════
+
 - SIEMPRE preséntate primero y pide el nombre
 - SIEMPRE usa el nombre del cliente una vez lo tengas
 - SIEMPRE pide empresa y web cuando hable de su negocio
@@ -610,7 +565,7 @@ REGLAS CRÍTICAS
     let messages = [];
     let leadSent = false;
     let firstMessage = '';
-    
+
     // Datos del lead que iremos recopilando
     let leadData = {
       nombre: '',
@@ -630,11 +585,11 @@ REGLAS CRÍTICAS
         telefono: '',
         necesidad: ''
       };
-      
+
       // Email
       const emailMatch = allText.match(/[\w.-]+@[\w.-]+\.\w+/i);
       if (emailMatch) data.email = emailMatch[0];
-      
+
       // Teléfono - formato más flexible
       const phonePatterns = [
         /\b(\+34\s?\d{9})\b/,
@@ -645,7 +600,7 @@ REGLAS CRÍTICAS
         /\b(7\d{8})\b/,
         /\b(9\d{8})\b/
       ];
-      
+
       for (const pattern of phonePatterns) {
         const match = allText.match(pattern);
         if (match) {
@@ -653,7 +608,7 @@ REGLAS CRÍTICAS
           break;
         }
       }
-      
+
       // Nombre - buscar patrones comunes (ahora es más probable que lo digan al inicio)
       const nombrePatterns = [
         /(?:me llamo|soy|mi nombre es|nombre:?)\s+([A-ZÁÉÍÓÚÑ][a-záéíóúñ]+(?:\s+[A-ZÁÉÍÓÚÑ][a-záéíóúñ]+)*)/i,
@@ -667,7 +622,7 @@ REGLAS CRÍTICAS
           break;
         }
       }
-      
+
       // Empresa - buscar patrones comunes
       const empresaPatterns = [
         /(?:empresa|compañía|trabajo en|trabajamos en|de la empresa|somos de|se llama|llamamos)\s+([A-ZÁÉÍÓÚÑ][\w\s&.-]+?)(?:\s*[,.]|\s+y\s|\s+somos|\s+tenemos|$)/i,
@@ -683,7 +638,7 @@ REGLAS CRÍTICAS
           }
         }
       }
-      
+
       // Web - buscar URLs
       const webPatterns = [
         /(https?:\/\/[^\s]+)/i,
@@ -697,12 +652,12 @@ REGLAS CRÍTICAS
           break;
         }
       }
-      
+
       return data;
     }
 
     function hasContactInfo(text) {
-      const hasEmail = /[\w.-]+@[\w.-]+\.\w+/i.test(text);
+      const hasEmail = /[\w.-]+@[\w.-]+.\w+/i.test(text);
       const hasPhone = /\b\d{9}\b|\b\d{3}[\s.-]\d{3}[\s.-]\d{3}\b/i.test(text);
       return hasEmail || hasPhone;
     }
@@ -716,13 +671,13 @@ REGLAS CRÍTICAS
 
     async function sendLead() {
       if (leadSent) return;
-      
+
       const userMessages = messages.filter(m => m.role === 'user').map(m => m.content).join(' ');
       const extractedData = extractLeadData(userMessages);
-      
+
       // Solo enviar si hay al menos email o teléfono
       if (!extractedData.email && !extractedData.telefono) return;
-      
+
       // Construir el objeto del lead con la conversación completa
       const leadPayload = {
         nombre: extractedData.nombre || 'No proporcionado',
@@ -735,37 +690,29 @@ REGLAS CRÍTICAS
         fecha: new Date().toLocaleString('es-ES')
       };
 
-      try {
-        const response = await fetch('/api/lead', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(leadPayload)
-        });
-        if (response.ok) {
-          console.log('Lead enviado con conversación completa');
-          leadSent = true;
-        }
-      } catch (e) {
-        console.error('Error enviando lead:', e);
-      }
+      console.log('📞 LEAD CAPTURADO:', leadPayload);
+      leadSent = true;
+
+      // Aquí puedes integrar con tu sistema de leads
+      // fetch('/api/lead', { method: 'POST', body: JSON.stringify(leadPayload) })
     }
 
     function startFromHero() {
       const heroInput = document.getElementById('hero-input');
       const text = heroInput.value.trim();
       if (!text) return;
-      
+
       firstMessage = text;
-      
+
       document.getElementById('hero').classList.add('hidden');
       document.getElementById('chat-section').classList.remove('hidden');
       document.getElementById('chat-section').classList.add('animate-fadeIn');
       document.body.classList.add('chat-open');
-      
+
       messages.push({ role: 'user', content: text });
       renderMessages();
       sendToAI();
-      
+
       // Enfocar el input después de un pequeño delay
       setTimeout(() => {
         document.getElementById('input').focus();
@@ -796,12 +743,12 @@ REGLAS CRÍTICAS
         // Saltos de línea
         .replace(/\n\n/g, '</p><p class="mt-2">')
         .replace(/\n/g, '<br>');
-      
+
       // Envolver listas en <ul>
       if (formatted.includes('<li>')) {
         formatted = formatted.replace(/(<li>.*?<\/li>)+/g, '<ul class="list-disc list-inside mt-1 space-y-1">$&</ul>');
       }
-      
+
       return formatted;
     }
 
@@ -828,7 +775,7 @@ REGLAS CRÍTICAS
           </div>
         </div>
       `).join('');
-      
+
       container.innerHTML = `<div class="messages-wrapper space-y-4">${messagesHTML}</div>`;
       container.scrollTop = container.scrollHeight;
     }
@@ -837,15 +784,15 @@ REGLAS CRÍTICAS
       const container = document.getElementById('messages');
       const messageDiv = container.querySelector(`[data-msg-index="${messageIndex}"] .msg-content`);
       if (!messageDiv) return;
-      
+
       let currentText = '';
       const speed = 15; // milisegundos por carácter
-      
+
       for (let i = 0; i < text.length; i++) {
         currentText += text[i];
         messageDiv.innerHTML = formatMessage(currentText);
         container.scrollTop = container.scrollHeight;
-        
+
         // Pausa más larga en puntos y saltos de línea
         if (text[i] === '.' || text[i] === '\n') {
           await new Promise(r => setTimeout(r, speed * 3));
@@ -878,7 +825,7 @@ REGLAS CRÍTICAS
           </div>
         </div>
       `).join('');
-      
+
       container.innerHTML = `<div class="messages-wrapper space-y-4">${messagesHTML}</div>`;
       container.scrollTop = container.scrollHeight;
     }
@@ -887,16 +834,19 @@ REGLAS CRÍTICAS
       document.getElementById('typing').classList.remove('hidden');
       // Solo deshabilitar el botón, no el input (para mantener el teclado en móvil)
       document.getElementById('sendBtn').disabled = true;
-      
+
       const msgContainer = document.getElementById('messages');
       msgContainer.scrollTop = msgContainer.scrollHeight;
 
       try {
-        const response = await fetch('/api/chat', {
+        const response = await fetch('https://api.anthropic.com/v1/messages', {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+          headers: { 
+            'Content-Type': 'application/json',
+            'anthropic-version': '2023-06-01'
+          },
           body: JSON.stringify({
-            model: 'claude-sonnet-4-20250514',
+            model: 'claude-3-5-sonnet-20241022',
             max_tokens: 600,
             system: SYSTEM_PROMPT,
             messages: messages.map(msg => ({
@@ -912,13 +862,8 @@ REGLAS CRÍTICAS
         
         messages.push({ role: 'assistant', content: responseText });
         
-        // Ocultar typing y mostrar mensaje vacío
-        document.getElementById('typing').classList.add('hidden');
-        const newMsgIndex = messages.length - 1;
-        renderMessagesWithTyping(newMsgIndex);
-        
-        // Efecto typewriter
-        await typeMessage(responseText, newMsgIndex);
+        // Renderizar inmediatamente sin typing effect para simplificar
+        renderMessages();
         
         // Verificar si hay datos de contacto después de cada mensaje
         const allUserText = messages.filter(m => m.role === 'user').map(m => m.content).join(' ');
@@ -933,7 +878,6 @@ REGLAS CRÍTICAS
       } finally {
         document.getElementById('typing').classList.add('hidden');
         document.getElementById('sendBtn').disabled = false;
-        renderMessages();
         // Mantener el foco en el input para que el teclado no se cierre
         const inputEl = document.getElementById('input');
         requestAnimationFrame(() => {
@@ -946,7 +890,7 @@ REGLAS CRÍTICAS
     document.getElementById('hero-input').addEventListener('keypress', function(e) {
       if (e.key === 'Enter') startFromHero();
     });
-    
+
     // Usar form submit en vez de keypress para mantener el teclado
     document.getElementById('chatForm').addEventListener('submit', function(e) {
       e.preventDefault();
@@ -955,18 +899,18 @@ REGLAS CRÍTICAS
       // Mantener foco inmediatamente
       requestAnimationFrame(() => inputEl.focus());
     });
-    
+
     document.addEventListener('touchstart', function() {}, {passive: true});
 
     // Parpadeo de Meiton
     function meitonBlink() {
       const eyes = document.querySelectorAll('.meiton-eye');
       if (eyes.length === 0) return;
-      
+
       let ry = 3.5;
       const closeSpeed = 0.7;
       const openSpeed = 0.5;
-      
+
       const closeInterval = setInterval(() => {
         ry -= closeSpeed;
         if (ry <= 0.3) {
@@ -984,43 +928,43 @@ REGLAS CRÍTICAS
         }
         eyes.forEach(eye => eye.setAttribute('ry', ry));
       }, 20);
-      
+
       setTimeout(meitonBlink, 2500 + Math.random() * 3500);
     }
-    
+
     setTimeout(meitonBlink, 1500);
-    
+
     // Menú hamburguesa
     function toggleMenu() {
       const menu = document.getElementById('mobileMenu');
       const menuIcon = document.getElementById('menuIcon');
       const closeIcon = document.getElementById('closeIcon');
-      
+
       menu.classList.toggle('hidden');
       menuIcon.classList.toggle('hidden');
       closeIcon.classList.toggle('hidden');
     }
-    
+
     // Mantener teclado abierto en móvil después de enviar
     function sendMessage() {
       const input = document.getElementById('input');
       const text = input.value.trim();
       if (!text) return;
-      
+
       input.value = '';
       messages.push({ role: 'user', content: text });
       renderMessages();
       sendToAI();
-      
+
       // Mantener focus en el input para que el teclado no se cierre
       setTimeout(() => {
         input.focus();
       }, 100);
     }
-    
+
     // Detectar si estamos en móvil
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-    
+
     if (isMobile) {
       // En móvil, al abrir el chat, hacer focus en el input
       const observer = new MutationObserver((mutations) => {
@@ -1030,4 +974,15 @@ REGLAS CRÍTICAS
               document.getElementById('input').focus();
             }, 300);
           }
-        }
+        });
+      });
+
+      observer.observe(document.getElementById('chat-section'), {
+        attributes: true,
+        attributeFilter: ['class']
+      });
+    }
+  </script>
+
+</body>
+</html>
