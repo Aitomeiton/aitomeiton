@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -23,280 +24,283 @@
   </script>
   <style>
     * { font-family: 'Inter', sans-serif; }
-    
-    html, body {
-      height: 100%;
-      overflow: hidden;
-      position: fixed;
-      width: 100%;
-    }
-    
-    .app-container {
-      height: 100%;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-    
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    
-    @keyframes messageIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
 
-    @keyframes bounce-dot {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-4px); }
-    }
+```
+html, body {
+  height: 100%;
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+}
 
-    @keyframes breathe {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.08); }
-    }
+.app-container {
+  height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
 
-    @keyframes glow-pulse {
-      0%, 100% { filter: drop-shadow(0 0 8px rgba(70, 167, 88, 0.6)); }
-      50% { filter: drop-shadow(0 0 20px rgba(229, 77, 46, 0.8)); }
-    }
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-    /* Meiton Avatar Animado */
-    .meiton-body {
-      transform-origin: center;
-      animation: breathe 3s ease-in-out infinite, glow-pulse 2s ease-in-out infinite;
-    }
-    
-    .meiton-mouth {
-      animation: smile 6s ease-in-out infinite;
-    }
-    
-    @keyframes smile {
-      0%, 100% { d: path("M24 42 Q32 48, 40 42"); }
-      50% { d: path("M24 42 Q32 51, 40 42"); }
-    }
+@keyframes messageIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
-    .animate-breathe { animation: breathe 3s ease-in-out infinite; }
-    .animate-glow-pulse { animation: glow-pulse 2s ease-in-out infinite; }
-    .animate-fadeIn { animation: fadeIn 0.6s ease-out; }
-    .animate-messageIn { animation: messageIn 0.25s ease-out both; }
-    .animate-bounce-dot { animation: bounce-dot 0.5s infinite; }
+@keyframes bounce-dot {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
 
-    .gradient-text {
-      background: linear-gradient(135deg, #46A758 0%, #E54D2E 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
+@keyframes breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
 
-    .input-chat {
-      background: rgba(70, 167, 88, 0.05);
-      border: 1px solid rgba(70, 167, 88, 0.2);
-      font-size: 16px;
-    }
-    .input-chat:focus {
-      border-color: rgba(70, 167, 88, 0.5);
-      background: rgba(70, 167, 88, 0.08);
-      box-shadow: 0 0 20px rgba(70, 167, 88, 0.1);
-      outline: none;
-    }
+@keyframes glow-pulse {
+  0%, 100% { filter: drop-shadow(0 0 8px rgba(70, 167, 88, 0.6)); }
+  50% { filter: drop-shadow(0 0 20px rgba(229, 77, 46, 0.8)); }
+}
 
-    .message-user {
-      background: linear-gradient(135deg, #46A758 0%, #E54D2E 100%);
-    }
+/* Meiton Avatar Animado */
+.meiton-body {
+  transform-origin: center;
+  animation: breathe 3s ease-in-out infinite, glow-pulse 2s ease-in-out infinite;
+}
 
-    .message-bot {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(70, 167, 88, 0.15);
-    }
+.meiton-mouth {
+  animation: smile 6s ease-in-out infinite;
+}
 
-    .btn-send {
-      background: linear-gradient(135deg, #46A758 0%, #E54D2E 100%);
-      box-shadow: 0 4px 20px rgba(70, 167, 88, 0.3);
-    }
-    .btn-send:hover {
-      transform: scale(1.05);
-      box-shadow: 0 6px 30px rgba(70, 167, 88, 0.4);
-    }
-    .btn-send:disabled {
-      opacity: 0.5;
-      transform: none;
-    }
+@keyframes smile {
+  0%, 100% { d: path("M24 42 Q32 48, 40 42"); }
+  50% { d: path("M24 42 Q32 51, 40 42"); }
+}
 
-    .card-glass {
-      background: rgba(10, 10, 10, 0.8);
-      border: 1px solid rgba(70, 167, 88, 0.15);
-      box-shadow: 0 0 40px rgba(70, 167, 88, 0.05);
-    }
+.animate-breathe { animation: breathe 3s ease-in-out infinite; }
+.animate-glow-pulse { animation: glow-pulse 2s ease-in-out infinite; }
+.animate-fadeIn { animation: fadeIn 0.6s ease-out; }
+.animate-messageIn { animation: messageIn 0.25s ease-out both; }
+.animate-bounce-dot { animation: bounce-dot 0.5s infinite; }
 
-    .scrollbar-minimal::-webkit-scrollbar { width: 3px; }
-    .scrollbar-minimal::-webkit-scrollbar-track { background: transparent; }
-    .scrollbar-minimal::-webkit-scrollbar-thumb { background: rgba(70, 167, 88, 0.3); border-radius: 10px; }
+.gradient-text {
+  background: linear-gradient(135deg, #46A758 0%, #E54D2E 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
 
-    textarea::placeholder, input::placeholder { color: rgba(255,255,255,0.35); }
-    
-    /* Chat en desktop - más grande */
-    #chat-section .card-glass {
-      display: flex;
-      flex-direction: column;
-      height: calc(100vh - 180px);
-      max-height: 700px;
-      min-height: 500px;
-    }
-    
-    #messages {
-      flex: 1;
-      overflow-y: auto;
-    }
+.input-chat {
+  background: rgba(70, 167, 88, 0.05);
+  border: 1px solid rgba(70, 167, 88, 0.2);
+  font-size: 16px;
+}
+.input-chat:focus {
+  border-color: rgba(70, 167, 88, 0.5);
+  background: rgba(70, 167, 88, 0.08);
+  box-shadow: 0 0 20px rgba(70, 167, 88, 0.1);
+  outline: none;
+}
 
-    /* Menú hamburguesa */
-    .menu-burger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      cursor: pointer;
-      padding: 8px;
-      z-index: 100;
-    }
-    .menu-burger span {
-      display: block;
-      width: 24px;
-      height: 2px;
-      background: white;
-      border-radius: 2px;
-      transition: all 0.3s;
-    }
-    .menu-burger.active span:nth-child(1) {
-      transform: rotate(45deg) translate(5px, 5px);
-    }
-    .menu-burger.active span:nth-child(2) {
-      opacity: 0;
-    }
-    .menu-burger.active span:nth-child(3) {
-      transform: rotate(-45deg) translate(5px, -5px);
-    }
+.message-user {
+  background: linear-gradient(135deg, #46A758 0%, #E54D2E 100%);
+}
 
-    .mobile-menu {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(10, 10, 10, 0.98);
-      z-index: 90;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      gap: 32px;
-    }
-    .mobile-menu.active {
-      display: flex;
-    }
-    .mobile-menu a {
-      font-size: 1.5rem;
-      color: #a3a3a3;
-      transition: color 0.3s;
-    }
-    .mobile-menu a:hover {
-      color: #46A758;
-    }
-    
-    /* Chat en móvil - fullscreen */
-    @media (max-width: 768px) {
-      .menu-burger {
-        display: flex;
-      }
-      
-      /* Ocultar header y footer cuando el chat está abierto */
-      body.chat-open header,
-      body.chat-open footer {
-        display: none !important;
-      }
-      
-      /* Ocultar botón de enviar en el chat (se usa Enter del teclado) */
-      body.chat-open #sendBtn {
-        display: none;
-      }
-      
-      body.chat-open #chatForm input {
-        border-radius: 1rem;
-      }
-      
-      #chat-section {
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 50;
-        padding: 0;
-        max-width: 100%;
-        display: none;
-        background: #0a0a0a;
-      }
-      
-      #chat-section.active {
-        display: flex;
-      }
-      
-      #chat-section:not(.hidden) {
-        display: flex;
-      }
-      
-      #chat-section .card-glass {
-        height: 100%;
-        max-height: 100%;
-        min-height: 100%;
-        border-radius: 0;
-        border: none;
-        background: #0a0a0a;
-      }
-      
-      #messages {
-        flex: 1;
-        height: auto;
-        min-height: 0;
-        max-height: none;
-        overflow-y: auto;
-        -webkit-overflow-scrolling: touch;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-      }
-      
-      #messages > div {
-        margin-top: auto;
-      }
-      
-      #messages .messages-wrapper {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-end;
-        min-height: 100%;
-      }
-      
-      /* Input fijo abajo como WhatsApp */
-      .chat-input-container {
-        position: sticky;
-        bottom: 0;
-        background: #0a0a0a;
-        padding-bottom: env(safe-area-inset-bottom, 12px);
-        border-top: 1px solid rgba(70, 167, 88, 0.1);
-      }
-      
-      /* Asegurar que el body no haga scroll cuando el chat está abierto */
-      body.chat-open {
-        overflow: hidden;
-        position: fixed;
-        width: 100%;
-      }
-    }
+.message-bot {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(70, 167, 88, 0.15);
+}
+
+.btn-send {
+  background: linear-gradient(135deg, #46A758 0%, #E54D2E 100%);
+  box-shadow: 0 4px 20px rgba(70, 167, 88, 0.3);
+}
+.btn-send:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 30px rgba(70, 167, 88, 0.4);
+}
+.btn-send:disabled {
+  opacity: 0.5;
+  transform: none;
+}
+
+.card-glass {
+  background: rgba(10, 10, 10, 0.8);
+  border: 1px solid rgba(70, 167, 88, 0.15);
+  box-shadow: 0 0 40px rgba(70, 167, 88, 0.05);
+}
+
+.scrollbar-minimal::-webkit-scrollbar { width: 3px; }
+.scrollbar-minimal::-webkit-scrollbar-track { background: transparent; }
+.scrollbar-minimal::-webkit-scrollbar-thumb { background: rgba(70, 167, 88, 0.3); border-radius: 10px; }
+
+textarea::placeholder, input::placeholder { color: rgba(255,255,255,0.35); }
+
+/* Chat en desktop - más grande */
+#chat-section .card-glass {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 180px);
+  max-height: 700px;
+  min-height: 500px;
+}
+
+#messages {
+  flex: 1;
+  overflow-y: auto;
+}
+
+/* Menú hamburguesa */
+.menu-burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 8px;
+  z-index: 100;
+}
+.menu-burger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: white;
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+.menu-burger.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.menu-burger.active span:nth-child(2) {
+  opacity: 0;
+}
+.menu-burger.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(5px, -5px);
+}
+
+.mobile-menu {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(10, 10, 10, 0.98);
+  z-index: 90;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+}
+.mobile-menu.active {
+  display: flex;
+}
+.mobile-menu a {
+  font-size: 1.5rem;
+  color: #a3a3a3;
+  transition: color 0.3s;
+}
+.mobile-menu a:hover {
+  color: #46A758;
+}
+
+/* Chat en móvil - fullscreen */
+@media (max-width: 768px) {
+  .menu-burger {
+    display: flex;
+  }
+  
+  /* Ocultar header y footer cuando el chat está abierto */
+  body.chat-open header,
+  body.chat-open footer {
+    display: none !important;
+  }
+  
+  /* Ocultar botón de enviar en el chat (se usa Enter del teclado) */
+  body.chat-open #sendBtn {
+    display: none;
+  }
+  
+  body.chat-open #chatForm input {
+    border-radius: 1rem;
+  }
+  
+  #chat-section {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 50;
+    padding: 0;
+    max-width: 100%;
+    display: none;
+    background: #0a0a0a;
+  }
+  
+  #chat-section.active {
+    display: flex;
+  }
+  
+  #chat-section:not(.hidden) {
+    display: flex;
+  }
+  
+  #chat-section .card-glass {
+    height: 100%;
+    max-height: 100%;
+    min-height: 100%;
+    border-radius: 0;
+    border: none;
+    background: #0a0a0a;
+  }
+  
+  #messages {
+    flex: 1;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  
+  #messages > div {
+    margin-top: auto;
+  }
+  
+  #messages .messages-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    min-height: 100%;
+  }
+  
+  /* Input fijo abajo como WhatsApp */
+  .chat-input-container {
+    position: sticky;
+    bottom: 0;
+    background: #0a0a0a;
+    padding-bottom: env(safe-area-inset-bottom, 12px);
+    border-top: 1px solid rgba(70, 167, 88, 0.1);
+  }
+  
+  /* Asegurar que el body no haga scroll cuando el chat está abierto */
+  body.chat-open {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+  }
+}
+```
+
   </style>
 </head>
 <body class="text-white" style="background-color: #0a0a0a;">
-  
+
   <div class="app-container">
     <!-- Background -->
     <div style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 0; background-color: #0a0a0a; overflow: hidden; pointer-events: none;">
@@ -305,167 +309,180 @@
       <div style="position: absolute; top: 0; left: 0; right: 0; height: 1px; background: linear-gradient(90deg, transparent, #46A758, #E54D2E, transparent);"></div>
     </div>
 
-    <!-- Header -->
-    <header class="relative z-20 px-4 md:px-12 py-4 flex justify-between items-center max-w-6xl mx-auto">
-      <a href="/" class="flex items-center gap-2">
-        <svg viewBox="0 0 64 64" class="w-7 h-7 md:w-8 md:h-8">
-          <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#logoGrad)" stroke-width="10" stroke-linecap="round" stroke-dasharray="115 25"/>
-          <defs>
-            <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#46A758"/>
-              <stop offset="100%" stop-color="#E54D2E"/>
-            </linearGradient>
-          </defs>
-        </svg>
-        <span class="text-xl md:text-2xl tracking-tight font-bold" style="font-family: 'Nunito', sans-serif;">
-          ai<span class="gradient-text">tomeiton</span>
-        </span>
-      </a>
-      
-      <!-- Menú desktop -->
-      <nav class="hidden md:flex items-center gap-8 text-sm text-neutral-400">
-        <a href="servicios.html" class="hover:text-leaf-500 transition-colors">Servicios</a>
-        <a href="servicios.html#casos" class="hover:text-leaf-500 transition-colors">Casos</a>
-        <a href="contacto.html" class="px-4 py-2 rounded-full border border-leaf-500/20 hover:border-leaf-500/50 hover:bg-leaf-500/5 transition-all">Contacto</a>
-      </nav>
-      
-      <!-- Menú hamburguesa móvil -->
-      <button id="menuToggle" class="md:hidden p-2 text-neutral-400 hover:text-white transition-colors" onclick="toggleMenu()">
-        <svg id="menuIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-        </svg>
-        <svg id="closeIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
-        </svg>
-      </button>
-    </header>
-    
-    <!-- Menú móvil desplegable -->
-    <div id="mobileMenu" class="hidden md:hidden fixed inset-0 z-10 bg-black/95 pt-20">
-      <nav class="flex flex-col items-center gap-6 text-lg text-neutral-300 p-8">
-        <a href="servicios.html" class="hover:text-leaf-500 transition-colors" onclick="toggleMenu()">Servicios</a>
-        <a href="servicios.html#casos" class="hover:text-leaf-500 transition-colors" onclick="toggleMenu()">Casos</a>
-        <a href="contacto.html" class="px-6 py-3 rounded-full border border-leaf-500/30 hover:border-leaf-500/50 hover:bg-leaf-500/10 transition-all" onclick="toggleMenu()">Contacto</a>
-      </nav>
+```
+<!-- Header -->
+<header class="relative z-20 px-4 md:px-12 py-4 flex justify-between items-center max-w-6xl mx-auto">
+  <a href="/" class="flex items-center gap-2">
+    <svg viewBox="0 0 64 64" class="w-7 h-7 md:w-8 md:h-8">
+      <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#logoGrad)" stroke-width="10" stroke-linecap="round" stroke-dasharray="115 25"/>
+      <defs>
+        <linearGradient id="logoGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#46A758"/>
+          <stop offset="100%" stop-color="#E54D2E"/>
+        </linearGradient>
+      </defs>
+    </svg>
+    <span class="text-xl md:text-2xl tracking-tight font-bold" style="font-family: 'Nunito', sans-serif;">
+      ai<span class="gradient-text">tomeiton</span>
+    </span>
+  </a>
+  
+  <!-- Menú desktop -->
+  <nav class="hidden md:flex items-center gap-8 text-sm text-neutral-400">
+    <a href="servicios.html" class="hover:text-leaf-500 transition-colors">Servicios</a>
+    <a href="servicios.html#casos" class="hover:text-leaf-500 transition-colors">Casos</a>
+    <a href="contacto.html" class="px-4 py-2 rounded-full border border-leaf-500/20 hover:border-leaf-500/50 hover:bg-leaf-500/5 transition-all">Contacto</a>
+  </nav>
+  
+  <!-- Menú hamburguesa móvil -->
+  <button id="menuToggle" class="md:hidden p-2 text-neutral-400 hover:text-white transition-colors" onclick="toggleMenu()">
+    <svg id="menuIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+    </svg>
+    <svg id="closeIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+    </svg>
+  </button>
+</header>
+
+<!-- Menú móvil desplegable -->
+<div id="mobileMenu" class="hidden md:hidden fixed inset-0 z-[100] bg-black/98 pt-20">
+  <button onclick="toggleMenu()" class="absolute top-4 right-4 p-2 text-neutral-400 hover:text-white">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+    </svg>
+  </button>
+  <nav class="flex flex-col items-center gap-8 text-xl text-neutral-300 p-8 mt-8">
+    <a href="/" class="hover:text-leaf-500 transition-colors" onclick="toggleMenu()">Inicio</a>
+    <a href="servicios.html" class="hover:text-leaf-500 transition-colors" onclick="toggleMenu()">Servicios</a>
+    <a href="servicios.html#casos" class="hover:text-leaf-500 transition-colors" onclick="toggleMenu()">Casos</a>
+    <a href="contacto.html" class="px-6 py-3 rounded-full border border-leaf-500/30 hover:border-leaf-500/50 hover:bg-leaf-500/10 transition-all" onclick="toggleMenu()">Contacto</a>
+  </nav>
+</div>
+
+<!-- Main -->
+<main class="relative z-10 flex flex-col items-center justify-center min-h-[calc(100vh-120px)] px-4 md:px-6 py-6">
+  
+  <!-- Hero -->
+  <div id="hero" class="text-center max-w-2xl animate-fadeIn">
+    <h1 class="text-sm md:text-base text-neutral-400 mb-6 md:mb-8 tracking-wide uppercase px-2">
+      Tu equipo especializado en desarrollo e implementación de automatización de procesos con IA
+    </h1>
+
+    <div class="relative w-24 h-24 md:w-32 md:h-32 mx-auto mb-6 md:mb-8 flex items-center justify-center">
+      <svg viewBox="0 0 64 64" class="w-24 h-24 md:w-32 md:h-32 meiton-avatar" style="overflow: visible;">
+        <defs>
+          <linearGradient id="heroGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#46A758"/>
+            <stop offset="100%" stop-color="#E54D2E"/>
+          </linearGradient>
+        </defs>
+        <g class="meiton-body">
+          <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#heroGrad)" stroke-width="8" stroke-linecap="round" stroke-dasharray="115 25"/>
+          <!-- Ojos -->
+          <ellipse class="meiton-eye" cx="24" cy="30" rx="2.5" ry="3.5" fill="white"/>
+          <ellipse class="meiton-eye" cx="40" cy="30" rx="2.5" ry="3.5" fill="white"/>
+          <!-- Sonrisa -->
+          <path class="meiton-mouth" d="M24 42 Q32 48, 40 42" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+        </g>
+      </svg>
     </div>
 
-    <!-- Main -->
-    <main class="relative z-10 flex flex-col items-center justify-center min-h-[calc(100vh-120px)] px-4 md:px-6 py-6">
+    <p class="text-3xl md:text-5xl font-semibold mb-4 md:mb-5 leading-tight tracking-tight px-2">
+      Venga, ¿qué procesos quieres<br class="hidden md:block">
+      <span class="gradient-text">automatizar en tu empresa?</span>
+    </p>
+
+    <div class="w-full max-w-xl mt-6 md:mt-8 px-2 mx-auto">
+      <div class="relative">
+        <input id="hero-input" type="text" readonly placeholder="Ventas, atención al cliente, administración..." class="w-full input-chat rounded-2xl px-4 md:px-5 py-3 md:py-4 pr-14 text-base text-white transition-all cursor-pointer" onclick="openChat()">
+        <button onclick="openChat()" class="absolute right-2 top-1/2 -translate-y-1/2 p-2 md:p-2.5 rounded-xl btn-send transition-all duration-200 hover:scale-105">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chat -->
+  <div id="chat-section" class="w-full max-w-2xl hidden px-1 md:px-4 flex-1 flex flex-col">
+    <div class="rounded-2xl md:rounded-2xl card-glass backdrop-blur-xl overflow-hidden flex flex-col flex-1 max-h-[calc(100vh-100px)] md:max-h-[600px]">
       
-      <!-- Hero -->
-      <div id="hero" class="text-center max-w-2xl animate-fadeIn">
-        <div class="relative w-24 h-24 md:w-32 md:h-32 mx-auto mb-8 md:mb-10 flex items-center justify-center">
-          <svg viewBox="0 0 64 64" class="w-24 h-24 md:w-32 md:h-32 meiton-avatar" style="overflow: visible;">
+      <div class="px-4 py-3 border-b border-leaf-500/10 flex items-center justify-between flex-shrink-0">
+        <div class="flex items-center gap-3">
+          <svg viewBox="0 0 64 64" class="w-9 h-9 md:w-10 md:h-10 animate-breathe">
             <defs>
-              <linearGradient id="heroGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <linearGradient id="chatGrad" x1="0%" y1="0%" x2="100%" y2="100%">
                 <stop offset="0%" stop-color="#46A758"/>
                 <stop offset="100%" stop-color="#E54D2E"/>
               </linearGradient>
             </defs>
-            <g class="meiton-body">
-              <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#heroGrad)" stroke-width="8" stroke-linecap="round" stroke-dasharray="115 25"/>
-              <!-- Ojos -->
-              <ellipse class="meiton-eye" cx="24" cy="30" rx="2.5" ry="3.5" fill="white"/>
-              <ellipse class="meiton-eye" cx="40" cy="30" rx="2.5" ry="3.5" fill="white"/>
-              <!-- Sonrisa -->
-              <path class="meiton-mouth" d="M24 42 Q32 48, 40 42" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
-            </g>
+            <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#chatGrad)" stroke-width="8" stroke-linecap="round" stroke-dasharray="115 25"/>
+            <ellipse cx="24" cy="30" rx="2" ry="3" fill="white"/>
+            <ellipse cx="40" cy="30" rx="2" ry="3" fill="white"/>
+            <path d="M24 42 Q32 48, 40 42" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/>
           </svg>
+          <div>
+            <span class="text-sm font-medium">aitomeiton</span>
+            <div class="flex items-center gap-1.5">
+              <span class="w-1.5 h-1.5 rounded-full bg-leaf-500 animate-pulse"></span>
+              <span class="text-xs text-neutral-500">En línea</span>
+            </div>
+          </div>
         </div>
+        <button onclick="goBack()" class="text-neutral-500 hover:text-white transition-colors p-2">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
 
-        <h1 class="text-3xl md:text-5xl font-semibold mb-4 md:mb-5 leading-tight tracking-tight px-2">
-          Venga, ¿qué te gustaría que<br>
-          <span class="gradient-text">se hiciera solo en tu empresa?</span>
-        </h1>
+      <div id="messages" class="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-minimal"></div>
 
-        <div class="w-full max-w-xl mt-6 md:mt-8 px-2 mx-auto">
-          <div class="relative">
-            <input id="hero-input" type="text" placeholder="Ej: Responder emails, gestionar pedidos..." class="w-full input-chat rounded-2xl px-4 md:px-5 py-3 md:py-4 pr-14 text-base text-white transition-all">
-            <button onclick="startFromHero()" class="absolute right-2 top-1/2 -translate-y-1/2 p-2 md:p-2.5 rounded-xl btn-send transition-all duration-200 hover:scale-105">
-              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7"/>
-              </svg>
-            </button>
+      <div id="typing" class="hidden px-4 pb-2">
+        <div class="flex items-start gap-3">
+          <svg viewBox="0 0 64 64" class="w-8 h-8 flex-shrink-0">
+            <defs>
+              <linearGradient id="typingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#46A758"/>
+                <stop offset="100%" stop-color="#E54D2E"/>
+              </linearGradient>
+            </defs>
+            <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#typingGrad)" stroke-width="8" stroke-linecap="round" stroke-dasharray="115 25"/>
+            <ellipse cx="24" cy="30" rx="2" ry="3" fill="white"/>
+            <ellipse cx="40" cy="30" rx="2" ry="3" fill="white"/>
+            <path d="M24 42 Q32 48, 40 42" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <div class="message-bot px-4 py-3 rounded-2xl">
+            <div class="flex gap-1">
+              <span class="w-1.5 h-1.5 bg-neutral-500 rounded-full animate-bounce-dot"></span>
+              <span class="w-1.5 h-1.5 bg-neutral-500 rounded-full animate-bounce-dot" style="animation-delay: 0.15s;"></span>
+              <span class="w-1.5 h-1.5 bg-neutral-500 rounded-full animate-bounce-dot" style="animation-delay: 0.3s;"></span>
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- Chat -->
-      <div id="chat-section" class="w-full max-w-2xl hidden px-1 md:px-4 flex-1 flex flex-col">
-        <div class="rounded-2xl md:rounded-2xl card-glass backdrop-blur-xl overflow-hidden flex flex-col flex-1 max-h-[calc(100vh-100px)] md:max-h-[600px]">
-          
-          <div class="px-4 py-3 border-b border-leaf-500/10 flex items-center justify-between flex-shrink-0">
-            <div class="flex items-center gap-3">
-              <svg viewBox="0 0 64 64" class="w-9 h-9 md:w-10 md:h-10 animate-breathe">
-                <defs>
-                  <linearGradient id="chatGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#46A758"/>
-                    <stop offset="100%" stop-color="#E54D2E"/>
-                  </linearGradient>
-                </defs>
-                <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#chatGrad)" stroke-width="8" stroke-linecap="round" stroke-dasharray="115 25"/>
-                <ellipse cx="24" cy="30" rx="2" ry="3" fill="white"/>
-                <ellipse cx="40" cy="30" rx="2" ry="3" fill="white"/>
-                <path d="M24 42 Q32 48, 40 42" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-              <div>
-                <span class="text-sm font-medium">aitomeiton</span>
-                <div class="flex items-center gap-1.5">
-                  <span class="w-1.5 h-1.5 rounded-full bg-leaf-500 animate-pulse"></span>
-                  <span class="text-xs text-neutral-500">En línea</span>
-                </div>
-              </div>
-            </div>
-            <button onclick="goBack()" class="text-neutral-500 hover:text-white transition-colors p-2">
-              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/>
-              </svg>
-            </button>
-          </div>
-
-          <div id="messages" class="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-minimal"></div>
-
-          <div id="typing" class="hidden px-4 pb-2">
-            <div class="flex items-start gap-3">
-              <svg viewBox="0 0 64 64" class="w-8 h-8 flex-shrink-0">
-                <defs>
-                  <linearGradient id="typingGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stop-color="#46A758"/>
-                    <stop offset="100%" stop-color="#E54D2E"/>
-                  </linearGradient>
-                </defs>
-                <path d="M32 8 C 50 8, 56 24, 56 32 C 56 40, 50 56, 32 56 C 14 56, 8 40, 8 32 C 8 24, 14 8, 32 8" fill="none" stroke="url(#typingGrad)" stroke-width="8" stroke-linecap="round" stroke-dasharray="115 25"/>
-                <ellipse cx="24" cy="30" rx="2" ry="3" fill="white"/>
-                <ellipse cx="40" cy="30" rx="2" ry="3" fill="white"/>
-                <path d="M24 42 Q32 48, 40 42" fill="none" stroke="white" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-              <div class="message-bot px-4 py-3 rounded-2xl">
-                <div class="flex gap-1">
-                  <span class="w-1.5 h-1.5 bg-neutral-500 rounded-full animate-bounce-dot"></span>
-                  <span class="w-1.5 h-1.5 bg-neutral-500 rounded-full animate-bounce-dot" style="animation-delay: 0.15s;"></span>
-                  <span class="w-1.5 h-1.5 bg-neutral-500 rounded-full animate-bounce-dot" style="animation-delay: 0.3s;"></span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="chat-input-container p-3 md:p-4 border-t border-leaf-500/10 flex-shrink-0 bg-neutral-900/95">
-            <form id="chatForm" class="flex gap-2 md:gap-3">
-              <input id="input" type="text" inputmode="text" enterkeyhint="send" autocomplete="off" autocorrect="on" placeholder="Escribe tu mensaje..." class="flex-1 input-chat rounded-xl px-3 md:px-4 py-3 text-base text-white transition-all">
-              <button type="submit" id="sendBtn" class="px-4 md:px-5 py-3 rounded-xl btn-send transition-all duration-200">
-                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
-              </button>
-            </form>
-          </div>
-        </div>
+      <div class="chat-input-container p-3 md:p-4 border-t border-leaf-500/10 flex-shrink-0 bg-neutral-900/95">
+        <form id="chatForm" class="flex gap-2 md:gap-3">
+          <input id="input" type="text" inputmode="text" enterkeyhint="send" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Escribe tu mensaje..." class="flex-1 input-chat rounded-xl px-3 md:px-4 py-3 text-base text-white transition-all">
+          <button type="submit" id="sendBtn" class="px-4 md:px-5 py-3 rounded-xl btn-send transition-all duration-200">
+            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </button>
+        </form>
       </div>
-    </main>
+    </div>
+  </div>
+</main>
 
-    <footer class="relative z-10 py-6 pb-4 px-4 text-center" style="margin-top: -50px;">
-      <a href="servicios.html" class="text-sm text-neutral-500 hover:text-leaf-500 transition-colors">Ver servicios y casos de éxito →</a>
-    </footer>
+<footer class="relative z-10 py-6 pb-4 px-4 text-center" style="margin-top: 30px;">
+  <a href="servicios.html" class="text-sm text-neutral-500 hover:text-leaf-500 transition-colors">Ver servicios y casos de éxito →</a>
+</footer>
+```
+
   </div>
 
   <script>
@@ -679,6 +696,18 @@ REGLAS CRÍTICAS
       } catch (e) {
         console.error('Error enviando lead:', e);
       }
+    }
+
+    function openChat() {
+      document.getElementById('hero').classList.add('hidden');
+      document.getElementById('chat-section').classList.remove('hidden');
+      document.getElementById('chat-section').classList.add('animate-fadeIn');
+      document.body.classList.add('chat-open');
+      
+      // Enfocar el input del chat
+      setTimeout(() => {
+        document.getElementById('input').focus();
+      }, 100);
     }
 
     function startFromHero() {
@@ -970,5 +999,6 @@ REGLAS CRÍTICAS
       }
     }
   </script>
+
 </body>
 </html>
